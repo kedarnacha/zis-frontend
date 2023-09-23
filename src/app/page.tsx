@@ -4,15 +4,14 @@ import Image from 'next/image';
 import React from 'react';
 
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
 import DonationItemCardVertical from '@/components/zis/DonationItemCardVertical';
 import { cn } from '@/lib/utils';
 
 const Carousel = dynamic(() => import('@/components/zis/Carousel'), {
   ssr: false,
   loading: () => (
-    <div className="px-4 mt-6">
-      <div className="w-full aspect-video bg-slate-200 rounded-md " />
+    <div className="mt-6 px-4">
+      <div className="aspect-video w-full rounded-md bg-slate-200 " />
     </div>
   ),
 });
@@ -20,32 +19,32 @@ const Carousel = dynamic(() => import('@/components/zis/Carousel'), {
 const HomePage = () => {
   return (
     <div className="relative">
-      <nav className="p-4 py-7 flex items-center justify-center w-full bg-amber-300 space-x-3">
+      <nav className="flex w-full items-center justify-center space-x-3 bg-amber-300 p-4 py-7">
         <Image src="/zis.png" alt="Logo" width={32} height={32} />
         <div className="flex-1">
           <Button
-            className="bg-slate-50 border-red-500 text-slate-400 w-full text-left"
+            className="w-full border-red-500 bg-slate-50 text-left text-slate-400"
             size="sm"
             variant="outline"
           >
             <SearchIcon width={16} height={16} className="text-red-600 " />
-            <div className="flex-1 ml-3">
+            <div className="ml-3 flex-1">
               <p>Cari Program Kebaikan</p>
             </div>
           </Button>
         </div>
       </nav>
       <div className="relative aspect-[7/2]">
-        <Image src="/home_header.png" fill alt="Home header" className="object-cover z-10" />
-        <div className="absolute z-10 left-5 top-5 pr-32 font-semibold text-base">
+        <Image src="/home_header.png" fill alt="Home header" className="z-10 object-cover" />
+        <div className="absolute left-5 top-5 z-10 pr-32 text-base font-semibold">
           Bantu sesama dengan berbagai cara lewat Ziswaf Indosat
         </div>
       </div>
-      <div className="px-4 -mt-10 z-40 relative">
-        <div className="p-4 shadow-lg bg-white rounded-lg">
+      <div className="relative z-40 -mt-10 px-4">
+        <div className="rounded-lg bg-white p-4 shadow-lg">
           <p>Lewat Program yang telah kami sediakan, terbukti banyak orang yang telah terbantu.</p>
           <Button
-            className="text-slate-50 rounded-full w-full mt-4"
+            className="mt-4 w-full rounded-full text-slate-50"
             size="sm"
             variant="destructive"
           >
@@ -57,12 +56,9 @@ const HomePage = () => {
       <div className="mt-5 px-4">
         <h3 className="font-semibold ">Pilih Program Kebaikan</h3>
 
-        <div className="flex space-x-4 px-4 overflow-auto py-4 scroll-smooth">
+        <div className="flex space-x-4 overflow-auto scroll-smooth p-4">
           {[1, 2, 3, 4, 5].map((item) => (
-            <div
-              key={item}
-              className="w-16 cursor-pointer flex flex-col items-center flex-shrink-0"
-            >
+            <div key={item} className="flex w-16 shrink-0 cursor-pointer flex-col items-center">
               <div
                 className={cn(
                   'h-10 w-10 rounded-full items-center justify-center flex bg-slate-50 shadow-lg',
@@ -95,8 +91,8 @@ const HomePage = () => {
         <DonationItemCardVertical />
         <DonationItemCardVertical />
 
-        <div className="flex justify-center mt-4">
-          <Button className="text-slate-50 rounded-full" size="sm" variant="destructive">
+        <div className="mt-4 flex justify-center">
+          <Button className="rounded-full text-slate-50" size="sm" variant="destructive">
             Lihat Lebih Banyak
           </Button>
         </div>

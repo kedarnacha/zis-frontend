@@ -2,7 +2,7 @@ import './globals.css';
 
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
-import Image from 'next/image';
+import React from 'react';
 
 import { Toaster } from '@/components/ui/toaster';
 import BottomNavigation from '@/components/zis/BottomNavigation';
@@ -19,7 +19,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className={cn(inter.className, 'bg-slate-100 text-slate-900')}>
-        <div className="max-w-md mx-auto min-h-screen bg-white relative">
+        <div className="relative mx-auto min-h-screen max-w-md bg-white">
           <div className="pb-16">{children}</div>
           <BottomNavigation />
         </div>

@@ -49,7 +49,7 @@ const BottomNavigation = () => {
   if (!matchRoutes) return null;
 
   return (
-    <div className="h-16 bg-white w-full fixed flex bottom-0 left-0 right-0 max-w-md mx-auto shadow-t-sm border-t border-t-slate-100">
+    <div className="shadow-t-sm fixed inset-x-0 bottom-0 mx-auto flex h-16 w-full max-w-md border-t border-t-slate-100 bg-white">
       {menu.map((item, index) => {
         const Icon = item.icon;
         return (

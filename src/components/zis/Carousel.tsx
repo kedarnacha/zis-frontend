@@ -19,7 +19,7 @@ const Carousel = () => {
       }}
     >
       <SplideSlide>
-        <div className="relative aspect-video rounded-md overflow-hidden mt-6 mx-4">
+        <div className="relative mx-4 mt-6 aspect-video overflow-hidden rounded-md">
           <Image
             src="https://ik.imagekit.io/iyansr/zis-carousel1_51xPIr38Y.jpeg?updatedAt=1692372579001"
             alt="Carousel1"
@@ -29,7 +29,7 @@ const Carousel = () => {
         </div>
       </SplideSlide>
       <SplideSlide>
-        <div className="relative aspect-video rounded-md overflow-hidden mt-6 mx-4">
+        <div className="relative mx-4 mt-6 aspect-video overflow-hidden rounded-md">
           <Image
             src="https://ik.imagekit.io/iyansr/zis-carousel1_51xPIr38Y.jpeg?updatedAt=1692372579001"
             alt="Carousel1"
@@ -39,7 +39,7 @@ const Carousel = () => {
         </div>
       </SplideSlide>
       <SplideSlide>
-        <div className="relative aspect-video rounded-md overflow-hidden mt-6 mx-4">
+        <div className="relative mx-4 mt-6 aspect-video overflow-hidden rounded-md">
           <Image
             src="https://ik.imagekit.io/iyansr/zis-carousel1_51xPIr38Y.jpeg?updatedAt=1692372579001"
             alt="Carousel1"
@@ -49,7 +49,7 @@ const Carousel = () => {
         </div>
       </SplideSlide>
       <SplideSlide>
-        <div className="relative aspect-video rounded-md overflow-hidden mt-6 mx-4">
+        <div className="relative mx-4 mt-6 aspect-video overflow-hidden rounded-md">
           <Image
             src="https://ik.imagekit.io/iyansr/zis-carousel1_51xPIr38Y.jpeg?updatedAt=1692372579001"
             alt="Carousel1"
