@@ -1,11 +1,14 @@
-import { GlobeIcon, SearchIcon } from 'lucide-react';
+import { SearchIcon } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 
 import { Button } from '@/components/ui/button';
+import ArticleCard from '@/components/zis/ArticleCard';
 import DonationItemCardVertical from '@/components/zis/DonationItemCardVertical';
-import { cn } from '@/lib/utils';
+import FooterEmail from '@/components/zis/FooterEmail';
+import Menu from '@/components/zis/Menu';
 
 const Carousel = dynamic(() => import('@/components/zis/Carousel'), {
   ssr: false,
@@ -53,39 +56,9 @@ const HomePage = () => {
         </div>
       </div>
       <Carousel />
-      <div className="mt-5 px-4">
-        <h3 className="font-semibold ">Pilih Program Kebaikan</h3>
-
-        <div className="flex space-x-4 overflow-auto scroll-smooth p-4">
-          {[1, 2, 3, 4, 5].map((item) => (
-            <div key={item} className="flex w-16 shrink-0 cursor-pointer flex-col items-center">
-              <div
-                className={cn(
-                  'h-10 w-10 rounded-full items-center justify-center flex bg-slate-50 shadow-lg',
-                  {
-                    'bg-red-500': item === 1,
-                  },
-                )}
-              >
-                <GlobeIcon
-                  className={cn('h-4 w-4 text-red-500', {
-                    'text-slate-50': item === 1,
-                  })}
-                />
-              </div>
-              <p
-                className={cn('text-[10px] text-center mt-2', {
-                  'text-slate-400': item !== 1,
-                })}
-              >
-                Program Umum
-              </p>
-            </div>
-          ))}
-        </div>
-      </div>
+      <Menu />
       <div className="h-3 bg-slate-100" />
-      <div className="mt-5 px-4">
+      <div className="my-5 px-4">
         <DonationItemCardVertical />
         <DonationItemCardVertical />
         <DonationItemCardVertical />
@@ -97,6 +70,25 @@ const HomePage = () => {
           </Button>
         </div>
       </div>
+      <div className="h-3 bg-slate-100" />
+
+      <div className="mt-5">
+        <div className="flex items-center justify-between px-4">
+          <h3 className="font-semibold">Kabar Mustahiq</h3>
+          <Link href="#" className="text-sm font-medium text-orange-500">
+            Lihat Semua
+          </Link>
+        </div>
+        <div className="flex space-x-2 overflow-auto scroll-smooth p-4">
+          <ArticleCard />
+          <ArticleCard />
+          <ArticleCard />
+          <ArticleCard />
+        </div>
+      </div>
+
+      <div className="h-3 bg-slate-100" />
+      <FooterEmail />
     </div>
   );
 };

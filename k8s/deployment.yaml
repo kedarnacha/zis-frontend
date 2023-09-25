@@ -14,6 +14,7 @@ spec:
     spec:
       containers:
         - name: zis-frontend
+          imagePullPolicy: Always
           image: iyansr/zis-frontend
           ports:
             - containerPort: 3000
