@@ -13,7 +13,7 @@ const BottomNavigation = () => {
   const menu = [
     {
       icon: HomeIcon,
-      label: 'Home',
+      label: 'Beranda',
       href: '/',
     },
     {
@@ -23,8 +23,8 @@ const BottomNavigation = () => {
     },
     {
       icon: HeartHandshakeIcon,
-      label: 'Galang Dana',
-      href: '/galang-dana',
+      label: 'Bantuan',
+      href: '/bantuan',
     },
     {
       icon: LogInIcon,

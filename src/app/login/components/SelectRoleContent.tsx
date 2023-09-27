@@ -1,5 +1,6 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 
 import MustahiqIcon from '@/components/icon/MustahiqIcon';
@@ -28,6 +29,7 @@ const selection = [
 
 const SelectRoleContent = () => {
   const [selected, setSelected] = useState('');
+  const { push } = useRouter();
 
   return (
     <>
@@ -58,7 +60,13 @@ const SelectRoleContent = () => {
       </div>
 
       <div className="shadow-t-sm fixed inset-x-0 bottom-0 mx-auto w-full max-w-md border-t border-t-slate-100 bg-white p-5">
-        <Button className="w-full" size="lg" variant="destructive" disabled={!selected}>
+        <Button
+          onClick={() => push('/login/form')}
+          className="w-full"
+          size="lg"
+          variant="destructive"
+          disabled={!selected}
+        >
           Selanjutnya
         </Button>
       </div>

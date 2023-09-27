@@ -14,11 +14,7 @@ const Navbar = ({ title = '' }: Props) => {
   const router = useRouter();
 
   const handleBack = () => {
-    if (window.history.state && window.history.state.idx > 0) {
-      router.back();
-    } else {
-      router.push('/');
-    }
+    router.back();
   };
 
   return (
