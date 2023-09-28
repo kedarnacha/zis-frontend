@@ -12,7 +12,7 @@ const slides = [1, 2, 3, 4, 5];
 const Carousel = () => {
   return (
     <Splide
-      aria-label="My Favorite Images"
+      aria-label="Banner"
       options={{
         type: 'loop',
         gap: '1rem',

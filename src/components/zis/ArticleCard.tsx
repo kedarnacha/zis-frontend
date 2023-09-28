@@ -5,7 +5,7 @@ import React from 'react';
 const ArticleCard = () => {
   return (
     <Link href="#">
-      <div className="w-60 shrink-0 overflow-hidden rounded-md border shadow-md transition duration-300 hover:shadow-none">
+      <div className="ml-5 w-60 overflow-hidden rounded-md border shadow-md transition duration-300 hover:shadow-none">
         <div className="relative aspect-video">
           <Image
             src="https://ik.imagekit.io/iyansr/zis-item1_4fp6LWH7n.jpg?updatedAt=1692376347958"

@@ -43,9 +43,7 @@ const BottomNavigation = () => {
     //        href: '/account',
     //      },
   ];
-  const routes = [...menu.map((item) => item.href), '/register'].filter(
-    (item) => item !== '/login',
-  );
+  const routes = [...menu.map((item) => item.href)].filter((item) => item !== '/login');
   const pathName = usePathname();
   const matchRoutes = routes.find((item) => item === pathName);
   if (!matchRoutes) return null;

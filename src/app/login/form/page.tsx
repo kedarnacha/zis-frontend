@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React, { Fragment } from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -21,11 +22,7 @@ const LoginPageForm = () => {
         <Label className="mt-4" htmlFor="email">
           Email
         </Label>
-        <Input
-          name="email"
-          className="rounded-none border-x-0 border-b border-t-0 border-b-slate-400 placeholder:text-slate-400"
-          placeholder="Masukkan Email"
-        />
+        <Input name="email" placeholder="Masukkan Email" />
       </div>
       <div className="h-3 bg-slate-100" />
 
@@ -34,12 +31,7 @@ const LoginPageForm = () => {
         <Label className="mt-4" htmlFor="email">
           Kata Sandi
         </Label>
-        <Input
-          name="password"
-          type="password"
-          className="rounded-none border-x-0 border-b border-t-0 border-b-slate-400 placeholder:text-slate-400"
-          placeholder="Masukkan Email"
-        />
+        <Input name="password" type="password" placeholder="Masukkan Email" />
 
         <p className="mt-4 text-sm text-slate-700">
           Lupa kata sandi? <span className="font-semibold text-orange-500">Ganti Disini</span>
@@ -55,9 +47,15 @@ const LoginPageForm = () => {
           <p className="text-sm text-slate-400">Belum Punya Akun ?</p>
           <div className="h-px flex-1 bg-slate-200" />
         </div>
-        <Button className="w-full border-red-500 text-red-500" size="lg" variant="outline">
-          Daftar Sekarang
-        </Button>
+        <Link href="/register">
+          <Button
+            className="w-full border-red-500 text-red-500 hover:text-red-500"
+            size="lg"
+            variant="outline"
+          >
+            Daftar Sekarang
+          </Button>
+        </Link>
       </div>
     </Fragment>
   );

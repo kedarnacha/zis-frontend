@@ -6,6 +6,7 @@ import React from 'react';
 
 import { Button } from '@/components/ui/button';
 import ArticleCard from '@/components/zis/ArticleCard';
+import ArticleCarousel from '@/components/zis/ArticleCarousel';
 import DonationItemCardVertical from '@/components/zis/DonationItemCardVertical';
 import FooterEmail from '@/components/zis/FooterEmail';
 import Menu from '@/components/zis/Menu';
@@ -73,18 +74,13 @@ const HomePage = () => {
       <div className="h-3 bg-slate-100" />
 
       <div className="mt-5">
-        <div className="flex items-center justify-between px-4">
+        <div className="mb-4 flex items-center justify-between px-4">
           <h3 className="font-semibold">Kabar Mustahiq</h3>
           <Link href="#" className="text-sm font-medium text-orange-500">
             Lihat Semua
           </Link>
         </div>
-        <div className="flex space-x-2 overflow-auto scroll-smooth p-4">
-          <ArticleCard />
-          <ArticleCard />
-          <ArticleCard />
-          <ArticleCard />
-        </div>
+        <ArticleCarousel />
       </div>
 
       <div className="h-3 bg-slate-100" />
