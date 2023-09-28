@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React, { Fragment } from 'react';
+import React from 'react';
 
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -8,7 +8,7 @@ import Navbar from '@/components/zis/Navbar';
 
 const LoginPageForm = () => {
   return (
-    <Fragment>
+    <div className="pb-96">
       <Navbar title="Masuk Zis Indosat" />
 
       <div className="border-b-8 border-b-slate-100 p-5">
@@ -57,7 +57,7 @@ const LoginPageForm = () => {
           </Button>
         </Link>
       </div>
-    </Fragment>
+    </div>
   );
 };
 

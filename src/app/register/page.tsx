@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import React, { Fragment } from 'react';
 
+import MuzakiIcon from '@/components/icon/MuzakiIcon';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -8,7 +9,7 @@ import Navbar from '@/components/zis/Navbar';
 
 const RegisterPage = () => {
   return (
-    <Fragment>
+    <div className="pb-96">
       <Navbar title="Daftar Zis Indosat" />
 
       <div className="border-b-8 border-b-slate-100 p-5">
@@ -16,6 +17,23 @@ const RegisterPage = () => {
           Yuk Daftar, untuk nikmati kemudahan berdonasi dan akses fitur lainnya
         </h2>
       </div>
+
+      <div className="p-5">
+        <p className="font-semibold">Daftar Sebagai</p>
+        <div className="mt-3 flex items-center justify-between space-x-3 rounded-md border border-slate-300 p-2">
+          <MuzakiIcon />
+          <div className="flex-1">
+            <p>
+              Muzaki <span className="text-slate-600">(Pemberi Bantuan)</span>
+            </p>
+          </div>
+          <Button variant="ghost" className="text-amber-500">
+            Ubah
+          </Button>
+        </div>
+      </div>
+
+      <div className="h-3 bg-slate-100" />
 
       <div className="flex flex-col space-y-4 p-5">
         <p className="font-semibold">Masukkan Data</p>
@@ -46,13 +64,13 @@ const RegisterPage = () => {
       </div>
       <div className="h-3 bg-slate-100" />
 
-      <div className="p-5 font-semibold">
+      <div className="p-5 text-slate-700">
         Dengan Klik Daftar, anda telah menyetujui{' '}
-        <span className="text-orange-500">Syarat dan Ketentuan kami.</span>
+        <span className="font-semibold text-orange-500">Syarat dan Ketentuan kami.</span>
       </div>
       <div className="h-3 bg-slate-100" />
 
-      <div className="shadow-t-sm fixed inset-x-0 bottom-0 mx-auto w-full max-w-md border-t border-t-slate-100 bg-white p-5">
+      <div className="shadow-t-sm fixed inset-x-0 bottom-0 mx-auto w-full max-w-md  bg-white p-5">
         <Button className="w-full" size="lg" variant="destructive">
           Daftar
         </Button>
@@ -71,7 +89,7 @@ const RegisterPage = () => {
           </Button>
         </Link>
       </div>
-    </Fragment>
+    </div>
   );
 };
 
