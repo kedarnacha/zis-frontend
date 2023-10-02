@@ -29,11 +29,6 @@ const BottomNavigation = () => {
       label: 'Bantuan',
       href: '/bantuan',
     },
-    {
-      icon: LogInIcon,
-      label: 'Masuk',
-      href: '/login',
-    },
     !auth?.isAuthenticated || !auth?.hasHydrated
       ? {
           icon: LogInIcon,
