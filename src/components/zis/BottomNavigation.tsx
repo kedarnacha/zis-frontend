@@ -1,15 +1,18 @@
 'use client';
 
-import { HeartHandshakeIcon, HomeIcon, LayoutGridIcon, LogInIcon } from 'lucide-react';
+import { HeartHandshakeIcon, HomeIcon, LayoutGridIcon, LogInIcon, UserIcon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 
 import { cn } from '@/lib/utils';
+import { useAuthState } from '@/store/useAuthStore';
 
 import { Button } from '../ui/button';
 
 const BottomNavigation = () => {
+  const auth = useAuthState();
+
   const menu = [
     {
       icon: HomeIcon,
@@ -31,18 +34,19 @@ const BottomNavigation = () => {
       label: 'Masuk',
       href: '/login',
     },
-    //  status === 'unauthenticated' || status === 'loading'
-    //    ? {
-    //        icon: LogInIcon,
-    //        label: 'Masuk',
-    //        href: '/login',
-    //      }
-    //    : {
-    //        icon: UserIcon,
-    //        label: 'Akun',
-    //        href: '/account',
-    //      },
+    !auth?.isAuthenticated || !auth?.hasHydrated
+      ? {
+          icon: LogInIcon,
+          label: 'Masuk',
+          href: '/login',
+        }
+      : {
+          icon: UserIcon,
+          label: 'Akun',
+          href: '/account',
+        },
   ];
+
   const routes = [...menu.map((item) => item.href)].filter((item) => item !== '/login');
   const pathName = usePathname();
   const matchRoutes = routes.find((item) => item === pathName);
