@@ -6,7 +6,7 @@ import { usePathname } from 'next/navigation';
 import React from 'react';
 
 import { cn } from '@/lib/utils';
-import { useAuthState } from '@/store/useAuthStore';
+import { useAuthState } from '@/store/useAuthState';
 
 import { Button } from '../ui/button';
 

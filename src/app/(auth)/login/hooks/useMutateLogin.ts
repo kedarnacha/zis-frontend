@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
 import axios from '@/lib/axios';
 import { User } from '@/store/types';
-import { useAuthState } from '@/store/useAuthStore';
+import { useAuthState } from '@/store/useAuthState';
 
 type Response = {
   success: boolean;

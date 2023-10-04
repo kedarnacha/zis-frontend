@@ -2,7 +2,6 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
 import { User } from './types';
-import { useStore } from './useStore';
 
 type AuthState = {
   isAuthenticated: boolean;
@@ -11,6 +10,7 @@ type AuthState = {
   token: null | string;
   login: (user: User, token: string) => void;
   setHasHydrated: (hasHydrated: boolean) => void;
+  logOut: () => void;
 };
 
 const useAuthStore = create<AuthState>()(
@@ -24,6 +24,7 @@ const useAuthStore = create<AuthState>()(
         return set({ isAuthenticated: true, user, token });
       },
       setHasHydrated: (hasHydrated) => set({ hasHydrated }),
+      logOut: () => set({ isAuthenticated: false, user: null, token: null }),
     }),
     {
       name: 'auth',
@@ -34,9 +35,5 @@ const useAuthStore = create<AuthState>()(
     },
   ),
 );
-
-export const useAuthState = () => {
-  return useStore(useAuthStore, (state) => state);
-};
 
 export default useAuthStore;
