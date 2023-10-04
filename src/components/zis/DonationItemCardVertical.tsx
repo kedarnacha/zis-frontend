@@ -1,10 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useId } from 'react';
 
 const DonationItemCardVertical = () => {
+  const id = useId();
   return (
-    <Link href="#">
+    <Link href={`/program/${id}`}>
       <div className="flex border-b border-b-slate-200 py-3">
         <div className="relative aspect-[480/320] flex-1 overflow-hidden rounded-md">
           <Image
