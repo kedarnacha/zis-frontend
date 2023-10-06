@@ -47,13 +47,15 @@ const HomePage = () => {
       <div className="relative z-40 -mt-10 px-4">
         <div className="rounded-lg bg-white p-4 shadow-lg">
           <p>Lewat Program yang telah kami sediakan, terbukti banyak orang yang telah terbantu.</p>
-          <Button
-            className="mt-4 w-full rounded-full text-slate-50"
-            size="sm"
-            variant="destructive"
-          >
-            Yuk Donasi Sekarang!
-          </Button>
+          <Link href="/program/submit-program-intro">
+            <Button
+              className="mt-4 w-full rounded-full text-slate-50"
+              size="sm"
+              variant="destructive"
+            >
+              Ajukan Bantuan Sekarang
+            </Button>
+          </Link>
         </div>
       </div>
       <Carousel />

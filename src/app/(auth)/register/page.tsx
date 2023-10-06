@@ -1,13 +1,20 @@
+'use client';
+
 import Link from 'next/link';
-import React, { Fragment } from 'react';
+import React, { useState } from 'react';
 
 import MuzakiIcon from '@/components/icon/MuzakiIcon';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import Navbar from '@/components/zis/Navbar';
+import { role } from '@/data/role';
+
+import RoleSelector from './components/RoleSelector';
 
 const RegisterPage = () => {
+  const [selectedRole, setSelectedRole] = useState(role[0].id);
+
   return (
     <div className="pb-96">
       <Navbar title="Daftar Zis Indosat" />
@@ -24,12 +31,12 @@ const RegisterPage = () => {
           <MuzakiIcon />
           <div className="flex-1">
             <p>
-              Muzaki <span className="text-slate-600">(Pemberi Bantuan)</span>
+              {role.find((r) => r.id === selectedRole)?.label1}{' '}
+              <span className="text-slate-600">(Pemberi Bantuan)</span>
             </p>
           </div>
-          <Button variant="ghost" className="text-amber-500">
-            Ubah
-          </Button>
+
+          <RoleSelector onSelect={setSelectedRole} />
         </div>
       </div>
 
@@ -66,7 +73,9 @@ const RegisterPage = () => {
 
       <div className="p-5 text-slate-700">
         Dengan Klik Daftar, anda telah menyetujui{' '}
-        <span className="font-semibold text-orange-500">Syarat dan Ketentuan kami.</span>
+        <Link href="/toc" className="font-semibold text-orange-500">
+          Syarat dan Ketentuan kami.
+        </Link>
       </div>
       <div className="h-3 bg-slate-100" />
 

@@ -2,7 +2,7 @@ import React, { Fragment } from 'react';
 
 import Navbar from '@/components/zis/Navbar';
 
-import SelectRoleContent from './components/SelectRoleContent';
+import LoginForm from './components/LoginForm';
 
 const LoginPage = () => {
   return (
@@ -15,7 +15,7 @@ const LoginPage = () => {
         </h2>
       </div>
 
-      <SelectRoleContent />
+      <LoginForm />
     </Fragment>
   );
 };
