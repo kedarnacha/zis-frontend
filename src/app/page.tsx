@@ -5,11 +5,11 @@ import Link from 'next/link';
 import React from 'react';
 
 import { Button } from '@/components/ui/button';
-import ArticleCard from '@/components/zis/ArticleCard';
 import ArticleCarousel from '@/components/zis/ArticleCarousel';
-import DonationItemCardVertical from '@/components/zis/DonationItemCardVertical';
 import FooterEmail from '@/components/zis/FooterEmail';
 import Menu from '@/components/zis/Menu';
+
+import ProgramList from './(program)/components/ProgramList';
 
 const Carousel = dynamic(() => import('@/components/zis/Carousel'), {
   ssr: false,
@@ -61,17 +61,13 @@ const HomePage = () => {
       <Carousel />
       <Menu />
       <div className="h-3 bg-slate-100" />
-      <div className="my-5 px-4">
-        <DonationItemCardVertical />
-        <DonationItemCardVertical />
-        <DonationItemCardVertical />
-        <DonationItemCardVertical />
-
-        <div className="mt-4 flex justify-center">
+      <ProgramList isHome />
+      <div className="my-4 flex justify-center">
+        <Link href="/program">
           <Button className="rounded-full text-slate-50" size="sm" variant="destructive">
             Lihat Lebih Banyak
           </Button>
-        </div>
+        </Link>
       </div>
       <div className="h-3 bg-slate-100" />
 

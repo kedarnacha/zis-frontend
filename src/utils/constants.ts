@@ -1,0 +1,1 @@
+export const ALL_PROGRAM_QUERY_KEY = 'ALL_PROGRAM';

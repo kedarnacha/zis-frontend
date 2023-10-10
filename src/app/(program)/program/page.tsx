@@ -8,6 +8,8 @@ import FooterEmail from '@/components/zis/FooterEmail';
 import Menu from '@/components/zis/Menu';
 import { cn } from '@/lib/utils';
 
+import ProgramList from '../components/ProgramList';
+
 const page = () => {
   return (
     <div>
@@ -45,18 +47,7 @@ const page = () => {
         })}
       </div>
       <div className="h-3 bg-slate-100" />
-      <div className="my-5 px-4">
-        <DonationItemCardVertical />
-        <DonationItemCardVertical />
-        <DonationItemCardVertical />
-        <DonationItemCardVertical />
-
-        <div className="mt-4 flex justify-center">
-          <Button className="rounded-full text-slate-50" size="sm" variant="destructive">
-            Lihat Lebih Banyak
-          </Button>
-        </div>
-      </div>
+      <ProgramList />
       <div className="h-3 bg-slate-100" />
       <FooterEmail />
     </div>

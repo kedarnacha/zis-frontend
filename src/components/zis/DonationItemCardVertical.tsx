@@ -1,24 +1,26 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useId } from 'react';
+import React from 'react';
 
-const DonationItemCardVertical = () => {
-  const id = useId();
+import { Program } from '@/schema/program';
+import { formatter } from '@/utils/number';
+
+const DonationItemCardVertical = ({ program }: { program: Program }) => {
   return (
-    <Link href={`/program/${id}`}>
+    <Link href={`/program/${program.program_id}`}>
       <div className="flex border-b border-b-slate-200 py-3">
         <div className="relative aspect-[480/320] flex-1 overflow-hidden rounded-md">
           <Image
-            src="https://ik.imagekit.io/iyansr/zis-item1_4fp6LWH7n.jpg?updatedAt=1692376347958"
+            src={`/backend/${program.banners_path}`}
             fill
             alt="Item Image"
             className="object-cover"
           />
         </div>
         <div className="flex w-full flex-1 flex-col px-3">
-          <p className="mt-2 text-xs font-semibold">Urgent Masjid Satu-satunya Rawan Roboh</p>
+          <p className="mt-2 text-xs font-semibold">{program.program_title}</p>
           <div className="flex items-center">
-            <p className="text-[10px] text-slate-500">Yayasan Zakat</p>
+            <p className="text-[10px] text-slate-500">{program.institusi_nama}</p>
             <svg
               width="12"
               height="12"
@@ -45,7 +47,9 @@ const DonationItemCardVertical = () => {
           </div>
           <div className="flex items-center">
             <div className="flex-1">
-              <p className="text-sm font-semibold text-slate-900">Rp20.000.000</p>
+              <p className="text-sm font-semibold text-slate-900">
+                {formatter.format(program.program_target_amount)}
+              </p>
             </div>
             <p className="text-sm font-semibold text-slate-900">9</p>
           </div>
