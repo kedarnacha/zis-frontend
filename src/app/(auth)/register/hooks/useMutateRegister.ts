@@ -3,7 +3,6 @@ import { useMutation } from '@tanstack/react-query';
 import { useToast } from '@/components/ui/use-toast';
 import axios from '@/lib/axios';
 import { RegisterSchema } from '@/schema/register';
-import { User } from '@/store/types';
 
 type Response = {
   success: boolean;

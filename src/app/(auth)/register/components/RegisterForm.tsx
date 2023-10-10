@@ -43,7 +43,7 @@ const RegisterForm = () => {
   };
 
   const onSubmit = (data: RegisterSchema) => {
-    mutateAsync(data).then(() => {
+    mutateAsync(data).finally(() => {
       form.reset(
         {
           email: '',
