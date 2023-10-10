@@ -17,29 +17,9 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
+import { LoginSchema, loginSchema } from '@/schema/login';
 
 import useMutateLogin from '../hooks/useMutateLogin';
-
-const loginSchema = z.object({
-  username: z
-    .string({
-      invalid_type_error: 'Email tidak valid',
-      required_error: 'Email harus diisi',
-    })
-    .email({
-      message: 'Email tidak valid',
-    }),
-  password: z
-    .string({
-      required_error: 'Kata sandi harus diisi',
-    })
-    .min(8, {
-      message: 'Kata sandi minimal 8 karakter',
-    })
-    .max(32),
-});
-
-type LoginSchema = z.infer<typeof loginSchema>;
 
 const LoginForm = () => {
   const { mutate, isLoading } = useMutateLogin();
