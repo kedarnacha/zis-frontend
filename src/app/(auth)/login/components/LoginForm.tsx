@@ -66,7 +66,7 @@ const LoginForm = () => {
                   Kata Sandi
                 </FormLabel>
                 <FormControl>
-                  <Input placeholder="Masukkan Kata Sandi" {...field} />
+                  <Input placeholder="Masukkan Kata Sandi" type="password" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -74,7 +74,10 @@ const LoginForm = () => {
           />
 
           <p className="mt-4 text-sm text-slate-700">
-            Lupa kata sandi? <span className="font-semibold text-orange-500">Ganti Disini</span>
+            Lupa kata sandi?{' '}
+            <Link href="/forgot-password" className="font-semibold text-orange-500">
+              Ganti Disini
+            </Link>
           </p>
         </div>
 

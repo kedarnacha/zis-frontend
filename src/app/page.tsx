@@ -9,6 +9,7 @@ import ArticleCarousel from '@/components/zis/ArticleCarousel';
 import FooterEmail from '@/components/zis/FooterEmail';
 import Menu from '@/components/zis/Menu';
 
+import ActionButton from './(home)/components/ActionButton';
 import ProgramList from './(program)/components/ProgramList';
 
 const Carousel = dynamic(() => import('@/components/zis/Carousel'), {
@@ -47,15 +48,7 @@ const HomePage = () => {
       <div className="relative z-40 -mt-10 px-4">
         <div className="rounded-lg bg-white p-4 shadow-lg">
           <p>Lewat Program yang telah kami sediakan, terbukti banyak orang yang telah terbantu.</p>
-          <Link href="/program/submit-program-intro">
-            <Button
-              className="mt-4 w-full rounded-full text-slate-50"
-              size="sm"
-              variant="destructive"
-            >
-              Ajukan Bantuan Sekarang
-            </Button>
-          </Link>
+          <ActionButton />
         </div>
       </div>
       <Carousel />

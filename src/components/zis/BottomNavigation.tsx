@@ -7,13 +7,32 @@ import React from 'react';
 
 import { cn } from '@/lib/utils';
 import { useAuthState } from '@/store/useAuthState';
+import { TYPE_MUSTAHIQ } from '@/utils/constants';
 
 import { Button } from '../ui/button';
 
 const BottomNavigation = () => {
   const auth = useAuthState();
 
-  const menu = [
+  const mustahiqMenu = [
+    {
+      icon: HomeIcon,
+      label: 'Beranda',
+      href: '/',
+    },
+    {
+      icon: HeartHandshakeIcon,
+      label: 'Galang Dana',
+      href: '/program/submit-program-intro',
+    },
+    {
+      icon: LayoutGridIcon,
+      label: 'program',
+      href: '/program',
+    },
+  ];
+
+  const muzakiMenu = [
     {
       icon: HomeIcon,
       label: 'Beranda',
@@ -29,6 +48,10 @@ const BottomNavigation = () => {
       label: 'Bantuan',
       href: '/bantuan',
     },
+  ];
+
+  const menu = [
+    ...(auth?.user?.user_type === TYPE_MUSTAHIQ ? mustahiqMenu : muzakiMenu),
     !auth?.isAuthenticated || !auth?.hasHydrated
       ? {
           icon: LogInIcon,
@@ -42,7 +65,9 @@ const BottomNavigation = () => {
         },
   ];
 
-  const routes = [...menu.map((item) => item.href)].filter((item) => item !== '/login');
+  const routes = [...menu.map((item) => item.href)].filter(
+    (item) => item !== '/login' && item !== '/program/submit-program-intro',
+  );
   const pathName = usePathname();
   const matchRoutes = routes.find((item) => item === pathName);
   if (!matchRoutes) return null;
