@@ -24,17 +24,7 @@ const useMutateRegister = () => {
 
   return useMutation<Response, unknown, RegisterSchema>({
     mutationFn: login,
-    onSuccess: (data) => {
-      if (!data.success) {
-        toast({
-          title: 'Gagal Daftar',
-          description: data.message,
-          variant: 'destructive',
-        });
-
-        return;
-      }
-
+    onSuccess: () => {
       toast({
         title: 'Berhasil Daftar',
         description: 'Berhasil Daftar, Silahkan Periksa Email Anda',

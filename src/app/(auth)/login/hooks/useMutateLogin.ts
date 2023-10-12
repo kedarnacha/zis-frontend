@@ -11,7 +11,7 @@ type Response = {
   message: string;
   session_id: string;
   token?: string;
-  data?: User[];
+  data?: User;
 };
 
 type Input = {
@@ -40,37 +40,19 @@ const useMutateLogin = () => {
   return useMutation<Response, unknown, Input>({
     mutationFn: login,
     onSuccess: (data) => {
-      if (!data.success) {
-        toast({
-          title: 'Gagal Login',
-          description: data.message,
-          variant: 'destructive',
-        });
-
-        return;
-      }
-
-      if (data.success && data.token && data.data) {
-        state?.login(data.data[0], data.token);
-        toast({
-          title: 'Berhasil Login',
-          description: data.message,
-        });
-        router.push('/');
-
-        return;
-      }
-
       toast({
-        title: 'Gagal Login',
-        description: data?.message ?? 'Terjadi kesalahan',
-        variant: 'destructive',
+        title: 'Berhasil Login',
+        description: data?.message,
       });
+
+      state?.login(data.data!, data.token!);
+      router.push('/');
     },
-    onError: () => {
+    onError: (error) => {
+      const err = error as any;
       toast({
         title: 'Gagal Login',
-        description: 'Terjadi kesalahan',
+        description: err?.response?.data?.message ?? 'Terjadi kesalahan',
         variant: 'destructive',
       });
     },

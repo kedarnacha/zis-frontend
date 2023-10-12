@@ -9,5 +9,7 @@ export type Program = {
   program_target_amount: number;
   institusi_nama: string;
   institusi_no_hp: string;
-  banners_path: string;
+  program_banner: {
+    banners_path: string;
+  };
 };

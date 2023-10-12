@@ -1,3 +1,5 @@
+import axios from '@/lib/axios';
+
 import VerifikasiPage from './components/VerifikasiPage';
 
 type Props = {
@@ -15,29 +17,15 @@ const Verifikasi = async (props: Props) => {
   const cleanAccount = decodeURIComponent(account);
   const email = Buffer.from(cleanAccount, 'base64').toString();
 
-  const res = await fetch('http://api.zisindosat.id/auth/verifed', {
-    body: JSON.stringify({
-      email,
-    }),
+  const res = await axios.request({
+    url: '/auth/verifed',
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
+    data: {
+      email,
     },
   });
 
-  console.log({ email });
-
-  const json = await res.json();
-
-  console.log({ json });
-
-  if (!res.ok) {
-    throw new Error('Gagal memverifikasi akun');
-  }
-
-  if (!json.success) {
-    throw new Error('Gagal memverifikasi akun');
-  }
+  console.log(res.data);
 
   return <VerifikasiPage />;
 };

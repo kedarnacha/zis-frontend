@@ -3,7 +3,7 @@ import Axs from 'axios';
 import useAuthStore from '@/store/useAuthStore';
 
 const axios = Axs.create({
-  baseURL: '/backend',
+  baseURL: process.env.NEXT_PUBLIC_API_URL,
   headers: {
     'Content-Type': 'application/json',
   },

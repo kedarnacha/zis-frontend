@@ -6,12 +6,13 @@ import { Program } from '@/schema/program';
 import { formatter } from '@/utils/number';
 
 const DonationItemCardVertical = ({ program }: { program: Program }) => {
+  console.log(`${process.env.NEXT_PUBLIC_API_URL}/${program.program_banner.banners_path}`);
   return (
     <Link href={`/program/${program.program_id}`}>
       <div className="flex border-b border-b-slate-200 py-3">
         <div className="relative aspect-[480/320] flex-1 overflow-hidden rounded-md">
           <Image
-            src={`/backend/${program.banners_path}`}
+            src={`http://api.zisindosat.id/${program.program_banner.banners_path}`}
             fill
             alt="Item Image"
             className="object-cover"
