@@ -9,15 +9,15 @@ type Response = {
 };
 
 type Input = {
-  username: string;
+  email: string;
 };
 
-const login = async ({ username }: Input) => {
+const login = async ({ email }: Input) => {
   const { data } = await axios.request<Response>({
     method: 'POST',
-    url: '/auth/resetpassword',
+    url: '/auth/forgot-password',
     data: {
-      username,
+      email,
     },
   });
 
@@ -29,26 +29,16 @@ const useMutateForgotPassword = () => {
 
   return useMutation<Response, unknown, Input>({
     mutationFn: login,
-    onSuccess: (data) => {
-      if (!data.success) {
-        toast({
-          title: 'Gagal Request Reset Password',
-          description: 'Data tidak ditemukan',
-          variant: 'destructive',
-        });
-
-        return;
-      }
-
+    onSuccess: () => {
       toast({
         title: 'Berhasil Request Reset Password',
         description: 'Silahkan Periska Email Anda',
       });
     },
-    onError: () => {
+    onError: (err) => {
       toast({
         title: 'Gagal Request Reset Password',
-        description: 'Terjadi kesalahan',
+        description: (err as any)?.response?.data?.message ?? 'Terjadi kesalahan',
         variant: 'destructive',
       });
     },

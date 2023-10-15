@@ -4,25 +4,30 @@ import React from 'react';
 
 import Navbar from '@/components/zis/Navbar';
 import { useAuthState } from '@/store/useAuthState';
-import { TYPE_MUZAKI } from '@/utils/constants';
+import { TYPE_MUSTAHIQ } from '@/utils/constants';
 
+import CallCenter from '../../components/zis/CallCenter';
 import AccountHeader from './components/AccountHeader';
-import CallCenter from './components/CallCenter';
 import DonationReminder from './components/DonationReminder';
 import DonationWalletEntry from './components/DonationWalletEntry';
 import LogoutSection from './components/LogoutSection';
 import Menu from './components/Menu';
+import MustahiqDataEntry from './components/MustahiqDataEntry';
 
 const ProfilePage = () => {
   const authState = useAuthState();
   return (
     <div>
       <Navbar
-        title={`Akses Akun ${authState?.user?.user_type === TYPE_MUZAKI ? 'Muzaki' : 'Mustahiq'}`}
+        title={`Akses Akun ${authState?.user?.user_type === TYPE_MUSTAHIQ ? 'Mustahiq' : 'Muzaki'}`}
       />
       <AccountHeader />
       <div className="h-3 w-full bg-slate-100" />
-      <DonationWalletEntry />
+      {authState?.user?.user_type === TYPE_MUSTAHIQ ? (
+        <MustahiqDataEntry />
+      ) : (
+        <DonationWalletEntry />
+      )}
       <div className="h-3 w-full bg-slate-100" />
       <DonationReminder />
       <div className="h-3 w-full bg-slate-100" />
@@ -31,6 +36,7 @@ const ProfilePage = () => {
       <Menu />
       <div className="h-3 w-full bg-slate-100" />
       <LogoutSection />
+      <div className="h-96" />
     </div>
   );
 };

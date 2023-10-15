@@ -1,11 +1,10 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Loader2Icon, LoaderIcon } from 'lucide-react';
+import { Loader2Icon } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
 
 import { Button } from '@/components/ui/button';
 import {

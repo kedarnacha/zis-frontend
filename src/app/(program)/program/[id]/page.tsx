@@ -3,6 +3,7 @@
 import { ChevronLeft, Download, HomeIcon, Share } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useParams, useRouter } from 'next/navigation';
 import React from 'react';
 
 import {
@@ -12,24 +13,36 @@ import {
   AccordionTrigger,
 } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
+import DataLayout from '@/components/zis/DataLayout';
+
+import useQueryDetailProgram from '../../hooks/useQueryDetailProgram';
 
 const ProgramDetailPage = () => {
+  const router = useRouter();
+
+  const handleBack = () => {
+    router.back();
+  };
+
+  const param = useParams();
+  const id = param?.id as string;
+
+  const { data, isError, isLoading } = useQueryDetailProgram(id);
+
   return (
-    <div>
+    <DataLayout isLoading={isLoading} isError={isError} className="h-[80dvh]">
       <div className="relative w-full">
         <div className="to-black-90 absolute left-0 top-0 z-10 flex w-full items-center justify-between bg-gradient-to-b from-black/50 p-5">
-          <Link href="/">
-            <Button className="h-8 w-8 rounded-full p-0" variant="secondary">
-              <ChevronLeft size={16} />
-            </Button>
-          </Link>
+          <Button onClick={handleBack} className="h-8 w-8 rounded-full p-0" variant="secondary">
+            <ChevronLeft size={16} />
+          </Button>
           <Button className="rounded-full" variant="secondary">
             <Share size={16} className="mr-2" />
             Bagikan
           </Button>
         </div>
         <Image
-          src="https://ik.imagekit.io/iyansr/zis-item1_4fp6LWH7n.jpg?updatedAt=1692376347958"
+          src={`http://api.zisindosat.id/${data?.data.program_banner.banners_path}`}
           height={375}
           width={230}
           alt="Item Image"
@@ -38,9 +51,8 @@ const ProgramDetailPage = () => {
       </div>
 
       <div className="p-5">
-        <h1 className="font-bold">
-          Tak Punya Tempat Tidur Layak, Mari Bangun Ponpes Hafidz Kasur Tidur yang Super Nyaman
-        </h1>
+        <h1 className="font-bold">{data?.data.program_title}</h1>
+        <p className="mt-2 text-sm font-light">{data?.data.program_short_desc ?? ''}</p>
 
         <div className="mb-2 mt-5 h-1 w-full rounded-full bg-slate-300">
           <div className="h-1 w-[65%] rounded-full bg-orange-500" />
@@ -59,14 +71,14 @@ const ProgramDetailPage = () => {
         </div>
       </div>
       <div className="h-3 bg-slate-100" />
-      <div className="p-5">
-        <h2 className="font-semibold">Tentang Program Ini</h2>
+      <div className="prose prose-fuchsia p-5 leading-normal">
+        <h4 className="font-semibold">Tentang Program Ini</h4>
 
-        <p className="mt-5 font-light">
-          Lorem ipsum dolor sit amet consectetur, adipisicing elit. Expedita, non dolorem corrupti
-          tempore culpa, accusamus, exercitationem ipsa eius nostrum id quas quidem totam esse
-          saepe! Maiores ex temporibus dolorem doloremque.
-        </p>
+        {(data?.data.program_description ?? '').split('\n').map((text, index) => (
+          <p key={index} className="font-light">
+            {text}
+          </p>
+        ))}
       </div>
       <div className="h-3 bg-slate-100" />
       <div className="p-5">
@@ -168,7 +180,7 @@ const ProgramDetailPage = () => {
           </Button>
         </Link>
       </div>
-    </div>
+    </DataLayout>
   );
 };
 

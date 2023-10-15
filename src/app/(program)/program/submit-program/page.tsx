@@ -3,7 +3,6 @@
 import { GlobeIcon, Upload } from 'lucide-react';
 import React from 'react';
 
-import CallCenter from '@/app/account/components/CallCenter';
 import { Button } from '@/components/ui/button';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Input } from '@/components/ui/input';
@@ -16,6 +15,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
+import CallCenter from '@/components/zis/CallCenter';
 import Divider from '@/components/zis/Divider';
 import Navbar from '@/components/zis/Navbar';
 

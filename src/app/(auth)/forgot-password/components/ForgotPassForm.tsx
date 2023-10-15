@@ -21,7 +21,7 @@ import { Input } from '@/components/ui/input';
 import useMutateForgotPassword from '../hooks/useMutateForgotPassword';
 
 const schema = z.object({
-  username: z
+  email: z
     .string({
       invalid_type_error: 'Email tidak valid',
       required_error: 'Email harus diisi',
@@ -50,7 +50,7 @@ const ForgotPassForm = () => {
 
           <FormField
             control={form.control}
-            name="username"
+            name="email"
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="mt-4" htmlFor="email">
