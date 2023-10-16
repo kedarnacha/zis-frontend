@@ -68,7 +68,9 @@ const RegisterForm = () => {
             <div className="flex-1">
               <p>
                 {role.find((r) => r.id === selectedRole)?.label1}{' '}
-                <span className="text-slate-600">(Pemberi Bantuan)</span>
+                <span className="text-slate-600">
+                  {role.find((r) => r.id === selectedRole)?.label3}
+                </span>
               </p>
             </div>
 

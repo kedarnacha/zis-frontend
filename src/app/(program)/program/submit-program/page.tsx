@@ -28,7 +28,7 @@ import Navbar from '@/components/zis/Navbar';
 import { cn } from '@/lib/utils';
 import { ProgramSchema, programSchema } from '@/schema/program';
 
-import useMutateCreateProgram from '../hooks/useMutateCreateProgram';
+import useMutateCreateProgram from '../../hooks/useMutateCreateProgram';
 
 const SubmitProgramPage = () => {
   const bannerRef = React.useRef<HTMLInputElement>(null);

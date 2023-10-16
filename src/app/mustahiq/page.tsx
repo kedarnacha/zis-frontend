@@ -41,6 +41,9 @@ const MustahiqPage = () => {
   const form = useForm<MustahiqSchema>({
     resolver: zodResolver(mustahiqSchema),
     reValidateMode: 'onChange',
+    defaultValues: {
+      is_institusi: false,
+    },
   });
 
   useEffect(() => {
@@ -59,44 +62,104 @@ const MustahiqPage = () => {
     mutate(data);
   };
 
+  const isInstitusi = form.watch('is_institusi');
+
   return (
     <div>
       <Navbar title="Data Diri Mustahiq" />
-
-      <div className="p-5">
-        <div className="flex items-center justify-between">
-          <p className="font-medium">Data Diri</p>
-          <Button variant="ghost" className="text-orange-500">
-            Ubah
-          </Button>
-        </div>
-
-        <div className="mt-4 space-y-4">
-          <div>
-            <Label>Nama Lengkap</Label>
-            <Input type="text" value={data?.user_nama} disabled placeholder="Nama Lengkap" />
-          </div>
-
-          <div>
-            <Label>Email</Label>
-            <Input disabled type="text" value={data?.username} placeholder="Email" />
-          </div>
-
-          <div>
-            <Label>Nomor telepon / whatsapp</Label>
-            <Input
-              disabled
-              type="text"
-              value={data?.user_phone}
-              placeholder="Nomor telepon / whatsapp"
-            />
-          </div>
-        </div>
-      </div>
-
-      <Divider />
-
       <Form {...form}>
+        <div className="space-y-4 p-5">
+          <FormField
+            control={form.control}
+            name="is_institusi"
+            render={({ field }) => (
+              <FormItem className="flex flex-col space-y-2">
+                <Label>Daftar Sebagai</Label>
+                <Select
+                  onValueChange={(value) => field.onChange(value !== 'personal')}
+                  defaultValue={!field.value ? 'personal' : 'institusi'}
+                >
+                  <SelectTrigger className="h-14 w-full">
+                    <SelectValue placeholder="Pilih Status Keluarga" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="personal">Perorangan</SelectItem>
+                      <SelectItem value="institusi">Institusi</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {isInstitusi && (
+            <>
+              <FormField
+                control={form.control}
+                name="institusi_nama"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="mt-4">Nama Institusi</FormLabel>
+                    <FormControl>
+                      <Input required placeholder="Masukkan Nama Institusi" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="institusi_no_hp"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="mt-4">No. PIC</FormLabel>
+                    <FormControl>
+                      <Input required placeholder="Masukkan No. PIC" type="number" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </>
+          )}
+        </div>
+        <Divider />
+
+        <div className="p-5">
+          <div className="flex items-center justify-between">
+            <p className="font-medium">Data Diri</p>
+            <Button variant="ghost" className="text-orange-500">
+              Ubah
+            </Button>
+          </div>
+
+          <div className="mt-4 space-y-4">
+            <div>
+              <Label>Nama Lengkap</Label>
+              <Input type="text" value={data?.user_nama} disabled placeholder="Nama Lengkap" />
+            </div>
+
+            <div>
+              <Label>Email</Label>
+              <Input disabled type="text" value={data?.username} placeholder="Email" />
+            </div>
+
+            <div>
+              <Label>Nomor telepon / whatsapp</Label>
+              <Input
+                disabled
+                type="text"
+                value={data?.user_phone}
+                placeholder="Nomor telepon / whatsapp"
+              />
+            </div>
+          </div>
+        </div>
+
+        <Divider />
+
         <div className="p-5">
           <p className="font-medium">Identitas Penerima Bantuan</p>
 

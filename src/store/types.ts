@@ -7,6 +7,11 @@ export type User = {
   user_status: string;
   mustahiq_id: number | null;
   mustahiq?: Mustahiq | null;
+  institusi:
+    | {
+        institusi_id: number;
+      }[]
+    | [];
 };
 
 export type Mustahiq = {

@@ -4,7 +4,7 @@ import MuzakiIcon from '@/components/icon/MuzakiIcon';
 export const role = [
   {
     icon: MuzakiIcon,
-    label1: 'Muzaki,',
+    label1: 'Muzaki',
     label2: 'Berbagi kebaikan lewat donasi',
     label3: '(Pemberi Bantuan)',
     description:
@@ -13,7 +13,7 @@ export const role = [
   },
   {
     icon: MustahiqIcon,
-    label1: 'Mustahiq,',
+    label1: 'Mustahiq',
     label3: '(Penerima Bantuan)',
     label2: 'Saya ingin mengajukan bantuan',
     description:

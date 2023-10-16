@@ -10,6 +10,9 @@ export type Program = {
   program_description: string;
   program_target_amount: number;
   institusi_nama: string;
+  program_institusi?: {
+    institusi_nama: string;
+  };
   institusi_no_hp: string;
   program_banner: {
     banners_path: string;

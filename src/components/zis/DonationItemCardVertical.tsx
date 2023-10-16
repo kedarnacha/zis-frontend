@@ -16,7 +16,9 @@ const DonationItemCardVertical = ({ program }: { program: Program }) => {
         <div className="flex w-full flex-1 flex-col px-3">
           <p className="mt-2 text-xs font-semibold">{program.program_title}</p>
           <div className="flex items-center">
-            <p className="text-[10px] text-slate-500">ZIS Indosat</p>
+            <p className="text-[10px] text-slate-500">
+              {program?.program_institusi?.institusi_nama ?? 'ZIS Indosat'}
+            </p>
             <svg
               width="12"
               height="12"

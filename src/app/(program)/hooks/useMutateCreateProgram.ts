@@ -1,6 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 
+import useQueryAccount from '@/app/account/hooks/useQueryAccount';
 import { useToast } from '@/components/ui/use-toast';
 import axios from '@/lib/axios';
 import { ProgramSchema } from '@/schema/program';
@@ -15,6 +16,9 @@ const useMutateCreateProgram = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const router = useRouter();
+  const { data } = useQueryAccount();
+
+  const institusi_id = (data?.institusi ?? []).length > 0 ? data?.institusi[0].institusi_id : null;
 
   const mutationFn = async (data: ProgramSchema) => {
     const formData = new FormData();
@@ -25,6 +29,10 @@ const useMutateCreateProgram = () => {
       if (Boolean(data[_key])) {
         formData.append(key, data[_key]);
       }
+    }
+
+    if (institusi_id) {
+      formData.append('program_institusi_id', String(institusi_id));
     }
 
     const response = await axios.request<Response>({
@@ -46,7 +54,7 @@ const useMutateCreateProgram = () => {
         title: 'Berhasil Simpan Data',
       });
       queryClient.invalidateQueries([ALL_PROGRAM_QUERY_KEY]);
-      router.push('/program');
+      router.push('/program/submit-complete');
     },
     onError: (err) => {
       toast({
