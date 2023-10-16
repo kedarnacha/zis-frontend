@@ -1,7 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   images: {
-    domains: ['ik.imagekit.io', 'api.zisindosat.id'],
+    domains: ['ik.imagekit.io', 'api.zisindosat.id', 'localhost'],
   },
   output: 'standalone',
   async rewrites() {

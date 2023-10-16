@@ -21,6 +21,7 @@ FROM --platform=linux/amd64 base AS builder
 WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
+COPY .env.production.local ./.env
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
@@ -61,6 +62,5 @@ EXPOSE 3000
 ENV PORT 3000
 # set hostname to localhost
 ENV HOSTNAME "0.0.0.0"
-ENV NEXT_PUBLIC_API_URL="https://api.zisindosat.id"
 
 CMD ["node", "server.js"]

@@ -29,6 +29,8 @@ const ProgramDetailPage = () => {
 
   const { data, isError, isLoading } = useQueryDetailProgram(id);
 
+  const imageUrl = `${process.env.NEXT_PUBLIC_IMAGE_URL}/public/${data?.data.program_banner.banners_path}`;
+
   return (
     <DataLayout isLoading={isLoading} isError={isError} className="h-[80dvh]">
       <div className="relative w-full">
@@ -42,7 +44,7 @@ const ProgramDetailPage = () => {
           </Button>
         </div>
         <Image
-          src={`http://api.zisindosat.id/${data?.data.program_banner.banners_path}`}
+          src={imageUrl}
           height={375}
           width={230}
           alt="Item Image"

@@ -51,7 +51,7 @@ const MustahiqPage = () => {
       form.setValue('bank_name', data?.mustahiq?.bank_name);
       form.setValue('bank_number', data?.mustahiq?.bank_number);
       form.setValue('bank_account_name', data?.mustahiq?.bank_account_name);
-      form.setValue('imkas_number', (data?.mustahiq?.imkas_number as any) || null);
+      form.setValue('imkas_number', (data?.mustahiq?.imkas_number as any) || undefined);
     }
   }, [data?.mustahiq, form]);
 
@@ -108,7 +108,7 @@ const MustahiqPage = () => {
                 <FormItem>
                   <FormLabel className="mt-4">Alamat Lengkap</FormLabel>
                   <FormControl>
-                    <Input placeholder="Masukkan Alaman Lengkap" {...field} />
+                    <Input placeholder="Masukkan Alamat Lengkap" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

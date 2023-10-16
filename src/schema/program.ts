@@ -1,3 +1,5 @@
+import { z } from 'zod';
+
 export type Program = {
   program_id: number;
   program_kode: string;
@@ -13,3 +15,21 @@ export type Program = {
     banners_path: string;
   };
 };
+
+const acceptedSize = 1 * 1024 * 1024;
+const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+
+export const programSchema = z.object({
+  program_title: z.string().min(1, 'Nama Program Harus Diisi').max(255),
+  program_short_desc: z.string().max(100).optional(),
+  program_start_date: z.date(),
+  program_end_date: z.date(),
+  program_description: z.string().min(1, 'Deskripsi Program Harus Diisi'),
+  program_target_amount: z.number().min(1, 'Target Dana Harus Diisi'),
+  banner: z
+    .any()
+    .refine((file) => file?.size <= acceptedSize, 'Ukuran file maksimal 2MB')
+    .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), 'Format file tidak didukung'),
+});
+
+export type ProgramSchema = z.infer<typeof programSchema>;

@@ -6,22 +6,17 @@ import { Program } from '@/schema/program';
 import { formatter } from '@/utils/number';
 
 const DonationItemCardVertical = ({ program }: { program: Program }) => {
-  console.log(`${process.env.NEXT_PUBLIC_API_URL}/${program.program_banner.banners_path}`);
+  const imageUrl = `${process.env.NEXT_PUBLIC_IMAGE_URL}/public/${program.program_banner.banners_path}`;
   return (
     <Link href={`/program/${program.program_id}`}>
       <div className="flex border-b border-b-slate-200 py-3">
         <div className="relative aspect-[480/320] flex-1 overflow-hidden rounded-md">
-          <Image
-            src={`http://api.zisindosat.id/${program.program_banner.banners_path}`}
-            fill
-            alt="Item Image"
-            className="object-cover"
-          />
+          <Image src={imageUrl} fill alt="Item Image" className="object-cover" />
         </div>
         <div className="flex w-full flex-1 flex-col px-3">
           <p className="mt-2 text-xs font-semibold">{program.program_title}</p>
           <div className="flex items-center">
-            <p className="text-[10px] text-slate-500">{program.institusi_nama}</p>
+            <p className="text-[10px] text-slate-500">ZIS Indosat</p>
             <svg
               width="12"
               height="12"

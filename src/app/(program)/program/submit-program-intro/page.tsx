@@ -1,16 +1,28 @@
+'use client';
+
 import Image from 'next/image';
-import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
+import useQueryAccount from '@/app/account/hooks/useQueryAccount';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from '@/components/ui/accordion';
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from '@/components/ui/alert-dialog';
 import { Button } from '@/components/ui/button';
 import Divider from '@/components/zis/Divider';
 import Navbar from '@/components/zis/Navbar';
+import SearchYellowSvg from '@/components/zis/SearchYellowSvg';
 
 const content = [
   {
@@ -42,6 +54,28 @@ const tips = [
 ];
 
 const SubmitProgramPage = () => {
+  const router = useRouter();
+  const { data } = useQueryAccount();
+
+  const [isOpen, setIsOpen] = React.useState(false);
+
+  const handleClick = () => {
+    if (!data) {
+      return;
+    }
+    if (data?.mustahiq === null) {
+      setIsOpen(true);
+      return;
+    }
+
+    router.push('/program/program-category');
+  };
+
+  const handleClickModal = () => {
+    router.push('/program/program-category');
+    setIsOpen(false);
+  };
+
   return (
     <div className="pb-24">
       <Navbar title="Pengajuan Bantuan di Zis Indosat" />
@@ -62,11 +96,14 @@ const SubmitProgramPage = () => {
           Lewat Zis Indosat jutaan Teman yang berdonasi ke segala jenis bantuan tiap harinya.
         </p>
 
-        <Link href="/program/program-category">
-          <Button className="mt-4 w-full text-slate-50" size="lg" variant="destructive">
-            Ajukan Bantuan Sekarang
-          </Button>
-        </Link>
+        <Button
+          onClick={handleClick}
+          className="mt-4 w-full text-slate-50"
+          size="lg"
+          variant="destructive"
+        >
+          Ajukan Bantuan Sekarang
+        </Button>
       </div>
 
       <Divider />
@@ -135,12 +172,26 @@ const SubmitProgramPage = () => {
       <Divider />
 
       <div className="shadow-t-sm fixed inset-x-0 bottom-0 mx-auto  max-w-md items-center border-t border-t-slate-100 bg-white p-5">
-        <Link href="/program/program-category">
-          <Button className="w-full" size="lg" variant="destructive">
-            Ajukan Bantuan Sekarang
-          </Button>
-        </Link>
+        <Button onClick={handleClick} className="w-full" size="lg" variant="destructive">
+          Ajukan Bantuan Sekarang
+        </Button>
       </div>
+
+      <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Lengkapi Data sebelum mengajukan bantuan</AlertDialogTitle>
+            <AlertDialogDescription className="flex flex-col items-center">
+              <SearchYellowSvg />
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <Button onClick={handleClickModal} variant="destructive" size="lg">
+              Lengkapi Data Diri
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };
