@@ -1,5 +1,7 @@
 'use client';
 
+import { ChevronRight } from 'lucide-react';
+import Link from 'next/link';
 import React from 'react';
 
 import Navbar from '@/components/zis/Navbar';
@@ -29,7 +31,18 @@ const ProfilePage = () => {
         <DonationWalletEntry />
       )}
       <div className="h-3 w-full bg-slate-100" />
-      <DonationReminder />
+      {authState?.user?.user_type === TYPE_MUSTAHIQ ? (
+        <Link href="/program/submit-program-intro">
+          <div className="flex flex-row items-center space-x-4 p-5 text-slate-700">
+            <div className="flex-1">Submit Proposal</div>
+
+            <ChevronRight className="h-5 w-5" />
+          </div>
+        </Link>
+      ) : (
+        <DonationReminder />
+      )}
+
       <div className="h-3 w-full bg-slate-100" />
       <CallCenter />
       <div className="h-3 w-full bg-slate-100" />

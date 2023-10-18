@@ -1,3 +1,5 @@
+import { formatDistance } from 'date-fns';
+import { id } from 'date-fns/locale';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
@@ -7,6 +9,13 @@ import { formatter } from '@/utils/number';
 
 const DonationItemCardVertical = ({ program }: { program: Program }) => {
   const imageUrl = `${process.env.NEXT_PUBLIC_IMAGE_URL}/public/${program.program_banner.banners_path}`;
+
+  const percentage = (program.total_donation / program.program_target_amount) * 100;
+
+  const distance = formatDistance(new Date(program.program_end_date), new Date(), {
+    locale: id,
+  });
+
   return (
     <Link href={`/program/${program.program_id}`}>
       <div className="flex border-b border-b-slate-200 py-3">
@@ -41,21 +50,20 @@ const DonationItemCardVertical = ({ program }: { program: Program }) => {
           </div>
 
           <div className="mb-2 mt-auto h-1 w-full rounded-full bg-slate-300">
-            <div className="h-1 w-[65%] rounded-full bg-orange-500" />
+            <div className="h-1 rounded-full bg-orange-500" style={{ width: `${percentage}%` }} />
           </div>
           <div className="flex items-center">
             <div className="flex-1">
               <p className="text-sm font-semibold text-slate-900">
-                {formatter.format(program.program_target_amount)}
+                {formatter.format(program.total_donation)}
               </p>
             </div>
-            <p className="text-sm font-semibold text-slate-900">9</p>
           </div>
           <div className="flex items-center">
             <div className="flex-1">
               <p className="text-[10px]">Donasi Terkumpul</p>
             </div>
-            <p className="text-[10px]">Hari Lagi</p>
+            <p className="text-[10px]">{distance} lagi</p>
           </div>
         </div>
       </div>

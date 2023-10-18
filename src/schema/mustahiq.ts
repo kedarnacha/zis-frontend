@@ -1,13 +1,6 @@
 import { z } from 'zod';
 
-const acceptedSize = 2 * 1024 * 1024;
-const ACCEPTED_IMAGE_TYPES = [
-  'image/jpeg',
-  'image/jpg',
-  'image/png',
-  'image/webp',
-  'application/pdf',
-];
+import { ACCEPTED_IMAGE_TYPES, ACCEPTED_SIZE } from '@/utils/constants';
 
 export const mustahiqSchema = z
   .object({
@@ -48,12 +41,12 @@ export const mustahiqSchema = z
 
     kk_file: z
       .any()
-      .refine((file) => file?.size <= acceptedSize, 'Ukuran file maksimal 2MB')
+      .refine((file) => file?.size <= ACCEPTED_SIZE, 'Ukuran file maksimal 2MB')
       .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), 'Format file tidak didukung'),
 
     ktp_file: z
       .any()
-      .refine((file) => file?.size <= acceptedSize, 'Ukuran file maksimal 2MB')
+      .refine((file) => file?.size <= ACCEPTED_SIZE, 'Ukuran file maksimal 2MB')
       .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), 'Format file tidak didukung'),
   })
   .refine((data) => {

@@ -1,13 +1,20 @@
 'use client';
 
-import { HeartHandshakeIcon, HomeIcon, LayoutGridIcon, LogInIcon, UserIcon } from 'lucide-react';
+import {
+  HeartHandshakeIcon,
+  HomeIcon,
+  LayoutGridIcon,
+  LogInIcon,
+  MailIcon,
+  UserIcon,
+} from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import React from 'react';
 
 import { cn } from '@/lib/utils';
 import { useAuthState } from '@/store/useAuthState';
-import { TYPE_MUSTAHIQ, TYPE_MUZAKI } from '@/utils/constants';
+import { TYPE_MUSTAHIQ } from '@/utils/constants';
 
 import { Button } from '../ui/button';
 
@@ -44,14 +51,14 @@ const BottomNavigation = () => {
       href: '/program',
     },
     {
-      icon: HeartHandshakeIcon,
-      label: 'Bantuan',
-      href: '/bantuan',
+      icon: MailIcon,
+      label: 'Pesan',
+      href: '/message',
     },
   ];
 
   const menu = [
-    ...(auth?.user?.user_type === TYPE_MUZAKI ? muzakiMenu : mustahiqMenu),
+    ...(auth?.user?.user_type === TYPE_MUSTAHIQ ? mustahiqMenu : muzakiMenu),
     !auth?.isAuthenticated || !auth?.hasHydrated
       ? {
           icon: LogInIcon,

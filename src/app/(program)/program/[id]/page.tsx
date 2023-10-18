@@ -1,5 +1,7 @@
 'use client';
 
+import { formatDistance } from 'date-fns';
+import { id as indo } from 'date-fns/locale';
 import { ChevronLeft, Download, HomeIcon, Share } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -14,6 +16,7 @@ import {
 } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
 import DataLayout from '@/components/zis/DataLayout';
+import { formatter } from '@/utils/number';
 
 import useQueryDetailProgram from '../../hooks/useQueryDetailProgram';
 
@@ -30,6 +33,17 @@ const ProgramDetailPage = () => {
   const { data, isError, isLoading } = useQueryDetailProgram(id);
 
   const imageUrl = `${process.env.NEXT_PUBLIC_IMAGE_URL}/public/${data?.data.program_banner.banners_path}`;
+
+  const percentage =
+    ((data?.data?.total_donation ?? 0) / (data?.data?.program_target_amount ?? 0)) * 100;
+
+  const distance = formatDistance(
+    new Date(data?.data?.program_end_date ?? Date.now()),
+    new Date(),
+    {
+      locale: indo,
+    },
+  );
 
   return (
     <DataLayout isLoading={isLoading} isError={isError} className="h-[80dvh]">
@@ -57,19 +71,20 @@ const ProgramDetailPage = () => {
         <p className="mt-2 text-sm font-light">{data?.data.program_short_desc ?? ''}</p>
 
         <div className="mb-2 mt-5 h-1 w-full rounded-full bg-slate-300">
-          <div className="h-1 w-[65%] rounded-full bg-orange-500" />
+          <div className="h-1 rounded-full bg-orange-500" style={{ width: `${percentage}%` }} />
         </div>
         <div className="mt-4 flex items-center">
           <div className="flex-1">
-            <p className="text font-semibold text-slate-900">Rp20.000.000</p>
+            <p className="text font-semibold text-slate-900">
+              {formatter.format(data?.data?.total_donation ?? 0)}
+            </p>
           </div>
-          <p className="text font-semibold text-slate-900">9</p>
         </div>
         <div className="flex items-center">
           <div className="flex-1">
             <p className="text-sm">Donasi Terkumpul</p>
           </div>
-          <p className="text-sm">Hari Lagi</p>
+          <p className="text-sm">{distance} Lagi</p>
         </div>
       </div>
       <div className="h-3 bg-slate-100" />

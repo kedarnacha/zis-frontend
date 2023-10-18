@@ -10,6 +10,8 @@ export type User = {
   institusi:
     | {
         institusi_id: number;
+        institusi_nama: string;
+        institusi_no_hp: string;
       }[]
     | [];
 };

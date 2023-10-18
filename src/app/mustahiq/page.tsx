@@ -55,8 +55,13 @@ const MustahiqPage = () => {
       form.setValue('bank_number', data?.mustahiq?.bank_number);
       form.setValue('bank_account_name', data?.mustahiq?.bank_account_name);
       form.setValue('imkas_number', (data?.mustahiq?.imkas_number as any) || undefined);
+      if (data?.institusi?.length > 0) {
+        form.setValue('is_institusi', true);
+        form.setValue('institusi_nama', String(data?.institusi?.[0]?.institusi_nama ?? ''));
+        form.setValue('institusi_no_hp', String(data?.institusi?.[0]?.institusi_no_hp ?? ''));
+      }
     }
-  }, [data?.mustahiq, form]);
+  }, [data?.mustahiq, form, data?.institusi]);
 
   const onSubmit = (data: MustahiqSchema) => {
     mutate(data);
@@ -77,10 +82,10 @@ const MustahiqPage = () => {
                 <Label>Daftar Sebagai</Label>
                 <Select
                   onValueChange={(value) => field.onChange(value !== 'personal')}
-                  defaultValue={!field.value ? 'personal' : 'institusi'}
+                  value={field.value ? 'institusi' : 'personal'}
                 >
                   <SelectTrigger className="h-14 w-full">
-                    <SelectValue placeholder="Pilih Status Keluarga" />
+                    <SelectValue placeholder="Daftar Sebagai" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
@@ -252,7 +257,7 @@ const MustahiqPage = () => {
               render={({ field }) => (
                 <FormItem className="flex flex-col space-y-2">
                   <Label>Kontak Darurat</Label>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select onValueChange={field.onChange} value={field.value}>
                     <SelectTrigger className="h-14 w-full">
                       <SelectValue placeholder="Pilih Status Keluarga" />
                     </SelectTrigger>
@@ -296,7 +301,7 @@ const MustahiqPage = () => {
               render={({ field }) => (
                 <FormItem className="flex flex-col space-y-2">
                   <Label>Pilih Bank</Label>
-                  <Select onValueChange={field.onChange} defaultValue={field.value}>
+                  <Select onValueChange={field.onChange} value={field.value}>
                     <SelectTrigger className="h-14 w-full">
                       <SelectValue placeholder="Pilih Nama Bank" />
                     </SelectTrigger>

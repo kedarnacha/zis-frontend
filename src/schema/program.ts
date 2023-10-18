@@ -17,6 +17,7 @@ export type Program = {
   program_banner: {
     banners_path: string;
   };
+  total_donation: number;
 };
 
 const acceptedSize = 1 * 1024 * 1024;
