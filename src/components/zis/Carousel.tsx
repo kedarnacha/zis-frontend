@@ -38,7 +38,7 @@ const Carousel = () => {
           <Link href={`/program/${slide.program_id}`}>
             <div className="relative mx-4 mt-6 aspect-video overflow-hidden rounded-md bg-slate-100 shadow-md">
               <Image
-                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/public/${slide.program_banner.banners_path}`}
+                src={`${process.env.NEXT_PUBLIC_UNSAFE_URL}/public/${slide.program_banner.banners_path}`}
                 alt={`Carousel-${slide.program_id}`}
                 fill
                 className="object-cover"

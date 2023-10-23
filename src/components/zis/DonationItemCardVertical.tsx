@@ -8,7 +8,7 @@ import { Program } from '@/schema/program';
 import { formatter } from '@/utils/number';
 
 const DonationItemCardVertical = ({ program }: { program: Program }) => {
-  const imageUrl = `${process.env.NEXT_PUBLIC_IMAGE_URL}/public/${program.program_banner.banners_path}`;
+  const imageUrl = `${process.env.NEXT_PUBLIC_UNSAFE_URL}/public/${program.program_banner.banners_path}`;
 
   const percentage = (program.total_donation / program.program_target_amount) * 100;
 

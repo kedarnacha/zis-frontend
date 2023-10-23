@@ -21,6 +21,8 @@ import { Button } from '../ui/button';
 const BottomNavigation = () => {
   const auth = useAuthState();
 
+  const isLoggedIn = auth?.isAuthenticated && auth?.hasHydrated;
+
   const mustahiqMenu = [
     {
       icon: HomeIcon,
@@ -53,13 +55,14 @@ const BottomNavigation = () => {
     {
       icon: MailIcon,
       label: 'Pesan',
-      href: '/message',
+      href: isLoggedIn ? '/message' : '#',
+      disabled: true,
     },
   ];
 
   const menu = [
     ...(auth?.user?.user_type === TYPE_MUSTAHIQ ? mustahiqMenu : muzakiMenu),
-    !auth?.isAuthenticated || !auth?.hasHydrated
+    !isLoggedIn
       ? {
           icon: LogInIcon,
           label: 'Masuk',
@@ -91,6 +94,7 @@ const BottomNavigation = () => {
                 'rounded-none h-full flex-col w-full items-center text-slate-500 text-xs hover:text-red-600',
                 {
                   'text-red-600': pathName === item.href,
+                  'opacity-50': !isLoggedIn && 'disabled' in item && item.disabled,
                 },
               )}
             >

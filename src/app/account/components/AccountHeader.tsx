@@ -1,5 +1,6 @@
 'use client';
 
+import Link from 'next/link';
 import React from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -18,9 +19,11 @@ const AccountHeader = () => {
         <p>{authState?.user?.user_nama ?? ''}</p>
       </div>
 
-      <Button variant="destructive" className="rounded-full">
-        Ubah Profil
-      </Button>
+      <Link href="/account/edit">
+        <Button variant="destructive" className="rounded-full">
+          Ubah Profil
+        </Button>
+      </Link>
     </div>
   );
 };

@@ -24,7 +24,7 @@ const ConfirmDonationPage = () => {
 
   return (
     <div>
-      <Navbar title="Mulai Bantu Sedekah Sekarang" />
+      <Navbar title="Mulai Bantu Sedekah Sekarang" showBack={false} />
       <div className="border-b-8 border-b-slate-100 p-5">
         {!!data && <DonationItemCardVertical program={data?.data} />}
       </div>

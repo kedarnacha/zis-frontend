@@ -16,12 +16,15 @@ import {
 } from '@/components/ui/accordion';
 import { Button } from '@/components/ui/button';
 import DataLayout from '@/components/zis/DataLayout';
+import { useAuthState } from '@/store/useAuthState';
+import { TYPE_MUZAKI } from '@/utils/constants';
 import { formatter } from '@/utils/number';
 
 import useQueryDetailProgram from '../../hooks/useQueryDetailProgram';
 
 const ProgramDetailPage = () => {
   const router = useRouter();
+  const authState = useAuthState();
 
   const handleBack = () => {
     router.back();
@@ -32,7 +35,7 @@ const ProgramDetailPage = () => {
 
   const { data, isError, isLoading } = useQueryDetailProgram(id);
 
-  const imageUrl = `${process.env.NEXT_PUBLIC_IMAGE_URL}/public/${data?.data.program_banner.banners_path}`;
+  const imageUrl = `${process.env.NEXT_PUBLIC_UNSAFE_URL}/public/${data?.data.program_banner.banners_path}`;
 
   const percentage =
     ((data?.data?.total_donation ?? 0) / (data?.data?.program_target_amount ?? 0)) * 100;
@@ -185,18 +188,20 @@ const ProgramDetailPage = () => {
         </Accordion>
       </div>
 
-      <div className="shadow-t-sm fixed inset-x-0 bottom-0 mx-auto flex w-full max-w-md items-center space-x-4 border-t border-t-slate-100 bg-white p-5">
-        <Link href="/program/1/recurring-donation" className="w-full flex-1">
-          <Button className="w-full border-red-500 text-red-500" size="lg" variant="outline">
-            Sedekah Rutin
-          </Button>
-        </Link>
-        <Link href="/program/1/donate" className="w-full flex-1">
-          <Button className="w-full" size="lg" variant="destructive">
-            Bantu Sekarang
-          </Button>
-        </Link>
-      </div>
+      {authState?.user?.user_type === TYPE_MUZAKI && (
+        <div className="shadow-t-sm fixed inset-x-0 bottom-0 mx-auto flex w-full max-w-md items-center space-x-4 border-t border-t-slate-100 bg-white p-5">
+          <Link href="/program/1/recurring-donation" className="w-full flex-1">
+            <Button className="w-full border-red-500 text-red-500" size="lg" variant="outline">
+              Sedekah Rutin
+            </Button>
+          </Link>
+          <Link href="/program/1/donate" className="w-full flex-1">
+            <Button className="w-full" size="lg" variant="destructive">
+              Bantu Sekarang
+            </Button>
+          </Link>
+        </div>
+      )}
     </DataLayout>
   );
 };

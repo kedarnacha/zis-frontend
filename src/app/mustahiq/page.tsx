@@ -2,6 +2,7 @@
 
 import { zodResolver } from '@hookform/resolvers/zod';
 import { HardDriveDownload, Loader2Icon, Upload } from 'lucide-react';
+import Link from 'next/link';
 import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 
@@ -135,9 +136,11 @@ const MustahiqPage = () => {
         <div className="p-5">
           <div className="flex items-center justify-between">
             <p className="font-medium">Data Diri</p>
-            <Button variant="ghost" className="text-orange-500">
-              Ubah
-            </Button>
+            <Link href="/account/edit">
+              <Button variant="ghost" className="text-orange-500">
+                Ubah
+              </Button>
+            </Link>
           </div>
 
           <div className="mt-4 space-y-4">

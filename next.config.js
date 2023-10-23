@@ -8,7 +8,7 @@ const nextConfig = {
     return [
       {
         source: '/backend/:path*',
-        destination: 'http://api.zisindosat.id/:path*',
+        destination: process.env.NEXT_PUBLIC_API_URL + '/:path*',
       },
     ];
   },

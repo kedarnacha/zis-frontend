@@ -1,4 +1,4 @@
-import axios from '@/lib/axios';
+import { serverAxios } from '@/lib/axios';
 
 import VerifikasiPage from './components/VerifikasiPage';
 
@@ -17,7 +17,7 @@ const Verifikasi = async (props: Props) => {
   const cleanAccount = decodeURIComponent(account);
   const email = Buffer.from(cleanAccount, 'base64').toString();
 
-  const res = await axios.request({
+  const res = await serverAxios.request({
     url: '/auth/verifed',
     method: 'POST',
     data: {
