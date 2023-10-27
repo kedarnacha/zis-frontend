@@ -34,11 +34,6 @@ const BottomNavigation = () => {
       label: 'Galang Dana',
       href: '/program/submit-program-intro',
     },
-    {
-      icon: LayoutGridIcon,
-      label: 'program',
-      href: '/program',
-    },
   ];
 
   const muzakiMenu = [
@@ -52,16 +47,16 @@ const BottomNavigation = () => {
       label: 'Program',
       href: '/program',
     },
+  ];
+
+  const menu = [
+    ...(auth?.user?.user_type === TYPE_MUSTAHIQ ? mustahiqMenu : muzakiMenu),
     {
       icon: MailIcon,
       label: 'Pesan',
       href: isLoggedIn ? '/message' : '#',
       disabled: true,
     },
-  ];
-
-  const menu = [
-    ...(auth?.user?.user_type === TYPE_MUSTAHIQ ? mustahiqMenu : muzakiMenu),
     !isLoggedIn
       ? {
           icon: LogInIcon,
@@ -75,9 +70,10 @@ const BottomNavigation = () => {
         },
   ];
 
-  const routes = [...menu.map((item) => item.href)].filter(
+  const routes = Array.from(new Set([...menu.map((item) => item.href), '/program'])).filter(
     (item) => item !== '/login' && item !== '/program/submit-program-intro',
   );
+
   const pathName = usePathname();
   const matchRoutes = routes.find((item) => item === pathName);
   if (!matchRoutes) return null;

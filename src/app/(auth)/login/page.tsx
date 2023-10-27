@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 
 import Navbar from '@/components/zis/Navbar';
 
@@ -6,7 +6,7 @@ import LoginForm from './components/LoginForm';
 
 const LoginPage = () => {
   return (
-    <Fragment>
+    <div className="pb-96">
       <Navbar title="Masuk Zis Indosat" />
 
       <div className="border-b-8 border-b-slate-100 p-5">
@@ -16,7 +16,7 @@ const LoginPage = () => {
       </div>
 
       <LoginForm />
-    </Fragment>
+    </div>
   );
 };
 

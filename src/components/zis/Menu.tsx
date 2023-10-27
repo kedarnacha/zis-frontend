@@ -1,6 +1,7 @@
 'use client';
 
 import { GlobeIcon, MoreHorizontal } from 'lucide-react';
+import { parseAsInteger, useQueryState } from 'next-usequerystate';
 import React from 'react';
 
 import { cn } from '@/lib/utils';
@@ -12,33 +13,33 @@ import ZisMonoIcon from '../icon/ZisMonoIcon';
 const menu = [
   {
     name: 'Semua Kategori',
-    value: '1',
+    value: null,
     Icon: ZisMonoIcon,
   },
   {
     name: 'Kesehatan & Medis',
-    value: '2',
+    value: 3,
     Icon: MedicalIcon,
   },
   {
     name: 'Pendidikan & Guru',
-    value: '3',
+    value: 2,
     Icon: EducationIcon,
   },
   {
     name: 'Program Umum',
-    value: '4',
+    value: 1,
     Icon: GlobeIcon,
   },
   {
     name: 'Kategori Lainnya',
-    value: '5',
+    value: 4,
     Icon: MoreHorizontal,
   },
 ];
 
 const Menu = () => {
-  const [active, setActive] = React.useState('1');
+  const [category, setCategory] = useQueryState('category', parseAsInteger);
 
   return (
     <div className="mt-5 px-4">
@@ -47,7 +48,7 @@ const Menu = () => {
       <div className="flex space-x-4 overflow-auto scroll-smooth p-4">
         {menu.map((item) => (
           <div
-            onClick={() => setActive(item.value)}
+            onClick={() => setCategory(item.value)}
             key={item.value}
             className="flex w-16 shrink-0 cursor-pointer flex-col items-center"
           >
@@ -55,20 +56,20 @@ const Menu = () => {
               className={cn(
                 'h-10 w-10 rounded-full items-center justify-center flex bg-slate-50 shadow-lg',
                 {
-                  'bg-red-500': item.value === active,
+                  'bg-red-500': item.value === category,
                 },
               )}
             >
               <item.Icon
                 className={cn('h-4 w-4 text-red-500', {
-                  'text-slate-50': item.value === active,
+                  'text-slate-50': item.value === category,
                 })}
-                color={item.value === active ? '#fff' : '#ED1D26'}
+                color={item.value === category ? '#fff' : '#ED1D26'}
               />
             </div>
             <p
               className={cn('text-[10px] text-center mt-2', {
-                'text-slate-400': item.value !== active,
+                'text-slate-400': item.value !== category,
               })}
             >
               {item.name}

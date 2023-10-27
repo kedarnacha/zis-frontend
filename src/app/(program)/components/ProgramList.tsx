@@ -1,5 +1,6 @@
 'use client';
 
+import { parseAsInteger, useQueryState } from 'next-usequerystate';
 import React from 'react';
 
 import { Button } from '@/components/ui/button';
@@ -9,10 +10,21 @@ import DonationItemCardVertical from '@/components/zis/DonationItemCardVertical'
 import useQueryGetAllProgram from '../hooks/useQueryGetAllProgram';
 
 const ProgramList = ({ isHome = false }) => {
-  const { data, isLoading, isError } = useQueryGetAllProgram();
+  const [keyword] = useQueryState('keyword');
+  const [category] = useQueryState('category', parseAsInteger);
+
+  const [sortBy] = useQueryState('sortBy');
+  const [order] = useQueryState('order');
+
+  const { data, isLoading, isError, isFetching } = useQueryGetAllProgram({
+    category,
+    keyword,
+    sortBy,
+    order,
+  });
 
   return (
-    <DataLayout isError={isError} isLoading={isLoading} className="h-[30dvh]">
+    <DataLayout isError={isError} isLoading={isLoading || isFetching} className="h-[30dvh]">
       <div className="my-5 px-4">
         {data?.data?.map((item) => (
           <DonationItemCardVertical key={item.program_id} program={item} />

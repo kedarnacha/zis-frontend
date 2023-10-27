@@ -59,6 +59,8 @@ const SubmitProgramPage = () => {
 
   const [isOpen, setIsOpen] = React.useState(false);
 
+  console.log({ data });
+
   const handleClick = () => {
     if (!data) {
       return;
@@ -72,7 +74,7 @@ const SubmitProgramPage = () => {
   };
 
   const handleClickModal = () => {
-    router.push('/program/program-category');
+    router.push('/mustahiq');
     setIsOpen(false);
   };
 

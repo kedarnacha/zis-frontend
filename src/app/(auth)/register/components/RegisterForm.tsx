@@ -6,8 +6,17 @@ import Link from 'next/link';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 
+import TOCContent from '@/app/toc/components/TOCContent';
 import MuzakiIcon from '@/components/icon/MuzakiIcon';
 import { Button } from '@/components/ui/button';
+import { Checkbox } from '@/components/ui/checkbox';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
 import {
   Form,
   FormControl,
@@ -25,6 +34,7 @@ import RoleSelector from './RoleSelector';
 
 const RegisterForm = () => {
   const { mutateAsync, isLoading } = useMutateRegister();
+  const [isTermsAgreed, setIsTermsAgreed] = React.useState(false);
 
   const form = useForm<RegisterSchema>({
     resolver: zodResolver(registerSchema),
@@ -134,17 +144,35 @@ const RegisterForm = () => {
         </div>
         <div className="h-3 bg-slate-100" />
 
-        <div className="p-5 text-slate-700">
-          Dengan Klik Daftar, anda telah menyetujui{' '}
-          <Link href="/toc" className="font-semibold text-orange-500">
-            Syarat dan Ketentuan kami.
-          </Link>
+        <div className="flex p-5 text-slate-700">
+          <Checkbox
+            id="terms"
+            className="mr-2 mt-1"
+            checked={isTermsAgreed}
+            onCheckedChange={(e) => setIsTermsAgreed(Boolean(e))}
+          />
+          <div>
+            Dengan Klik Daftar, anda telah menyetujui{' '}
+            <Dialog>
+              <DialogTrigger asChild>
+                <div className="cursor-pointer font-semibold text-orange-500">
+                  Syarat dan Ketentuan kami.
+                </div>
+              </DialogTrigger>
+              <DialogContent className="max-h-screen overflow-y-scroll sm:max-w-[425px]">
+                <DialogHeader>
+                  <DialogTitle>Syarat Dan Ketentuan</DialogTitle>
+                </DialogHeader>
+                <TOCContent />
+              </DialogContent>
+            </Dialog>
+          </div>
         </div>
         <div className="h-3 bg-slate-100" />
 
         <div className="shadow-t-sm fixed inset-x-0 bottom-0 mx-auto w-full max-w-md  bg-white p-5">
           <Button
-            disabled={isLoading}
+            disabled={isLoading || !isTermsAgreed}
             className="w-full"
             size="lg"
             variant="destructive"

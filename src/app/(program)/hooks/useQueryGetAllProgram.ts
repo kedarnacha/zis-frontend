@@ -6,6 +6,10 @@ import { ALL_PROGRAM_QUERY_KEY } from '@/utils/constants';
 
 type Params = {
   page?: number;
+  category: number | null;
+  keyword: string | null;
+  sortBy: string | null;
+  order: string | null;
 };
 
 type Response = {
@@ -25,12 +29,16 @@ type Response = {
 };
 
 const request = async (params?: Params) => {
-  const { page = 1 } = params || {};
+  const { page = 1, category = '', keyword = '', order = '', sortBy = '' } = params || {};
   const { data } = await axios.request<Response>({
     method: 'GET',
     url: '/home/program',
-    data: {
+    params: {
       page,
+      category,
+      keyword,
+      order,
+      sortBy,
     },
   });
 
