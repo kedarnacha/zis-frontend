@@ -52,7 +52,7 @@ const HomePage = () => {
         </div>
       </div>
       <Carousel />
-      <Menu />
+      <Menu fromHome />
       <div className="h-3 bg-slate-100" />
       <ProgramList isHome />
       <div className="my-4 flex justify-center">

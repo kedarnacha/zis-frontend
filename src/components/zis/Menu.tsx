@@ -1,6 +1,7 @@
 'use client';
 
 import { GlobeIcon, MoreHorizontal } from 'lucide-react';
+import { useRouter } from 'next/navigation';
 import { parseAsInteger, useQueryState } from 'next-usequerystate';
 import React from 'react';
 
@@ -38,8 +39,23 @@ const menu = [
   },
 ];
 
-const Menu = () => {
+const Menu = ({ fromHome = false }: { fromHome?: boolean }) => {
   const [category, setCategory] = useQueryState('category', parseAsInteger);
+  const router = useRouter();
+
+  const handleClick = (value: number | null) => {
+    if (!value) {
+      router.push('/program');
+      return;
+    }
+
+    if (fromHome) {
+      router.push(`/program?category=${value}`);
+      return;
+    }
+
+    setCategory(value);
+  };
 
   return (
     <div className="mt-5 px-4">
@@ -48,7 +64,7 @@ const Menu = () => {
       <div className="flex space-x-4 overflow-auto scroll-smooth p-4">
         {menu.map((item) => (
           <div
-            onClick={() => setCategory(item.value)}
+            onClick={() => handleClick(item.value)}
             key={item.value}
             className="flex w-16 shrink-0 cursor-pointer flex-col items-center"
           >
