@@ -5,7 +5,7 @@ import React from 'react';
 
 import { Button } from '@/components/ui/button';
 import { useAuthState } from '@/store/useAuthState';
-import { TYPE_MUSTAHIQ } from '@/utils/constants';
+import { TYPE_MUSTAHIQ, TYPE_MUZAKI } from '@/utils/constants';
 
 const ActionButton = () => {
   const authState = useAuthState();
@@ -23,9 +23,13 @@ const ActionButton = () => {
       </Link>
     );
   }
+  
+  const user_type = authState?.user?.user_type;
 
+  const href = user_type === TYPE_MUZAKI ? '/program' : '/login';
+  
   return (
-    <Link href="/program">
+    <Link href={href}>
       <Button className="mt-4 w-full rounded-full text-slate-50" size="sm" variant="destructive">
         Yuk Donasi Sekarang!
       </Button>
