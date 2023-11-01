@@ -47,14 +47,92 @@ const MustahiqPage = () => {
     },
   });
 
+  useEffect(() => {
+    if (data?.mustahiq) {
+      form.setValue('address', data?.mustahiq?.address);
+      form.setValue('emergency_contact_name', data?.mustahiq?.emergency_contact_name);
+      form.setValue('emergency_contact_number', data?.mustahiq?.emergency_contact_number);
+      form.setValue('bank_name', data?.mustahiq?.bank_name);
+      form.setValue('bank_number', data?.mustahiq?.bank_number);
+      form.setValue('bank_account_name', data?.mustahiq?.bank_account_name);
+      form.setValue('imkas_number', (data?.mustahiq?.imkas_number as any) || undefined);
+      if (data?.institusi?.length > 0) {
+        form.setValue('is_institusi', true);
+        form.setValue('institusi_nama', String(data?.institusi?.[0]?.institusi_nama ?? ''));
+        form.setValue('institusi_no_hp', String(data?.institusi?.[0]?.institusi_no_hp ?? ''));
+      }
+    }
+  }, [data?.mustahiq, form, data?.institusi]);
+
   const onSubmit = (data: MustahiqSchema) => {
     mutate(data);
   };
+
+  const isInstitusi = form.watch('is_institusi');
 
   return (
     <div>
       <Navbar title="Data Diri Mustahiq" />
       <Form {...form}>
+        <div className="space-y-4 p-5">
+          <FormField
+            control={form.control}
+            name="is_institusi"
+            render={({ field }) => (
+              <FormItem className="flex flex-col space-y-2">
+                <Label>Daftar Sebagai</Label>
+                <Select
+                  onValueChange={(value) => field.onChange(value !== 'personal')}
+                  value={field.value ? 'institusi' : 'personal'}
+                >
+                  <SelectTrigger className="h-14 w-full">
+                    <SelectValue placeholder="Daftar Sebagai" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="personal">Perorangan</SelectItem>
+                      <SelectItem value="institusi">Institusi</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          {isInstitusi && (
+            <>
+              <FormField
+                control={form.control}
+                name="institusi_nama"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="mt-4">Nama Institusi</FormLabel>
+                    <FormControl>
+                      <Input required placeholder="Masukkan Nama Institusi" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="institusi_no_hp"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="mt-4">No. PIC</FormLabel>
+                    <FormControl>
+                      <Input required placeholder="Masukkan No. PIC" type="number" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </>
+          )}
+        </div>
+        <Divider />
+
         <div className="p-5">
           <div className="flex items-center justify-between">
             <p className="font-medium">Data Diri</p>
