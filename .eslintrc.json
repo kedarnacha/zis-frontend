@@ -9,6 +9,12 @@
     "simple-import-sort",
     "tailwindcss"
   ],
+  "prettier/prettier": [
+    "error",
+    {
+      "endOfLine": "auto"
+    }
+  ],
   "rules": {
     "simple-import-sort/imports": "warn",
     "prettier/prettier": "error",
