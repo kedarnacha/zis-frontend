@@ -9,13 +9,16 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import { Switch } from '@/components/ui/switch';
 import { Textarea } from '@/components/ui/textarea';
+import { Input } from '@/components/ui/input';
 import Divider from '@/components/zis/Divider';
 import DonationItemCardVertical from '@/components/zis/DonationItemCardVertical';
 import Navbar from '@/components/zis/Navbar';
 import SuccessSvg from '@/components/zis/SuccessSvg';
+import { useAuthState } from '@/store/useAuthState';
 
 const ConfirmDonationPage = () => {
   const [checked, setChecked] = React.useState(false);
+  const authState = useAuthState();
 
   const param = useParams();
   const id = param?.id as string;
@@ -33,6 +36,12 @@ const ConfirmDonationPage = () => {
         <SuccessSvg />
         <h4>Terima kasih telah bersedekah</h4>
         <p>Bantuan donasimu akan sangat berguna untuk yang membutuhkan dari program ini</p>
+      </div>
+      <Divider />
+
+      <div className="space-y-4 p-5">
+        <Label className="mt-4">Nama</Label>
+        <Input placeholder={checked ? 'Hamba Allah' : authState?.user?.user_nama ?? ''} disabled />
       </div>
 
       <Divider />

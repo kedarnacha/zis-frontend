@@ -92,7 +92,7 @@ const DonatePage = () => {
                   required
                   placeholder="Rp"
                   {...field}
-                  value={selectedIndex ? '' : field.value}
+                  value={field.value}
                   onChange={(e) => {
                     if (selectedIndex !== undefined) {
                       setSelectedIndex(undefined);

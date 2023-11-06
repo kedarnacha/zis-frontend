@@ -190,12 +190,12 @@ const ProgramDetailPage = () => {
 
       {authState?.user?.user_type === TYPE_MUZAKI && (
         <div className="shadow-t-sm fixed inset-x-0 bottom-0 mx-auto flex w-full max-w-md items-center space-x-4 border-t border-t-slate-100 bg-white p-5">
-          <Link href="/program/1/recurring-donation" className="w-full flex-1">
+          <Link href={`/program/${id}/recurring-donation`} className="w-full flex-1">
             <Button className="w-full border-red-500 text-red-500" size="lg" variant="outline">
               Sedekah Rutin
             </Button>
           </Link>
-          <Link href="/program/1/donate" className="w-full flex-1">
+          <Link href={`/program/${id}/donate`} className="w-full flex-1">
             <Button className="w-full" size="lg" variant="destructive">
               Bantu Sekarang
             </Button>

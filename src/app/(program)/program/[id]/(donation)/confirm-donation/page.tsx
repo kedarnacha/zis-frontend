@@ -1,7 +1,7 @@
 'use client';
 
-import { Upload } from 'lucide-react';
-import React from 'react';
+import { Divide, Upload } from 'lucide-react';
+import React, { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import useMutateDonate from '@/app/(program)/hooks/useMutateDonate';
@@ -20,7 +20,31 @@ import Divider from '@/components/zis/Divider';
 import Navbar from '@/components/zis/Navbar';
 import { DonateSchema } from '@/schema/donate';
 
+const bank = [
+  {
+    bank: "IMKas",
+    norek: 4567,
+  },
+  {
+    bank: "BCA",
+    norek: 297,
+  },
+  {
+    bank: "BNI",
+    norek: 319,
+  },
+  {
+    bank: "Mandiri",
+    norek: 533,
+  },
+  {
+    bank: "BRI",
+    norek: 198,
+  },
+];
+
 const ConfirmDonationPage = () => {
+  const [myItem, setMyItem] = useState(0);
   const form = useFormContext<DonateSchema>();
   const evidenceRef = React.useRef<HTMLInputElement>(null);
 
@@ -34,7 +58,7 @@ const ConfirmDonationPage = () => {
     <div>
       <Navbar title="Mulai Bantu Sedekah Sekarang" />
       <div className="border-b-8 border-b-slate-100 p-5">
-        <h2 className="font-semibold text-slate-500">Pilih Metode Pembayaran,</h2>
+        <h2 className="font-semibold text-slate-500">Pilih Metode Pembayaran</h2>
       </div>
 
       <div className="space-y-6 p-5">
@@ -44,25 +68,125 @@ const ConfirmDonationPage = () => {
           render={({ field }) => (
             <FormItem className="flex flex-col space-y-2">
               <Label>Metode Pembayaran</Label>
-              <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <Select onValueChange={(value) => {
+                field.onChange(value);
+                const selectedItems = bank.find((items) => items.bank === value);
+                if (selectedItems) {
+                  setMyItem(selectedItems.norek)
+                } else {
+                  setMyItem(0)
+                }
+              }}
+                defaultValue={field.value}>
                 <SelectTrigger className="h-14 w-full">
                   <SelectValue placeholder="Pilih Metode Pembayaran" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectGroup>
-                    <SelectItem value="IMKas">IMKas</SelectItem>
-                    <SelectItem value="BCA">BCA</SelectItem>
-                    <SelectItem value="BNI">BNI</SelectItem>
-                    <SelectItem value="Mandiri">Mandiri</SelectItem>
-                    <SelectItem value="BRI">BRI</SelectItem>
-                  </SelectGroup>
+                  {bank.map((items) => (
+                    <SelectGroup>
+                      <SelectItem value={items.bank}>
+                        {items.bank}
+                      </SelectItem>
+                    </SelectGroup>
+                  ))}
                 </SelectContent>
               </Select>
               <FormMessage />
+              <div className="relative mt-8 mb-4">
+                <Label>Panduan Pembayaran</Label>
+                <Select>
+                  <SelectTrigger className="h-14 w-full">
+                    <SelectValue placeholder="Panduan Pembayaran" />
+                    <SelectContent>
+                      <SelectGroup>
+                        <div className="max-w-[40ch] max-h-[20ch] p-5">
+                          <ol className="text-xs">
+                            <li className='pb-2'>
+                              <strong>Nomor Rekening:</strong>
+                              <br />
+                              <p className='text-blue-500'>{myItem}</p>
+                              
+                            </li>
+                            <li className='pb-2'>
+                              <strong>Login ke Akun Bank Anda:</strong>
+                              <br />
+                              Buka situs web bank Anda dan masuk ke akun
+                              Anda dengan menggunakan nama pengguna (username) dan kata sandi (password) yang benar.
+                            </li>
+
+                            <li className='pb-2'>
+                              <strong>Pilih Opsi Transfer:</strong>
+                              <br />
+                              Setelah masuk ke akun Anda, temukan opsi atau menu
+                              yang terkait dengan &quot;Transfer&quot; atau &quot;Pemindahan Dana.&quot; Ini bisa
+                              berbeda-beda tergantung pada bank Anda.
+                            </li>
+
+                            <li className='pb-2'>
+                              <strong>Pilih Rekening Asal:</strong>
+                              <br />
+                              Pilih rekening atau sumber dana yang ingin Anda
+                              gunakan untuk melakukan transfer.
+                            </li>
+
+                            <li className='pb-2'>
+                              <strong>Tentukan Rekening Tujuan:</strong>
+                              <br />
+                              Masukkan informasi rekening bank penerima,
+                              termasuk nama pemilik rekening, nomor rekening, dan kode bank jika diperlukan.
+                            </li>
+
+                            <li className='pb-2'>
+                              <strong>Masukkan Jumlah Dana:</strong>
+                              <br />
+                              Tentukan jumlah dana yang akan Anda transfer dan
+                              pilih mata uangnya.
+                            </li>
+
+                            <li className='pb-2'>
+                              <strong>Verifikasi Data:</strong>
+                              <br />
+                              Pastikan semua informasi yang Anda masukkan benar.
+                              Periksa lagi nomor rekening dan jumlah transfer sebelum melanjutkan.
+                            </li>
+
+                            <li className='pb-2'>
+                              <strong>Konfirmasi Transfer:</strong>
+                              <br />
+                              Setelah Anda yakin data yang dimasukkan benar,
+                              konfirmasikan transfer Anda. Biasanya, Anda akan diminta memasukkan kata sandi atau norek
+                              untuk mengesahkan transaksi.
+                            </li>
+
+                            <li className='pb-2'>
+                              <strong>Simpan Bukti Transfer:</strong>
+                              <br />
+                              Setelah selesai, simpan bukti transfer sebagai
+                              referensi. Bank biasanya akan memberikan nomor referensi atau nomor transaksi yang bisa
+                              Anda gunakan untuk pelacakan.
+                            </li>
+
+                            <li className='pb-2'>
+                              <strong>Cek Saldo:</strong>
+                              <br />
+                              Pastikan untuk memeriksa saldo rekening Anda setelah
+                              melakukan transfer untuk memastikan bahwa transaksi telah berhasil dan dana telah
+                              dinorekdahkan.
+                            </li>
+                          </ol>
+                        </div>
+                      </SelectGroup>
+                    </SelectContent>
+                  </SelectTrigger>
+                </Select>
+              </div>
             </FormItem>
           )}
         />
+      </div>
 
+      <Divider />
+      <div className="space-y-6 p-5">
         <FormField
           control={form.control}
           name="evidence"
@@ -99,60 +223,6 @@ const ConfirmDonationPage = () => {
         />
       </div>
 
-      <Divider />
-      <div className="prose p-5">
-        <h4>Panduan Pembayaran</h4>
-        <ol className="text-xs">
-          <li>
-            <strong>Login ke Akun Bank Anda:</strong> Buka situs web bank Anda dan masuk ke akun
-            Anda dengan menggunakan nama pengguna (username) dan kata sandi (password) yang benar.
-          </li>
-
-          <li>
-            <strong>Pilih Opsi Transfer:</strong> Setelah masuk ke akun Anda, temukan opsi atau menu
-            yang terkait dengan &quot;Transfer&quot; atau &quot;Pemindahan Dana.&quot; Ini bisa
-            berbeda-beda tergantung pada bank Anda.
-          </li>
-
-          <li>
-            <strong>Pilih Rekening Asal:</strong> Pilih rekening atau sumber dana yang ingin Anda
-            gunakan untuk melakukan transfer.
-          </li>
-
-          <li>
-            <strong>Tentukan Rekening Tujuan:</strong> Masukkan informasi rekening bank penerima,
-            termasuk nama pemilik rekening, nomor rekening, dan kode bank jika diperlukan.
-          </li>
-
-          <li>
-            <strong>Masukkan Jumlah Dana:</strong> Tentukan jumlah dana yang akan Anda transfer dan
-            pilih mata uangnya.
-          </li>
-
-          <li>
-            <strong>Verifikasi Data:</strong> Pastikan semua informasi yang Anda masukkan benar.
-            Periksa lagi nomor rekening dan jumlah transfer sebelum melanjutkan.
-          </li>
-
-          <li>
-            <strong>Konfirmasi Transfer:</strong> Setelah Anda yakin data yang dimasukkan benar,
-            konfirmasikan transfer Anda. Biasanya, Anda akan diminta memasukkan kata sandi atau PIN
-            untuk mengesahkan transaksi.
-          </li>
-
-          <li>
-            <strong>Simpan Bukti Transfer:</strong> Setelah selesai, simpan bukti transfer sebagai
-            referensi. Bank biasanya akan memberikan nomor referensi atau nomor transaksi yang bisa
-            Anda gunakan untuk pelacakan.
-          </li>
-
-          <li>
-            <strong>Cek Saldo:</strong> Pastikan untuk memeriksa saldo rekening Anda setelah
-            melakukan transfer untuk memastikan bahwa transaksi telah berhasil dan dana telah
-            dipindahkan.
-          </li>
-        </ol>
-      </div>
       <Divider />
 
       <div className="h-96" />
