@@ -13,6 +13,7 @@ import Divider from '@/components/zis/Divider';
 import Navbar from '@/components/zis/Navbar';
 import { cn } from '@/lib/utils';
 import { formatter } from '@/utils/number';
+import { useAuthState } from '@/store/useAuthState';
 
 const amount = [
   {
@@ -35,7 +36,7 @@ const amount = [
 
 const DonatePage = () => {
   const [checked, setChecked] = React.useState(false);
-
+  const authState = useAuthState();
   const [selectedIndex, setSelectedIndex] = React.useState<number | undefined>();
   const [customAmount, setCustomAmount] = React.useState<string>('');
   const param = useParams();
@@ -105,12 +106,17 @@ const DonatePage = () => {
 
         <div className="my-4">
           <Label>Email</Label>
-          <Input type="email" placeholder="Email" />
+          <Input type="email" placeholder="Email" value={authState?.user?.username}/>
+        </div>
+
+        <div className="my-4">
+          <Label>Nama</Label>
+          <Input type="text" placeholder="Nama" value={authState?.user?.user_nama}/>
         </div>
 
         <div className="my-4">
           <Label>Nomor telepon / whatsapp</Label>
-          <Input type="text" placeholder="Nomor telepon / whatsapp" />
+          <Input type="text" placeholder="Nomor telepon / whatsapp" value={authState?.user?.user_phone}/>
         </div>
 
         <Label>Durasi Sedekah</Label>

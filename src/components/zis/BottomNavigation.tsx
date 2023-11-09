@@ -31,7 +31,7 @@ const BottomNavigation = () => {
     },
     {
       icon: HeartHandshakeIcon,
-      label: 'Galang Dana',
+      label: 'Bantuan',
       href: '/program/submit-program-intro',
     },
   ];

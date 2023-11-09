@@ -1,8 +1,12 @@
-import { SearchIcon } from 'lucide-react';
+'use client'
+
+import { SearchIcon, XIcon } from 'lucide-react';
 import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
+import { useState } from 'react';
+import { useRouter } from 'next/navigation';
 
 import { Button } from '@/components/ui/button';
 import ArticleCarousel from '@/components/zis/ArticleCarousel';
@@ -22,20 +26,31 @@ const Carousel = dynamic(() => import('@/components/zis/Carousel'), {
 });
 
 const HomePage = () => {
+  const [search, setSearch] = useState('');
+  const router = useRouter();
   return (
     <div className="relative">
       <nav className="flex w-full items-center justify-center space-x-3 bg-amber-300 p-4 py-7">
         <Image src="/zis.png" alt="Logo" width={32} height={32} />
         <div className="flex-1">
-          <Button
-            className="w-full border-red-500 bg-slate-50 text-left text-slate-400"
-            size="sm"
-            variant="outline"
-          >
+          <div className="flex w-full items-center overflow-hidden rounded-md border border-red-500 bg-slate-50 pl-4 text-left text-slate-400">
             <SearchIcon width={16} height={16} className="text-red-600 " />
-            <div className="ml-3 flex-1">
-              <p>Cari Program Kebaikan</p>
-            </div>
+            <input
+              type="text"
+              value={search}
+              className="h-full w-full bg-slate-50 px-4 py-2.5 text-sm text-slate-900 outline-none placeholder:text-slate-400"
+              placeholder="Cari Program Kebaikan"
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </div>
+        </div>
+
+        <div>
+          <Button size="sm" variant="destructive"
+            onClick={() => {
+              router.push('/program?keyword=' + search);
+            }}>
+            Cari
           </Button>
         </div>
       </nav>
