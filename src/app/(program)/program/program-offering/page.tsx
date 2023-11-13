@@ -8,6 +8,7 @@ import Divider from '@/components/zis/Divider';
 import PengajuanMenu from '../components/PengajuanMenu';
 import PengajuanList from '../../components/PengajuanList';
 import CallCenter from '@/components/zis/CallCenter';
+import Link from 'next/link';
 
 const SubmitProgramPage = () => {
   return (
@@ -30,17 +31,18 @@ const SubmitProgramPage = () => {
       </div>
       <div className="relative z-40 -mt-10 px-4 mb-4">
         <div className="rounded-lg bg-white p-4 shadow-lg">
-          <div className="mt-3 flex items-center justify-center rounded-md border-2 border-dashed border-red-400 p-2">
-            <span className="text-red-400 text-sm py-2">
+          <Link href='/program/program-category' className="mt-3 flex items-center justify-center rounded-md border-2 border-dashed border-red-400 p-2">
+            <button className="text-red-400 text-sm py-2">
               Ajukan program bantuan baru
-            </span>
-          </div>
-          <Button className="mt-4 w-full rounded-full bg-[#EE888C] hover:bg-slate-400 text-black" size="sm" variant="destructive">
-            <span className="font-medium">Tips Pengajuan Bantuan? {' '}
-              <b className="text-red-600">Lihat disini</b>
-            </span>
-
-          </Button>
+            </button>
+          </Link>
+          <Link href="/program/submit-program-intro">
+            <Button className="mt-4 w-full rounded-full bg-[#EE888C] hover:bg-slate-400 text-black" size="sm" variant="destructive">
+              <span className="font-medium">Tips Pengajuan Bantuan? {' '}
+                <b className="text-[#B10000]">Lihat disini</b>
+              </span>
+            </Button>
+          </Link>
         </div>
       </div>
       <Divider />

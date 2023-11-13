@@ -32,6 +32,7 @@ const Carousel = () => {
         arrows: false,
         autoplay: true,
       }}
+      className="custom-splide"
     >
       {banners.map((slide) => (
         <SplideSlide key={String(slide.program_id)} className="pb-2">

@@ -2,11 +2,12 @@
 
 import { parseAsInteger, useQueryState } from 'next-usequerystate';
 import React from 'react';
+import { useParams } from 'next/navigation';
 
 import DataLayout from '@/components/zis/DataLayout';
 import PengajuanCard from '@/components/zis/PengajuanCard';
 
-import useQueryGetAllProgram from '../hooks/useQueryGetAllProgram';
+import useQueryUserProgram from '../hooks/userQueryUserProgram';
 
 const PengajuanList = () => {
     const [keyword] = useQueryState('keyword');
@@ -15,12 +16,10 @@ const PengajuanList = () => {
     const [sortBy] = useQueryState('sortBy');
     const [order] = useQueryState('order');
 
-    const { data, isLoading, isError, isFetching } = useQueryGetAllProgram({
-        category,
-        keyword,
-        sortBy,
-        order,
-    });
+    const param = useParams();
+    const id_user = param?.id_user as string;
+
+    const { data, isLoading, isError, isFetching } = useQueryUserProgram(id_user);
 
     return (
         <DataLayout isError={isError} isLoading={isLoading || isFetching} className="h-[30dvh]">

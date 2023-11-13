@@ -45,11 +45,11 @@ const content = [
 const tips = [
   {
     title: 'Verifikasi Identitas & Data Dokumen',
-    description: 'Lakukan verifikasi agar permohonan galang dana lebih meyakinkan orang berdonasi',
+    description: 'Lakukan verifikasi agar permohonan antuan lebih meyakinkan orang berdonasi',
   },
   {
-    title: 'Sebarkan galang dana kamu sesering mungkin',
-    description: 'Makin sering disebarkan, makin besar peluang galang danamu mendapat donasi',
+    title: 'Sebarkan Pengajuan Bantuan kamu sesering mungkin',
+    description: 'Makin sering disebarkan, makin besar peluang Pengajuan Bantuanmu mendapat donasi',
   },
 ];
 
@@ -126,7 +126,7 @@ const SubmitProgramPage = () => {
       </div>
       <Divider />
       <div className="flex w-full flex-col space-y-4 p-5">
-        <h4 className="font-semibold">Tips Galang Dana ZIs Indosat</h4>
+        <h4 className="font-semibold">Tips Pengajuan Bantuan ZIs Indosat</h4>
         <p className="text-sm font-light leading-tight">
           Agar Permohonan kamu lancar, kamu perlu memperhatikan beberapa hal berikut ini:
         </p>

@@ -20,7 +20,27 @@ const MessagePage = () => {
 
       <div className="p-5">
         {!hasMessage ? (
-          <p className="text-center">Belum Ada pesan</p>
+          <div className="flex-1 flex flex-col items-center justify-start">
+            <div className="flex flex-col items-center justify-start py-20">
+              <div className="items-center justify-center py-4 px-5">
+                <div className="w-[130px] h-[130px]">
+                  <img
+                    className="relative"
+                    alt=""
+                    src="/zis.png"
+                  />
+                </div>
+              </div>
+              <div className="relative font-semibold pb-2">
+                Belum ada Pesan Masuk
+              </div>
+              <div className="flex flex-row items-start justify-center px-5 text-gray-600 text-sm">
+                <div className="flex-1 relative">
+                  Kamu tidak memiliki pesan pemberitahuan terbaru
+                </div>
+              </div>
+            </div>
+          </div>
         ) : (
           notif.map((item) => (
             <div

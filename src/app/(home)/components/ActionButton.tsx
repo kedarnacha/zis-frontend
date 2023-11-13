@@ -18,7 +18,7 @@ const ActionButton = () => {
     return (
       <Link href="/program/submit-program-intro">
         <Button className="mt-4 w-full rounded-full text-slate-50" size="sm" variant="destructive">
-          Galang Dana Sekarang
+          Ajukan Bantuan Sekarang
         </Button>
       </Link>
     );
