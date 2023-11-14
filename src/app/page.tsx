@@ -82,7 +82,7 @@ const HomePage = () => {
       <div className="mt-5">
         <div className="mb-4 flex items-center justify-between px-4">
           <h3 className="font-semibold">Kabar Mustahiq</h3>
-          <Link href="#" className="text-sm font-medium text-orange-500">
+          <Link href="/article" className="text-sm font-medium text-orange-500">
             Lihat Semua
           </Link>
         </div>

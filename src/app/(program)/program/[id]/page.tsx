@@ -6,7 +6,7 @@ import { ChevronLeft, Download, HomeIcon, Share } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useParams, useRouter } from 'next/navigation';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import {
   Accordion,
@@ -22,7 +22,6 @@ import { TYPE_MUZAKI } from '@/utils/constants';
 import { formatter } from '@/utils/number';
 
 import useQueryDetailProgram from '../../hooks/useQueryDetailProgram';
-import { Value } from '@radix-ui/react-select';
 
 const ProgramDetailPage = () => {
   const router = useRouter();
@@ -58,7 +57,11 @@ const ProgramDetailPage = () => {
 
   const [copied, setCopied] = useState(false);
 
-  const [link, setLink] = useState('inilink')
+  const [link, setLink] = useState('');
+
+  useEffect(() => {
+    setLink(window.location.href);
+  }, []); 
 
   const copyToClipboard = (e: string) => {
     navigator.clipboard.writeText(e)
@@ -345,7 +348,7 @@ const ProgramDetailPage = () => {
                     d="m12 4.929-.707.707 1.414 1.414.707-.707a3.007 3.007 0 0 1 4.243 0 3.005 3.005 0 0 1 0 4.243l-2.122 2.121c-1.133 1.133-3.109 1.133-4.242 0L10.586 12l-1.414 1.414.707.707c.943.944 2.199 1.465 3.535 1.465s2.592-.521 3.535-1.465L19.071 12a5.008 5.008 0 0 0 0-7.071 5.006 5.006 0 0 0-7.071 0z"
                   ></path>
                 </svg>
-                <input className="w-full outline-none pl-2 bg-transparent" type="text" value={link} onChange={(e) => setLink(e.target.value)} />
+                <input className="w-full outline-none pl-2 bg-transparent" type="text" value={link} disabled/>
 
                 <button className={`bg-indigo-500 text-white rounded text-sm py-2 px-5 mr-2 hover:bg-indigo-600 ${copied ? 'bg-green-500 hover:bg-green-600' : ''
                   }`} onClick={() => copyToClipboard(link)}>

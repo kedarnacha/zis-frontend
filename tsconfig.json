@@ -37,7 +37,7 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts"
-, "src/app/(program)/program/submit-program-intro/page.tsx"  ],
+, "src/app/(program)/program/submit-program-intro/page.tsx", "../recurring.ts"  ],
   "exclude": [
     "node_modules"
   ]

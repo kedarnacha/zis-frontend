@@ -37,7 +37,7 @@ const Carousel = () => {
       {banners.map((slide) => (
         <SplideSlide key={String(slide.program_id)} className="pb-2">
           <Link href={`/program/${slide.program_id}`}>
-            <div className="relative mx-4 mt-6 aspect-video overflow-hidden rounded-md bg-slate-100 shadow-md">
+            <div className="relative h-72  mx-4 mt-6 aspect-video overflow-hidden rounded-md bg-slate-100 shadow-md">
               <Image
                 src={`${process.env.NEXT_PUBLIC_UNSAFE_URL}/public/${slide.program_banner.banners_path}`}
                 alt={`Carousel-${slide.program_id}`}
