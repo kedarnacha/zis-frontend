@@ -27,7 +27,7 @@ const useMutateCreateMustahiq = () => {
 
     const response = await axios.request<Response>({
       method: 'POST',
-      url: '/mustahiq/create',
+      url: 'https://api.zisindosat.id/mustahiq/create ',
       data: formData,
       headers: {
         'Content-Type': 'multipart/form-data',
