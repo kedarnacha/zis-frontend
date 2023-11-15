@@ -40,7 +40,7 @@ const useMutateCreateProgram = () => {
       url: '/home/createprogram',
       data: formData,
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'multipart/form-data',
       },
     });
 

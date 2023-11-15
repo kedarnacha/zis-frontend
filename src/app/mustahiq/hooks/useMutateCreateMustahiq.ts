@@ -1,7 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { useToast } from '@/components/ui/use-toast';
+import useQueryAccount from '@/app/account/hooks/useQueryAccount';
 import axios from '@/lib/axios';
+import { useAuthState } from '@/store/useAuthState';
 import { MustahiqSchema } from '@/schema/mustahiq';
 import { ACCOUNT_QUERY_KEY } from '@/utils/constants';
 
@@ -13,6 +15,10 @@ type Response = {
 const useMutateCreateMustahiq = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const authState = useAuthState();
+  const { data } = useQueryAccount();
+
+  const institusi_id = (data?.institusi ?? []).length > 0 ? data?.institusi[0].institusi_id : null;
 
   const mutationFn = async (data: MustahiqSchema) => {
     const formData = new FormData();
@@ -25,12 +31,17 @@ const useMutateCreateMustahiq = () => {
       }
     }
 
+    if (institusi_id) {
+      formData.append('program_institusi_id', String(institusi_id));
+    }
+    
     const response = await axios.request<Response>({
       method: 'POST',
       url: 'https://api.zisindosat.id/mustahiq/create ',
       data: formData,
       headers: {
-        'Content-Type': 'multipart/form-data',
+        Authorization: `Bearer ${authState?.token}`,
+        'Content-Type': 'application/x-www-form-urlencoded',
       },
     });
 
