@@ -20,10 +20,19 @@ import Divider from '@/components/zis/Divider';
 import Navbar from '@/components/zis/Navbar';
 import { cn } from '@/lib/utils';
 import { DonateSchema } from '@/schema/donate';
+import { RecurringSchema } from '@/schema/recurring';
 import { formatter } from '@/utils/number';
 import { Label } from '@/components/ui/label';
 import { useAuthState } from '@/store/useAuthState';
 import { Switch } from '@/components/ui/switch';
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 
 const amount = [
   {
@@ -50,6 +59,7 @@ const DonatePage = () => {
   const authState = useAuthState();
   const id = param?.id as string;
   const form = useFormContext<DonateSchema>();
+  const forms = useFormContext<RecurringSchema>();
   const [checked, setChecked] = React.useState(false);
 
   const watchAmount = form.watch('amount');
@@ -84,7 +94,6 @@ const DonatePage = () => {
       </div>
 
       <Divider />
-
       <div className="p-5">
         <FormField
           control={form.control}
@@ -142,27 +151,85 @@ const DonatePage = () => {
         </div>
         {checked ? (
           <>
-            <Label>Durasi Sedekah</Label>
-            <div className="flex items-center justify-start space-x-3">
-              <div className="flex-1">
-                <Input type="number" placeholder="0" />
-              </div>
-              <div className="flex-[3]">
-                <Input type="number" placeholder="Pilih Durasi" />
-              </div>
-            </div>
+            <FormField
+              control={forms.control}
+              name="reminder_type"
+              render={({ field }) => (
+                <FormItem className="flex flex-col space-y-2">
+                  <Label>Durasi Sedekah</Label>
+                  <div className="flex items-center justify-start space-x-3">
+                    <div className="flex-1">
+                      <Select onValueChange={(value) => {
+                        field.onChange(value);
+                      }}>
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="0" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectGroup>
+                            <SelectItem value="0" >
+                              1
+                            </SelectItem>
+                            <SelectItem value="1" >
+                              2
+                            </SelectItem>
+                            <SelectItem value="2" >
+                              3
+                            </SelectItem>
+                            <SelectItem value="3" >
+                              4
+                            </SelectItem>
+                          </SelectGroup>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="flex-[3]">
+                      <Input type="text" disabled placeholder="Minggu" />
+                    </div>
+                  </div>
+                </FormItem>
+              )}
+            />
 
-            <div className="mt-4">
-              <Label>Pengingat Setiap</Label>
-              <div className="flex items-center justify-start space-x-3">
-                <div className="flex-1">
-                  <Input type="number" placeholder="0" />
-                </div>
-                <div className="flex-[3]">
-                  <Input type="date" placeholder="Tanggal/Bulan/Tahun" />
-                </div>
-              </div>
-            </div>
+            <FormField
+              control={forms.control}
+              name="recurring_type"
+              render={({ field }) => (
+                <FormItem className="flex flex-col space-y-2">
+                  <Label>Pengingat Setiap</Label>
+                  <div className="flex items-center justify-start space-x-3">
+                    <div className="flex-1">
+                      <Select onValueChange={(value) => {
+                        field.onChange(value);
+                      }}>
+                        <SelectTrigger className="w-full">
+                          <SelectValue placeholder="0" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectGroup>
+                            <SelectItem value="0" >
+                              1
+                            </SelectItem>
+                            <SelectItem value="1" >
+                              2
+                            </SelectItem>
+                            <SelectItem value="2" >
+                              3
+                            </SelectItem>
+                            <SelectItem value="3" >
+                              4
+                            </SelectItem>
+                          </SelectGroup>
+                        </SelectContent>
+                      </Select>
+                    </div>
+                    <div className="flex-[3]">
+                      <Input type="text" disabled placeholder="Minggu" />
+                    </div>
+                  </div>
+                </FormItem>
+              )}
+            />
           </>
         ) : null}
       </div>

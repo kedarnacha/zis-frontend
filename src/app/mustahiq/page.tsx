@@ -48,7 +48,6 @@ const MustahiqPage = () => {
   });
 
   const onSubmit = (data: MustahiqSchema) => {
-    console.log(data);
     mutate(data);
   };
 
@@ -102,13 +101,7 @@ const MustahiqPage = () => {
                 <FormItem>
                   <FormLabel className="mt-4">Alamat Lengkap</FormLabel>
                   <FormControl>
-                    <Input
-                      required
-                      placeholder="Masukkan Alamat Lengkap"
-                      {...field}
-                      value={field.value}
-                      onChange={(e) => { field.onChange(e); }}
-                    />
+                    <Input placeholder="Masukkan Alamat Lengkap" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -189,7 +182,7 @@ const MustahiqPage = () => {
               render={({ field }) => (
                 <FormItem className="flex flex-col space-y-2">
                   <Label>Kontak Darurat</Label>
-                  <Select onValueChange={(e) => { field.onChange(e); }} value={field.value}>
+                  <Select onValueChange={field.onChange} value={field.value}>
                     <SelectTrigger className="h-14 w-full">
                       <SelectValue placeholder="Pilih Status Keluarga" />
                     </SelectTrigger>
@@ -212,13 +205,7 @@ const MustahiqPage = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input
-                      required
-                      placeholder="Masukkan Nomor Telepon"
-                      {...field}
-                      value={field.value}
-                      onChange={(e) => { field.onChange(e); }}
-                    />
+                    <Input placeholder="Masukkan Nomor Telepon" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -239,7 +226,7 @@ const MustahiqPage = () => {
               render={({ field }) => (
                 <FormItem className="flex flex-col space-y-2">
                   <Label>Pilih Bank</Label>
-                  <Select onValueChange={(e) => { field.onChange(e); }} value={field.value}>
+                  <Select onValueChange={field.onChange} value={field.value}>
                     <SelectTrigger className="h-14 w-full">
                       <SelectValue placeholder="Pilih Nama Bank" />
                     </SelectTrigger>
@@ -264,13 +251,7 @@ const MustahiqPage = () => {
                 <FormItem>
                   <FormLabel className="mt-4">Nomor Rekening</FormLabel>
                   <FormControl>
-                    <Input
-                      required
-                      placeholder="Masukkan Nomor Rekening"
-                      {...field}
-                      value={field.value}
-                      onChange={(e) => { field.onChange(e); }}
-                    />
+                    <Input placeholder="Masukkan Nomor Rekening" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -284,13 +265,7 @@ const MustahiqPage = () => {
                 <FormItem>
                   <FormLabel className="mt-4">Pemilik Rekening</FormLabel>
                   <FormControl>
-                    <Input
-                      required
-                      placeholder="Masukkan Pemilik Rekening"
-                      {...field}
-                      value={field.value}
-                      onChange={(e) => { field.onChange(e); }}
-                    />
+                    <Input placeholder="Masukkan Pemilik Rekening" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -312,13 +287,7 @@ const MustahiqPage = () => {
                 <FormItem>
                   <FormLabel className="mt-4">Masukkan Nomor IMkas</FormLabel>
                   <FormControl>
-                    <Input
-                      required
-                      placeholder="Masukkan Nomor IMkas"
-                      {...field}
-                      value={field.value}
-                      onChange={(e) => { field.onChange(e); }}
-                    />
+                    <Input placeholder="Masukkan Nomor IMkas" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

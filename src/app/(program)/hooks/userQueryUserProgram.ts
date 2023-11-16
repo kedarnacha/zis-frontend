@@ -13,7 +13,7 @@ type Response = {
   data?: Program[];
 };
 
-const request = async (id_user: string) => {
+const request = async (id_user: number) => {
   const { data } = await axios.request<Response>({
     method: 'GET',
     url: `/mustahiq/program/${id_user}`,
@@ -22,7 +22,7 @@ const request = async (id_user: string) => {
   return data; 
 };
 
-const useQueryUserProgram = (id_user: string) => {
+const useQueryUserProgram = (id_user: number) => {
   return useQuery({
     queryKey: [ALL_PROGRAM_QUERY_KEY, id_user],
     queryFn: () => request(id_user),

@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import useMutateDonate from '@/app/(program)/hooks/useMutateDonate';
+import useMutateRecurringDonate from '@/app/(program)/hooks/useMutateRecurringDonate';
 import { Button } from '@/components/ui/button';
 import { FormControl, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { Label } from '@/components/ui/label';
@@ -19,6 +20,7 @@ import {
 import Divider from '@/components/zis/Divider';
 import Navbar from '@/components/zis/Navbar';
 import { DonateSchema } from '@/schema/donate';
+import { RecurringSchema } from '@/schema/recurring';
 
 const bank = [
   {
@@ -46,12 +48,28 @@ const bank = [
 const ConfirmDonationPage = () => {
   const [myItem, setMyItem] = useState(0);
   const form = useFormContext<DonateSchema>();
+  const donateForm = useFormContext<DonateSchema>();
+  const recurringForm = useFormContext<RecurringSchema>();
   const evidenceRef = React.useRef<HTMLInputElement>(null);
 
-  const { mutate, isLoading } = useMutateDonate();
+  // const { mutate, isLoading } = useMutateDonate();
+  // const { mutate, isLoading} = useMutateRecurringDonate();
+  const { mutate: donateMutate, isLoading: donateLoading } = useMutateDonate();
+  const { mutate: recurringMutate, isLoading: recurringLoading } = useMutateRecurringDonate();
 
-  const onSubmit = (data: DonateSchema) => {
-    mutate(data);
+  // const onSubmit = (data: DonateSchema) => {
+  //   mutate(data);
+  // };
+  const onSubmit = () => {
+    // const donateData = donateForm.getValues();
+    const recurringData = recurringForm.getValues();
+
+    // Handle donation data
+    // donateMutate(donateData);
+
+    console.log(recurringData)
+    // Handle recurring donation data
+    recurringMutate(recurringData);
   };
 
   return (
@@ -231,7 +249,7 @@ const ConfirmDonationPage = () => {
         {/* <Link href={`/program/${id}/completed`}> */}
         <Button
           onClick={form.handleSubmit(onSubmit)}
-          disabled={!form.formState.isDirty || !form.formState.isValid || isLoading}
+          disabled={!form.formState.isDirty || !form.formState.isValid || (donateLoading && recurringLoading)}
           type="button"
           role="button"
           className="w-full "

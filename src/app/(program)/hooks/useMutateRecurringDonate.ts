@@ -1,20 +1,24 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useParams, useRouter } from 'next/navigation';
 
 import { useToast } from '@/components/ui/use-toast';
 import axios from '@/lib/axios';
-import { MustahiqSchema } from '@/schema/mustahiq';
-import { ACCOUNT_QUERY_KEY } from '@/utils/constants';
+import { RecurringSchema } from '@/schema/recurring';
+import { DETAIL_PROGRAM_QUERY_KEY } from '@/utils/constants';
 
 type Response = {
   success: boolean;
   message: string;
 };
 
-const useMutateCreateMustahiq = () => {
+const useMutateRecurringDonate = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const router = useRouter();
+  const param = useParams();
+  const id = param?.id as string;
 
-  const mutationFn = async (data: MustahiqSchema) => {
+  const mutationFn = async (data: RecurringSchema) => {
     const formData = new FormData();
 
     for (const key in data) {
@@ -27,10 +31,10 @@ const useMutateCreateMustahiq = () => {
 
     const response = await axios.request<Response>({
       method: 'POST',
-      url: '/mustahiq/create',
+      url: '/transaction/recurring',
       data: formData,
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'multipart/form-data',
       },
     });
 
@@ -38,16 +42,17 @@ const useMutateCreateMustahiq = () => {
   };
 
   return useMutation({
-    mutationFn: (data: MustahiqSchema) => mutationFn(data),
-    onSuccess: () => {
+    mutationFn: (data: RecurringSchema) => mutationFn(data),
+    onSuccess: async () => {
       toast({
-        title: 'Berhasil Simpan Data',
+        title: 'Berhasil Recurring',
       });
-      queryClient.invalidateQueries([ACCOUNT_QUERY_KEY]);
+      await queryClient.invalidateQueries([DETAIL_PROGRAM_QUERY_KEY]);
+      router.push(`/program/${id}/completed`);
     },
     onError: (err) => {
       toast({
-        title: 'Gagal Simpan Data',
+        title: 'Gagal Recurring',
         description: (err as any)?.response?.data?.message ?? 'Terjadi kesalahan',
         variant: 'destructive',
       });
@@ -55,4 +60,4 @@ const useMutateCreateMustahiq = () => {
   });
 };
 
-export default useMutateCreateMustahiq;
+export default useMutateRecurringDonate;
