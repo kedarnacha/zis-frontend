@@ -57,17 +57,6 @@ const ConfirmDonationPage = () => {
     donateMutate(data);
     recurringMutate(data);
   };
-  // const onSubmit = () => {
-  //   // const donateData = donateForm.getValues();
-  //   const recurringData = recurringForm.getValues();
-
-  //   // Handle donation data
-  //   // donateMutate(donateData);
-
-  //   console.log(recurringData)
-  //   // Handle recurring donation data
-  //   recurringMutate(recurringData);
-  // };
 
   return (
     <div>
