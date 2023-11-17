@@ -3,7 +3,7 @@ import { useParams, useRouter } from 'next/navigation';
 
 import { useToast } from '@/components/ui/use-toast';
 import axios from '@/lib/axios';
-import { RecurringSchema } from '@/schema/recurring';
+import { DonateSchema } from '@/schema/donate';
 import { DETAIL_PROGRAM_QUERY_KEY } from '@/utils/constants';
 
 type Response = {
@@ -11,14 +11,14 @@ type Response = {
   message: string;
 };
 
-const useMutateRecurringDonate = () => {
+const useMutateRecurring = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
   const router = useRouter();
   const param = useParams();
   const id = param?.id as string;
 
-  const mutationFn = async (data: RecurringSchema) => {
+  const mutationFn = async (data: DonateSchema) => {
     const formData = new FormData();
 
     for (const key in data) {
@@ -34,25 +34,25 @@ const useMutateRecurringDonate = () => {
       url: '/transaction/recurring',
       data: formData,
       headers: {
-        'Content-Type': 'multipart/form-data',
+        'Content-Type': 'application/json',
       },
     });
-
+    console.log(data);
     return response.data;
   };
 
   return useMutation({
-    mutationFn: (data: RecurringSchema) => mutationFn(data),
+    mutationFn: (data: DonateSchema) => mutationFn(data),
     onSuccess: async () => {
       toast({
-        title: 'Berhasil Recurring',
+        title: 'Berhasil Donasi',
       });
       await queryClient.invalidateQueries([DETAIL_PROGRAM_QUERY_KEY]);
       router.push(`/program/${id}/completed`);
     },
     onError: (err) => {
       toast({
-        title: 'Gagal Recurring',
+        title: 'Gagal Donasi',
         description: (err as any)?.response?.data?.message ?? 'Terjadi kesalahan',
         variant: 'destructive',
       });
@@ -60,4 +60,4 @@ const useMutateRecurringDonate = () => {
   });
 };
 
-export default useMutateRecurringDonate;
+export default useMutateRecurring;

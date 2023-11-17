@@ -10,6 +10,8 @@ export const donateSchema = z.object({
     .any()
     .refine((file) => file?.size <= ACCEPTED_SIZE, 'Ukuran file maksimal 2MB')
     .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), 'Format file tidak didukung'),
+  reminder_type: z.string().optional(),
+  recurring_type: z.string().optional(),
 });
 
 export type DonateSchema = z.infer<typeof donateSchema>;

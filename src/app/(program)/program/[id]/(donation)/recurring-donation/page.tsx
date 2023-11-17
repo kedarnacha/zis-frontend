@@ -20,7 +20,6 @@ import Divider from '@/components/zis/Divider';
 import Navbar from '@/components/zis/Navbar';
 import { cn } from '@/lib/utils';
 import { DonateSchema } from '@/schema/donate';
-import { RecurringSchema } from '@/schema/recurring';
 import { formatter } from '@/utils/number';
 import { Label } from '@/components/ui/label';
 import { useAuthState } from '@/store/useAuthState';
@@ -59,7 +58,6 @@ const DonatePage = () => {
   const authState = useAuthState();
   const id = param?.id as string;
   const form = useFormContext<DonateSchema>();
-  const forms = useFormContext<RecurringSchema>();
   const [checked, setChecked] = React.useState(false);
 
   const watchAmount = form.watch('amount');
@@ -152,7 +150,7 @@ const DonatePage = () => {
         {checked ? (
           <>
             <FormField
-              control={forms.control}
+              control={form.control}
               name="reminder_type"
               render={({ field }) => (
                 <FormItem className="flex flex-col space-y-2">
@@ -192,7 +190,7 @@ const DonatePage = () => {
             />
 
             <FormField
-              control={forms.control}
+              control={form.control}
               name="recurring_type"
               render={({ field }) => (
                 <FormItem className="flex flex-col space-y-2">
