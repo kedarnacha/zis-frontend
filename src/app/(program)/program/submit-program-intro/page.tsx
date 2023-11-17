@@ -70,7 +70,7 @@ const SubmitProgramPage = () => {
       return;
     }
 
-    router.push('/program/program-category');
+    router.push('/program/program-offering');
   };
 
   const handleClickModal = () => {

@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 
 import { useToast } from '@/components/ui/use-toast';
 import axios from '@/lib/axios';
@@ -13,6 +14,7 @@ type Response = {
 const useMutateCreateMustahiq = () => {
   const { toast } = useToast();
   const queryClient = useQueryClient();
+  const router = useRouter();
 
   const mutationFn = async (data: MustahiqSchema) => {
     const formData = new FormData();
@@ -44,6 +46,7 @@ const useMutateCreateMustahiq = () => {
         title: 'Berhasil Simpan Data',
       });
       queryClient.invalidateQueries([ACCOUNT_QUERY_KEY]);
+      router.push('/program/program-offering');
     },
     onError: (err) => {
       toast({

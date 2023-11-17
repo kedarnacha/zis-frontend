@@ -1,4 +1,5 @@
-import { formatDistance } from 'date-fns';
+import { format, formatDistance } from 'date-fns';
+import { id } from 'date-fns/locale';
 import Image from 'next/image';
 import React from 'react';
 
@@ -6,6 +7,19 @@ import { Program } from '@/schema/program';
 
 const PengajuanCard = ({ program }: { program: Program }) => {
     const imageUrl = `${process.env.NEXT_PUBLIC_UNSAFE_URL}/public/${program.program_banner.banners_path}`;
+    const formattedDate = format(new Date(program.program_create), "dd-MMM-yyyy", { locale: id });
+    const statusMappings = [
+        { id: 1, statusClass: 'text-yellow-500', statusText: 'Diproses' },
+        { id: 2, statusClass: 'text-green-500', statusText: 'Diterima' },
+        { id: 3, statusClass: 'text-red-500', statusText: 'Ditolak' },
+    ];
+
+    const statusMapping = (statusMappings.find(mapping => mapping.id === program.program_status) || {}) as {
+        statusClass?: string;
+        statusText?: string;
+    };
+
+    const { statusClass, statusText } = statusMapping;
 
     return (
         <>
@@ -20,7 +34,7 @@ const PengajuanCard = ({ program }: { program: Program }) => {
                     <div className="text-xs font-semibold text-slate-500">
                         Perubahan terakhir
                         <br />
-                        <span className="font-bold">10 September 2023</span>
+                        <span className="font-bold">{formattedDate}</span>
                     </div>
                     <div className="flex mt-3">
                         <img
@@ -32,13 +46,13 @@ const PengajuanCard = ({ program }: { program: Program }) => {
                             <div className="text-xs text-slate-500">
                                 Status
                             </div>
-                            <div className="text-sm font-semibold">Diproses</div>
+                            <div className={"text-sm font-semibold " + statusClass}>{statusText}</div>
                         </div>
                     </div>
                 </div>
             </div>
             <div className="self-stretch text-center text-xs mt-2.5">
-                Kategori: Pendidikan & Guru
+                Kategori: {program.program_category.name}
             </div>
             <div className="flex justify-between gap-2 mt-3.5">
                 <a
@@ -49,7 +63,7 @@ const PengajuanCard = ({ program }: { program: Program }) => {
                         Lihat Program
                     </div>
                 </a>
-                <div className="justify-center items-center self-stretch border border-slate-400 flex w-14 max-w-full flex-col px-5 py-3 rounded-lg">
+                <div className="justify-center disabled: items-center self-stretch border border-slate-400 flex w-14 max-w-full flex-col px-5 py-3 rounded-lg">
                     <img
                         loading="lazy"
                         src="https://cdn.builder.io/api/v1/image/assets/TEMP/f2fffc2b-c630-46dd-b41b-fb87af1fc1b9?apiKey=a34d9f8447c743e9898cd7ca4608868a&"

@@ -5,7 +5,7 @@ import { format } from 'date-fns';
 import { CalendarIcon, GlobeIcon, Loader2Icon, Upload } from 'lucide-react';
 import Image from 'next/image';
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm, useFormContext } from 'react-hook-form';
 
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
@@ -34,9 +34,9 @@ const SubmitProgramPage = () => {
   const bannerRef = React.useRef<HTMLInputElement>(null);
   const { mutate, isLoading } = useMutateCreateProgram();
 
-  const form = useForm<ProgramSchema>({
-    resolver: zodResolver(programSchema),
-  });
+  const form = useFormContext<ProgramSchema>();
+
+  console.log(form.watch())
 
   const onSubmit = (data: ProgramSchema) => {
     mutate(data);
@@ -84,6 +84,11 @@ const SubmitProgramPage = () => {
                       }}
                     >
                       Upload Foto
+                      <svg xmlns="http://www.w3.org/2000/svg" className="pl-2 icon icon-tabler icon-tabler-camera" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                        <path d="M5 7h1a2 2 0 0 0 2 -2a1 1 0 0 1 1 -1h6a1 1 0 0 1 1 1a2 2 0 0 0 2 2h1a2 2 0 0 1 2 2v9a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-9a2 2 0 0 1 2 -2"></path>
+                        <path d="M9 13a3 3 0 1 0 6 0a3 3 0 0 0 -6 0"></path>
+                      </svg>
                     </Button>
                   </>
                 </FormControl>

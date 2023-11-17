@@ -9,12 +9,25 @@ import PengajuanMenu from '../components/PengajuanMenu';
 import PengajuanList from '../../components/PengajuanList';
 import CallCenter from '@/components/zis/CallCenter';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
+import { ChevronLeft } from 'lucide-react';
 
 const SubmitProgramPage = () => {
+  const router = useRouter();
+
+  const handleBack = () => {
+    router.back();
+  };
   return (
     <div className="relative">
       <nav className="flex w-full items-center justify-center space-x-3 bg-amber-300 p-4 py-7">
-        <Image src="/zis.png" alt="Logo" width={32} height={32} />
+        <Button
+          className="h-10 w-10 rounded-full bg-white p-0"
+          variant="secondary"
+          onClick={handleBack}
+        >
+          <ChevronLeft size={24} className="text-slate-900" />
+        </Button>
         <div className="flex-1">
           <div className="ml-3 flex-1">
             <p className='text-lg font-semibold'>Ajukan bantuan di ZIS Indosat</p>

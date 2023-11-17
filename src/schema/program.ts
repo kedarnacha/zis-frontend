@@ -4,6 +4,11 @@ export type Program = {
   program_id: number;
   program_kode: string;
   program_title: string;
+  program_status: number;
+  program_create: string;
+  program_category:{
+    name:string;
+  };
   program_short_desc: string;
   program_start_date: string;
   program_end_date: string;
@@ -28,6 +33,7 @@ export const programSchema = z.object({
   program_short_desc: z.string().max(100).optional(),
   program_start_date: z.date(),
   program_end_date: z.date(),
+  program_category_id: z.number().min(1, 'ID Kategori Harus Diisi'),
   program_description: z.string().min(1, 'Deskripsi Program Harus Diisi'),
   program_target_amount: z.number().min(1, 'Target Dana Harus Diisi'),
   target: z.string().optional().or(z.literal('self')).optional(),
