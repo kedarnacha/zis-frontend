@@ -24,9 +24,25 @@ import useQueryAccount from '../hooks/useQueryAccount';
 import { ChevronRight, KeyIcon } from 'lucide-react';
 import Link from 'next/link';
 
+const phoneRegex = new RegExp(/^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/);
+
 const schema = z.object({
   nama: z.string().min(1),
-  phone: z.string().min(1),
+  phone: z.string().min(1)
+    .regex(phoneRegex, 'Nomor telepon / WA tidak valid')
+    .refine(
+      (value) =>
+        value.startsWith('0816') ||
+        value.startsWith('0815') ||
+        value.startsWith('0814') ||
+        value.startsWith('0855') ||
+        value.startsWith('0856') ||
+        value.startsWith('0857') ||
+        value.startsWith('0858'),
+      {
+        message: 'Nomor telepon harus nomor Indosat',
+      },
+    ),
 });
 
 type Schema = z.infer<typeof schema>;
@@ -78,7 +94,7 @@ const EditPage = () => {
               name="phone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="mt-4">No. Telepon / WhatsApp</FormLabel>
+                  <FormLabel className="mt-4">No. Telepon / WhatsApp (contoh format: 085xxxx)</FormLabel>
                   <FormControl>
                     <Input placeholder="No. Telepon / WhatsApp" {...field} />
                   </FormControl>

@@ -2,6 +2,8 @@ import { z } from 'zod';
 
 import { ACCEPTED_IMAGE_TYPES, ACCEPTED_SIZE } from '@/utils/constants';
 
+const phoneRegex = new RegExp(/^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/);
+
 export const mustahiqSchema = z
   .object({
     is_institusi: z.boolean().optional(),
@@ -21,7 +23,8 @@ export const mustahiqSchema = z
       .string({
         required_error: 'Nomor Kontak Darurat harus diisi',
       })
-      .min(1, 'Nomor Kontak Darurat harus diisi'),
+      .min(1, 'Nomor Kontak Darurat harus diisi')
+      .regex(phoneRegex, 'Nomor telepon / WA tidak valid'),
     bank_name: z
       .string({
         required_error: 'Nama Bank harus diisi',

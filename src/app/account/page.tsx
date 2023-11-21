@@ -19,7 +19,7 @@ const ProfilePage = () => {
   return (
     <div>
       <Navbar
-        title={`Akses Akun ${authState?.user?.user_type === TYPE_MUSTAHIQ ? 'Mustahiq' : 'Muzaki'}`}
+        title={`Akses Akun ${authState?.user?.user_type === TYPE_MUSTAHIQ ? 'Mustahiq' : 'Muzzaki'}`}
       />
       <AccountHeader />
       <div className="h-3 w-full bg-slate-100" />

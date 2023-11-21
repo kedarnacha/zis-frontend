@@ -1,7 +1,6 @@
 import { z } from 'zod';
 
 const phoneRegex = new RegExp(/^([+]?[\s0-9]+)?(\d{3}|[(]?[0-9]+[)])?([-]?[\s]?[0-9])+$/);
-const allowedPrefixes = ['0816', '0815', '0814', '0855', '0856', '0857', '0858'];
 
 export const registerSchema = z.object({
   type: z.enum(['10', '11']),
@@ -17,9 +16,19 @@ export const registerSchema = z.object({
   phone: z
     .string({ required_error: 'Nomor Telepon / WA harus diisi' })
     .regex(phoneRegex, 'Nomor telepon / WA tidak valid')
-    .refine(value => allowedPrefixes.some(prefix => value.startsWith(prefix)), {
-      message: 'Nomor bukan Indosat',
-    })
+    .refine(
+      (value) =>
+        value.startsWith('0816') ||
+        value.startsWith('0815') ||
+        value.startsWith('0814') ||
+        value.startsWith('0855') ||
+        value.startsWith('0856') ||
+        value.startsWith('0857') ||
+        value.startsWith('0858'),
+      {
+        message: 'Nomor telepon harus nomor Indosat',
+      },
+    ),
 });
 
 export type RegisterSchema = z.infer<typeof registerSchema>;

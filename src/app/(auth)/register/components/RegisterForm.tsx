@@ -132,7 +132,7 @@ const RegisterForm = () => {
             render={({ field }) => (
               <FormItem>
                 <FormLabel className="mt-4" htmlFor="email">
-                  Nomor telepon / whatsapp
+                  Nomor telepon / whatsapp (contoh format: 085xxxx)
                 </FormLabel>
                 <FormControl>
                   <Input placeholder="Nomor telepon / whatsapp Pengguna" {...field} />

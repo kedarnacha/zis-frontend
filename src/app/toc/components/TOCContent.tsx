@@ -9,7 +9,7 @@ const TOCContent = () => {
 
       <div className="prose p-5 font-light leading-tight">
         <h4>
-          Persetujuan Pembuatan Akun di Zis Indosat sebagai Muzaki (Pemberi Donasi) atau Mustahiq
+          Persetujuan Pembuatan Akun di Zis Indosat sebagai Muzzaki (Pemberi Donasi) atau Mustahiq
           (Penerima Donasi)
         </h4>
         <p>
