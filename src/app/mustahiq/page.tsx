@@ -3,7 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { HardDriveDownload, Loader2Icon, Upload } from 'lucide-react';
 import Link from 'next/link';
-import React, { useEffect } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Button } from '@/components/ui/button';
@@ -32,6 +32,16 @@ import { MustahiqSchema, mustahiqSchema } from '@/schema/mustahiq';
 
 import useQueryAccount from '../account/hooks/useQueryAccount';
 import useMutateCreateMustahiq from './hooks/useMutateCreateMustahiq';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import SelectInstitusiContent from './components/SelectInstitusiContent';
+import InstituteIcon from '@/components/icon/InstituteIcon';
+import PersonalIcon from '@/components/icon/PersonalIcon';
 
 const MustahiqPage = () => {
   const { data } = useQueryAccount();
@@ -51,10 +61,54 @@ const MustahiqPage = () => {
     mutate(data);
   };
 
+  const [open, setOpen] = useState(false);
+  const [isInstitusi, setIsInstitusi] = useState(false);
+
+  const handleClick = (label: true | false ) => {
+    setOpen(false);
+    setIsInstitusi(label)
+    form.setValue('is_institusi', label);
+  };
+
+
+  console.log(form.watch())
+
   return (
     <div>
       <Navbar title="Data Diri Mustahiq" />
       <Form {...form}>
+        <div className="mt-3 mx-3 flex items-center justify-between space-x-3 rounded-md border border-slate-300 p-2">
+          {isInstitusi ? <InstituteIcon /> : <PersonalIcon />}
+          <div className="flex-1">
+            <p className='font-semibold'>
+              {isInstitusi ? 'Lembaga' : 'Perorangan'}
+            </p>
+          </div>
+
+          <Dialog open={open} onOpenChange={setOpen}>
+            <DialogTrigger asChild>
+              <Button
+                variant="ghost"
+                className="text-amber-500"
+                type="button"
+                onClick={() => setOpen(true)}
+              >
+                Ubah
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>Daftar Sebagai</DialogTitle>
+              </DialogHeader>
+              <SelectInstitusiContent
+                onSelect={(label) => {
+                  // const _label = label as 'Perorangan' | 'Lembaga';
+                  handleClick(label);
+                }}
+              />
+            </DialogContent>
+          </Dialog>
+        </div>
         <div className="p-5">
           <div className="flex items-center justify-between">
             <p className="font-medium">Data Diri</p>
@@ -215,6 +269,45 @@ const MustahiqPage = () => {
         </div>
 
         <Divider />
+
+        {isInstitusi ?
+          <>
+            <div className="p-5">
+              <p className="font-medium">Data Lembaga</p>
+
+              <div className="mt-4 space-y-5">
+                <FormField
+                  control={form.control}
+                  name="institusi_nama"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="mt-4">Nama Institusi</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Masukkan Nama Institusi" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="institusi_no_hp"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="mt-4">Nomor Telepon Institusi</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Masukkan Nomor Telepon" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+              </div>
+            </div>
+            <Divider />
+          </>
+          : null}
 
         <div className="p-5">
           <p className="font-medium">Nomor Rekening Penerima Bantuan</p>
