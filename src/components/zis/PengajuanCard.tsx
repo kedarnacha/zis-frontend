@@ -10,8 +10,10 @@ const PengajuanCard = ({ program }: { program: Program }) => {
     const formattedDate = format(new Date(program.program_create), "dd-MMM-yyyy", { locale: id });
     const statusMappings = [
         { id: 1, statusClass: 'text-yellow-500', statusText: 'Diproses' },
-        { id: 2, statusClass: 'text-green-500', statusText: 'Diterima' },
-        { id: 3, statusClass: 'text-red-500', statusText: 'Ditolak' },
+        { id: 2, statusClass: 'text-yellow-500', statusText: 'Menunggu Persetujuan 2' },
+        { id: 3, statusClass: 'text-yellow-500', statusText: 'Menunggu Persetujuan 3' },
+        { id: 4, statusClass: 'text-green-500', statusText: 'Disetujui' },
+        { id: 5, statusClass: 'text-red-500', statusText: 'Ditolak' },
     ];
 
     const statusMapping = (statusMappings.find(mapping => mapping.id === program.program_status) || {}) as {
