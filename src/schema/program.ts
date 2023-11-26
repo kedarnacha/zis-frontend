@@ -7,6 +7,7 @@ export type Program = {
   program_status: number;
   program_create: string;
   program_category:{
+    id: string;
     name:string;
   };
   program_short_desc: string;

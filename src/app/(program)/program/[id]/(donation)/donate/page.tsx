@@ -21,6 +21,7 @@ import Navbar from '@/components/zis/Navbar';
 import { cn } from '@/lib/utils';
 import { DonateSchema } from '@/schema/donate';
 import { formatter } from '@/utils/number';
+// import useQueryDetailProgram from '@/app/(program)/hooks/useQueryDetailProgram';
 
 const amount = [
   {
@@ -46,6 +47,8 @@ const DonatePage = () => {
   const param = useParams();
   const id = param?.id as string;
   const form = useFormContext<DonateSchema>();
+  // const { data } = useQueryDetailProgram(id);
+  // const cat_id = data?.data.program_category.id;
 
   const watchAmount = form.watch('amount');
 
@@ -61,7 +64,7 @@ const DonatePage = () => {
           <div
             onClick={() => {
               setSelectedIndex(index);
-              form.setValue('amount', item.price.toString());
+              form.setValue('amount', (item.price+parseInt(id)).toString());
             }}
             key={index}
             className={cn(
@@ -92,12 +95,15 @@ const DonatePage = () => {
                   required
                   placeholder="Rp"
                   {...field}
-                  value={field.value}
+                  value={(field.value)}
                   onChange={(e) => {
                     if (selectedIndex !== undefined) {
                       setSelectedIndex(undefined);
                     }
                     field.onChange(e);
+                  }}
+                  onBlur={(e) => {
+                    form.setValue('amount', (parseInt(e.target.value) + parseInt(id)).toString());
                   }}
                 />
               </FormControl>
