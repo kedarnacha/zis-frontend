@@ -27,7 +27,8 @@ export type Program = {
 };
 
 const acceptedSize = 1 * 1024 * 1024;
-const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+// const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+const ACCEPTED_IMAGE_TYPES = ['image/png'];
 
 export const programSchema = z.object({
   program_title: z.string().min(1, 'Nama Program Harus Diisi').max(255),
