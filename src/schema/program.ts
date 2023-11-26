@@ -6,8 +6,8 @@ export type Program = {
   program_title: string;
   program_status: number;
   program_create: string;
+  program_category_id: number;
   program_category:{
-    id: string;
     name:string;
   };
   program_short_desc: string;

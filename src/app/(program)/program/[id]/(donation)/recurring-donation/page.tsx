@@ -32,7 +32,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select';
-// import useQueryDetailProgram from '@/app/(program)/hooks/useQueryDetailProgram';
+import useQueryDetailProgram from '@/app/(program)/hooks/useQueryDetailProgram';
 
 const amount = [
   {
@@ -60,8 +60,8 @@ const DonatePage = () => {
   const id = param?.id as string;
   const form = useFormContext<DonateSchema>();
   const [checked, setChecked] = React.useState(false);
-  // const { data } = useQueryDetailProgram(id);
-  // const cat_id = data?.data.program_category.id;
+  const { data } = useQueryDetailProgram(id);
+  const cat_id = data?.data.program_category_id;
 
   const watchAmount = form.watch('amount');
 
@@ -77,7 +77,7 @@ const DonatePage = () => {
           <div
             onClick={() => {
               setSelectedIndex(index);
-              form.setValue('amount', (item.price + parseInt(id)).toString());
+              form.setValue('amount', (item.price + (cat_id ?? 0)).toString());
             }}
             key={index}
             className={cn(
@@ -115,7 +115,7 @@ const DonatePage = () => {
                     field.onChange(e);
                   }}
                   onBlur={(e) => {
-                    form.setValue('amount', (parseInt(e.target.value) + parseInt(id)).toString());
+                    form.setValue('amount', (parseInt(e.target.value) + (cat_id ?? 0)).toString());
                   }}
                 />
               </FormControl>
