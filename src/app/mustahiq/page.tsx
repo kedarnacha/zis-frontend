@@ -170,7 +170,9 @@ const MustahiqPage = () => {
                 <FormItem>
                   <FormLabel className="mt-4">Provinsi</FormLabel>
                   <FormControl>
-                    <Input placeholder="Masukkan Provinsi" {...field} />
+                    <Input placeholder="Masukkan Provinsi" 
+                    // {...field} 
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -184,7 +186,9 @@ const MustahiqPage = () => {
                 <FormItem>
                   <FormLabel className="mt-4">Kota/Kabupaten</FormLabel>
                   <FormControl>
-                    <Input placeholder="Masukkan Kota/Kabupaten" {...field} />
+                    <Input placeholder="Masukkan Kota/Kabupaten" 
+                    // {...field} 
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -198,7 +202,9 @@ const MustahiqPage = () => {
                 <FormItem>
                   <FormLabel className="mt-4">Kecamatan</FormLabel>
                   <FormControl>
-                    <Input placeholder="Masukkan Kecamatan" {...field} />
+                    <Input placeholder="Masukkan Kecamatan" 
+                    // {...field} 
+                    />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
