@@ -406,7 +406,7 @@ const MustahiqPage = () => {
           <div className='flex'>
             <p className="font-medium flex">Nomor IMkas</p>
             <button data-popover-target="popover-default" className=" rounded-full bg-white p-0" onClick={() => setPop(!pop)} >
-              <HelpCircle className='ml-1' />
+              <HelpCircle className='ml-1'/>
             </button>
             <div data-popover id="popover-default" role="tooltip" className={`absolute z-10 left-1/3 block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm ${pop ? 'visible opacity-100' : 'invisible opacity-0'}`}>
               <div className="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg dark:border-gray-600 dark:bg-gray-700">
