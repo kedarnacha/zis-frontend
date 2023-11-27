@@ -37,8 +37,8 @@ export const programSchema = z.object({
   program_end_date: z.date(),
   program_category_id: z.number().min(1, 'ID Kategori Harus Diisi'),
   program_description: z.string().min(1, 'Deskripsi Program Harus Diisi'),
-  program_target_amount: z.number().min(1, 'Target Dana Harus Diisi'),
-  target: z.string().optional().or(z.literal('self')).optional(),
+  program_target_amount: z.number().min(1, 'Target Dana Harus Diisi')
+  .refine(x => x === Math.floor(x)),
   banner: z
     .any()
     .refine((file) => file?.size <= acceptedSize, 'Ukuran file maksimal 2MB')

@@ -155,6 +155,7 @@ const SubmitProgramPage = () => {
                   <Input
                     placeholder="Ex: 1000000"
                     type="number"
+                    onKeyDown={(event) => { if (!/[0-9]/.test(event.key)) { event.preventDefault(); } }}
                     {...field}
                     onChange={(e) => field.onChange(e.target.valueAsNumber)}
                     value={field.value ? Number(field.value) : undefined}

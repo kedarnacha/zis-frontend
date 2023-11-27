@@ -7,9 +7,9 @@ export const TYPE_MUZAKI = 11;
 
 export const ACCEPTED_SIZE = 2 * 1024 * 1024;
 export const ACCEPTED_IMAGE_TYPES = [
-  // 'image/jpeg',
-  // 'image/jpg',
+  'image/jpeg',
+  'image/jpg',
   'image/png',
-  // 'image/webp',
+  'image/webp',
   'application/pdf',
 ];

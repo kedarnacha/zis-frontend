@@ -5,6 +5,7 @@ import { Loader2Icon } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import { useRouter } from 'next/navigation';
 
 import TOCContent from '@/app/toc/components/TOCContent';
 import MuzakiIcon from '@/components/icon/MuzakiIcon';
@@ -27,19 +28,19 @@ import {
 } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { role } from '@/data/role';
-import { RegisterSchema, registerSchema } from '@/schema/register';
+import { RegisSchema, regisSchema } from '@/schema/regis';
 
-import useMutateRegister from '../hooks/useMutateRegister';
-import RoleSelector from './RoleSelector';
+import useMutateRegis from '../hooks/UseMutateRegis';
+import RoleSelector from '../../registrasimustahiq/components/RoleSelector'
 
-const RegisterForm = () => {
-  const { mutateAsync, isLoading } = useMutateRegister();
+const RegisForm = () => {
+  const { mutateAsync, isLoading } = useMutateRegis();
   const [isTermsAgreed, setIsTermsAgreed] = React.useState(false);
 
-  const form = useForm<RegisterSchema>({
-    resolver: zodResolver(registerSchema),
+  const form = useForm<RegisSchema>({
+    resolver: zodResolver(regisSchema),
     defaultValues: {
-      type: '10',
+      type: '11',
       email: '',
       nama: '',
       phone: '',
@@ -47,19 +48,23 @@ const RegisterForm = () => {
   });
 
   const selectedRole = form.watch('type');
+  const router = useRouter();
 
   const setSelectedRole = (id: '10' | '11') => {
     form.setValue('type', id);
+    if (id == '10'){
+      router.push('/registrasimustahiq');
+    }
   };
 
-  const onSubmit = (data: RegisterSchema) => {
+  const onSubmit = (data: RegisSchema) => {
     mutateAsync(data).finally(() => {
       form.reset(
         {
           email: '',
           nama: '',
           phone: '',
-          type: '10',
+          type: '11',
         },
         {
           keepValues: false,
@@ -203,4 +208,4 @@ const RegisterForm = () => {
   );
 };
 
-export default RegisterForm;
+export default RegisForm;

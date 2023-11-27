@@ -96,7 +96,7 @@ const LoginForm = () => {
             <p className="text-sm text-slate-400">Belum Punya Akun ?</p>
             <div className="h-px flex-1 bg-slate-200" />
           </div>
-          <Link href="/register">
+          <Link href="/registrasimustahiq">
             <Button
               type="button"
               role="button"

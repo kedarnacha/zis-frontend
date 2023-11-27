@@ -136,25 +136,13 @@ const ProgramDetailPage = () => {
                   <HomeIcon className="text-orange-500" size={16} />
                 </div>
                 <div className="flex-1 leading-tight">
-                  <p className="font-semibold">Sudah</p>
-                  <p className="font-semibold">Dicairkan</p>
+                  <p className="font-semibold">Penyaluran</p>
+                  <p className="font-semibold">Dana</p>
                 </div>
               </div>
-
-              <p className="ml-2 mt-5">Rp 1.123.123</p>
             </div>
             <div className="flex-1">
-              <div className="flex items-center space-x-3">
-                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-100">
-                  <HomeIcon className="text-orange-500" size={16} />
-                </div>
-                <div className="flex-1 leading-tight">
-                  <p className="font-semibold">Belum</p>
-                  <p className="font-semibold">Dicairkan</p>
-                </div>
-              </div>
-
-              <p className="ml-2 mt-5">Rp 1.123.123</p>
+              <p className="ml-2 mt-2">Rp 1.123.123</p>
             </div>
           </div>
           <p className="mt-5 font-light">

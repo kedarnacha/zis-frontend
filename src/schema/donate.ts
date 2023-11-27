@@ -4,7 +4,10 @@ import { ACCEPTED_IMAGE_TYPES, ACCEPTED_SIZE } from '@/utils/constants';
 
 export const donateSchema = z.object({
   program_id: z.string().min(1),
-  amount: z.string().min(1),
+  amount: z.string().min(1)
+  .refine((value) => /^[0-9]+$/.test(value), {
+    message: 'Masukkan nilai tanpa titik maupun koma',
+  }),
   payment_method: z.string().min(1),
   evidence: z
     .any()

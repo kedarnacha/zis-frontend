@@ -43,6 +43,22 @@ const bank = [
     bank: "BRI",
     norek: 198,
   },
+  {
+    bank: "BSI",
+    norek: 19999,
+  },
+  {
+    bank: "CIMB",
+    norek: 2111,
+  },
+  {
+    bank: "Danamon",
+    norek: 8817,
+  },
+  {
+    bank: "PANIN",
+    norek: 9918,
+  },
 ];
 
 const ConfirmDonationPage = () => {
@@ -108,7 +124,7 @@ const ConfirmDonationPage = () => {
                             <li className='pb-2'>
                               <strong>Nomor Rekening:</strong>
                               <br />
-                              <p className='text-blue-500'>{myItem}</p>
+                              <p className='text-blue-500'>{myItem === 0 ? 'Pilih Metode Pembayaran terlebih dahulu' : myItem}</p>
                               
                             </li>
                             <li className='pb-2'>

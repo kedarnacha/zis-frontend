@@ -1,7 +1,7 @@
 'use client';
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { HardDriveDownload, Loader2Icon, Upload } from 'lucide-react';
+import { HardDriveDownload, Loader2Icon, Upload, HelpCircle } from 'lucide-react';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -63,8 +63,9 @@ const MustahiqPage = () => {
 
   const [open, setOpen] = useState(false);
   const [isInstitusi, setIsInstitusi] = useState(false);
+  const [pop, setPop] = useState(false);
 
-  const handleClick = (label: true | false ) => {
+  const handleClick = (label: true | false) => {
     setOpen(false);
     setIsInstitusi(label)
     form.setValue('is_institusi', label);
@@ -156,6 +157,48 @@ const MustahiqPage = () => {
                   <FormLabel className="mt-4">Alamat Lengkap</FormLabel>
                   <FormControl>
                     <Input placeholder="Masukkan Alamat Lengkap" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="address"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="mt-4">Provinsi</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Masukkan Provinsi" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="address"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="mt-4">Kota/Kabupaten</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Masukkan Kota/Kabupaten" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="address"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="mt-4">Kecamatan</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Masukkan Kecamatan" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -317,21 +360,11 @@ const MustahiqPage = () => {
               control={form.control}
               name="bank_name"
               render={({ field }) => (
-                <FormItem className="flex flex-col space-y-2">
-                  <Label>Pilih Bank</Label>
-                  <Select onValueChange={field.onChange} value={field.value}>
-                    <SelectTrigger className="h-14 w-full">
-                      <SelectValue placeholder="Pilih Nama Bank" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectGroup>
-                        <SelectItem value="BCA">BCA</SelectItem>
-                        <SelectItem value="BNI">BNI</SelectItem>
-                        <SelectItem value="Mandiri">Mandiri</SelectItem>
-                        <SelectItem value="BRI">BRI</SelectItem>
-                      </SelectGroup>
-                    </SelectContent>
-                  </Select>
+                <FormItem>
+                  <FormLabel className="mt-4">Masukkan Nama Bank</FormLabel>
+                  <FormControl>
+                    <Input placeholder="Masukkan Nama Bank" {...field} />
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
@@ -370,7 +403,21 @@ const MustahiqPage = () => {
         <Divider />
 
         <div className="p-5">
-          <p className="font-medium">Nomor IMkas</p>
+          <div className='flex'>
+            <p className="font-medium flex">Nomor IMkas</p>
+            <button data-popover-target="popover-default" className=" rounded-full bg-white p-0" onClick={() => setPop(!pop)} >
+              <HelpCircle className='ml-1' />
+            </button>
+            <div data-popover id="popover-default" role="tooltip" className={`absolute z-10 left-1/3 block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm ${pop ? 'visible opacity-100' : 'invisible opacity-0'}`}>
+              <div className="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg dark:border-gray-600 dark:bg-gray-700">
+                <h3 className="font-semibold text-gray-900 dark:text-white">IMKas Procedure</h3>
+              </div>
+              <div className="px-3 py-2 text-black" >
+                <img src='/IMKAS.png' />
+              </div>
+              <div data-popper-arrow></div>
+            </div>
+          </div>
 
           <div className="mt-4 space-y-5">
             <FormField
