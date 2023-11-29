@@ -40,7 +40,39 @@ export const mustahiqSchema = z
         required_error: 'Nomor Rekening harus diisi',
       })
       .min(1, 'Nomor Rekening harus diisi'),
-    imkas_number: z.string().optional(),
+    imkas_number: z
+      .string()
+      // .optional()
+      .refine(
+        (value) =>
+          value.startsWith('0816') ||
+          value.startsWith('0815') ||
+          value.startsWith('0814') ||
+          value.startsWith('0855') ||
+          value.startsWith('0856') ||
+          value.startsWith('0857') ||
+          value.startsWith('0858') ||
+          value.startsWith('0898') ||
+          value.startsWith('0899'),
+        {
+          message: 'Nomor telepon harus nomor Indosat',
+        },
+      ),
+      province:z
+      .string({
+        required_error: 'Provinsi harus diisi',
+      })
+      .min(1, 'Provinsi harus diisi'),
+      kota: z
+      .string({
+        required_error: 'Kota harus diisi',
+      })
+      .min(1, 'Kota harus diisi'),
+      kecamatan: z
+      .string({
+        required_error: 'Kecamatan harus diisi',
+      })
+      .min(1, 'Kecamatan harus diisi'),
 
     kk_file: z
       .any()

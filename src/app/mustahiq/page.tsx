@@ -43,6 +43,12 @@ import SelectInstitusiContent from './components/SelectInstitusiContent';
 import InstituteIcon from '@/components/icon/InstituteIcon';
 import PersonalIcon from '@/components/icon/PersonalIcon';
 
+type CityList = {
+  [key: string]: { kota: string; value: string }[];
+};
+type KecList = {
+  [key: string]: { kec: string; value: string }[];
+};
 const MustahiqPage = () => {
   const { data } = useQueryAccount();
   const { mutate, isLoading } = useMutateCreateMustahiq();
@@ -57,6 +63,47 @@ const MustahiqPage = () => {
     },
   });
 
+  const ListOfProvinsi = [
+    { provinsi: 'DKI Jakarta', value: 'dki' },
+  ];
+  const ListOfCity: CityList = {
+    dki: [
+      { kota: 'Kepulauan Seribu', value: 'kepser' },
+      { kota: 'Jakarta Barat', value: 'jakbar' },
+      { kota: 'Jakarta Pusat', value: 'jakpus' },
+      { kota: 'Jakarta Selatan', value: 'jaksel' },
+      { kota: 'Jakarta Timur', value: 'jaktim' },
+      { kota: 'Jakarta Utara', value: 'jakut' },
+    ],
+  }
+  const ListofKec: KecList = {
+    jakpus: [
+      { kec: 'Tanah Abang', value: 'Tanah Abang' },
+      { kec: 'Senen', value: 'Senen' },
+    ],
+    jakut: [
+      { kec: 'Cilincing', value: 'Cilincing' },
+      { kec: 'Koja', value: 'Koja' },
+    ],
+    jaktim: [
+      { kec: 'Cakung', value: 'Cakung' },
+      { kec: 'Ciracas', value: 'Ciracas' },
+    ],
+    jaksel: [
+      { kec: 'Tebet', value: 'Tebet' },
+      { kec: 'Kemang', value: 'Kemang' },
+    ],
+    jakbar: [
+      { kec: 'Kebon Jeruk', value: 'Kebon Jeruk' },
+      { kec: 'Palmerah', value: 'Palmerah' },
+    ],
+    kepser: [
+      { kec: 'Kepulauan Seribu Utara', value: 'Kepulauan Seribu Utara' },
+      { kec: 'Kepulauan Seribu Selatan', value: 'Kepulauan Seribu Selatan' },
+    ],
+  }
+  const [selected, setSelected] = useState('');
+  const [selected2, setSelected2] = useState('');
   const onSubmit = (data: MustahiqSchema) => {
     mutate(data);
   };
@@ -70,7 +117,6 @@ const MustahiqPage = () => {
     setIsInstitusi(label)
     form.setValue('is_institusi', label);
   };
-
 
   console.log(form.watch())
 
@@ -165,51 +211,87 @@ const MustahiqPage = () => {
 
             <FormField
               control={form.control}
-              name="address"
+              name="province" /*ubah disini*/
               render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="mt-4">Provinsi</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Masukkan Provinsi" 
-                    // {...field} 
-                    />
-                  </FormControl>
-                  <FormMessage />
+                <FormItem className="flex flex-col space-y-2">
+                  <Label>Province</Label>
+                  <Select onValueChange={(value) => {
+                    field.onChange(value);
+                    setSelected(value);
+                  }}
+                    defaultValue={field.value}>
+                    <SelectTrigger className="h-14 w-full">
+                      <SelectValue placeholder="Pilih Provinsi" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {ListOfProvinsi.map((option, index) => (
+                        <SelectGroup>
+                          <SelectItem value={option.value}>
+                            {option.provinsi}
+                          </SelectItem>
+                        </SelectGroup>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </FormItem>
               )}
             />
-
-            <FormField
-              control={form.control}
-              name="address"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="mt-4">Kota/Kabupaten</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Masukkan Kota/Kabupaten" 
-                    // {...field} 
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="address"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="mt-4">Kecamatan</FormLabel>
-                  <FormControl>
-                    <Input placeholder="Masukkan Kecamatan" 
-                    // {...field} 
-                    />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
+            {selected && (
+              <FormField
+                control={form.control}
+                name="kota" /*ubah disini*/
+                render={({ field }) => (
+                  <FormItem className="flex flex-col space-y-2">
+                    <Label>Kota/Kabupaten</Label>
+                    <Select onValueChange={(value) => {
+                      field.onChange(value);
+                      setSelected2(value);
+                    }}
+                      defaultValue={field.value}>
+                      <SelectTrigger className="h-14 w-full">
+                        <SelectValue placeholder="Pilih Kota/Kabupaten" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {ListOfCity[selected]?.map((option) => (
+                          <SelectGroup>
+                            <SelectItem value={option.value}>
+                              {option.kota}
+                            </SelectItem>
+                          </SelectGroup>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormItem>
+                )}
+              />
+            )}
+            {selected2 && (
+              <FormField
+                control={form.control}
+                name="kecamatan" /*ubah disini*/
+                render={({ field }) => (
+                  <FormItem className="flex flex-col space-y-2">
+                    <Label>Kecamatan</Label>
+                    <Select onValueChange={(value) => {
+                      field.onChange(value);
+                    }}
+                      defaultValue={field.value}>
+                      <SelectTrigger className="h-14 w-full">
+                        <SelectValue placeholder="Pilih Kecamatan" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        {ListofKec[selected2]?.map((option) => (
+                          <SelectGroup>
+                            <SelectItem value={option.value}>
+                              {option.kec}
+                            </SelectItem>
+                          </SelectGroup>
+                        ))}
+                      </SelectContent>
+                    </Select>
+                  </FormItem>
+                )}
+              />)}
 
             <FormField
               control={form.control}
@@ -412,7 +494,7 @@ const MustahiqPage = () => {
           <div className='flex'>
             <p className="font-medium flex">Nomor IMkas</p>
             <button data-popover-target="popover-default" className=" rounded-full bg-white p-0" onClick={() => setPop(!pop)} >
-              <HelpCircle className='ml-1'/>
+              <HelpCircle className='ml-1' />
             </button>
             <div data-popover id="popover-default" role="tooltip" className={`absolute z-10 left-1/3 block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm ${pop ? 'visible opacity-100' : 'invisible opacity-0'}`}>
               <div className="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg dark:border-gray-600 dark:bg-gray-700">

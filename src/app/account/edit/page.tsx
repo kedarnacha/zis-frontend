@@ -38,7 +38,9 @@ const schema = z.object({
         value.startsWith('0855') ||
         value.startsWith('0856') ||
         value.startsWith('0857') ||
-        value.startsWith('0858'),
+        value.startsWith('0858') ||
+        value.startsWith('0898') ||
+        value.startsWith('0899'),
       {
         message: 'Nomor telepon harus nomor Indosat',
       },
@@ -94,7 +96,7 @@ const EditPage = () => {
               name="phone"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="mt-4">No. Telepon / WhatsApp (contoh format: 085xxxx)</FormLabel>
+                  <FormLabel className="mt-4">No. Telepon / WhatsApp (contoh format: 08xxxx)</FormLabel>
                   <FormControl>
                     <Input placeholder="No. Telepon / WhatsApp" {...field} />
                   </FormControl>

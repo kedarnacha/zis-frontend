@@ -39,13 +39,13 @@ const menu = [
   },
 ];
 
-const Menu = ({ fromHome = false }: { fromHome?: boolean }) => {
+const MenuMustahiq = ({ fromHome = false }: { fromHome?: boolean }) => {
   const [category, setCategory] = useQueryState('category', parseAsInteger);
   const router = useRouter();
 
   const handleClick = (value: number | null) => {
     if (!value) {
-      router.push('/program');
+      router.push('/program/program-mustahiq');
       return;
     }
 
@@ -59,7 +59,7 @@ const Menu = ({ fromHome = false }: { fromHome?: boolean }) => {
 
   return (
     <div className="mt-5 px-4">
-      <h3 className="font-semibold ">Pilih Program Kebaikan</h3>
+      <h3 className="font-semibold text-lg">Pilih Program Serupa dengan Pengajuan Proposal Bantuan</h3>
 
       <div className="flex space-x-4 overflow-auto scroll-smooth p-4">
         {menu.map((item) => (
@@ -97,4 +97,4 @@ const Menu = ({ fromHome = false }: { fromHome?: boolean }) => {
   );
 };
 
-export default Menu;
+export default MenuMustahiq;

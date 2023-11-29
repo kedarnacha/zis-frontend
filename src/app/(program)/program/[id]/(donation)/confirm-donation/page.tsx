@@ -25,44 +25,34 @@ import { RecurringSchema } from '@/schema/recurring';
 const bank = [
   {
     bank: "IMKas",
-    norek: 4567,
   },
   {
     bank: "BCA",
-    norek: 297,
   },
   {
     bank: "BNI",
-    norek: 319,
   },
   {
     bank: "Mandiri",
-    norek: 533,
   },
   {
     bank: "BRI",
-    norek: 198,
   },
   {
     bank: "BSI",
-    norek: 19999,
   },
   {
     bank: "CIMB",
-    norek: 2111,
   },
   {
-    bank: "Danamon",
-    norek: 8817,
+    bank: "DKI",
   },
   {
-    bank: "PANIN",
-    norek: 9918,
+    bank: "BJB",
   },
 ];
 
 const ConfirmDonationPage = () => {
-  const [myItem, setMyItem] = useState(0);
   const form = useFormContext<DonateSchema>();
   const evidenceRef = React.useRef<HTMLInputElement>(null);
 
@@ -90,12 +80,6 @@ const ConfirmDonationPage = () => {
               <Label>Metode Pembayaran</Label>
               <Select onValueChange={(value) => {
                 field.onChange(value);
-                const selectedItems = bank.find((items) => items.bank === value);
-                if (selectedItems) {
-                  setMyItem(selectedItems.norek)
-                } else {
-                  setMyItem(0)
-                }
               }}
                 defaultValue={field.value}>
                 <SelectTrigger className="h-14 w-full">
@@ -124,8 +108,25 @@ const ConfirmDonationPage = () => {
                             <li className='pb-2'>
                               <strong>Nomor Rekening:</strong>
                               <br />
-                              <p className='text-blue-500'>{myItem === 0 ? 'Pilih Metode Pembayaran terlebih dahulu' : myItem}</p>
-                              
+                              <p>Rekening zakat :
+                                <br />
+                                1. ZIS Indosat
+                                <br />
+                                Norek BSI 7015.73.8877
+                                <br />
+                                2. ZIS Indosat
+                                <br />
+                                Norek Bank Mandiri 103.009.5265.894</p>
+                              <br />
+                              <p>Rekening infaq :
+                                <br />
+                                1. ZIS Indosat
+                                <br />
+                                Norek BSI 711.2454.009
+                                <br />
+                                2. ZIS Indosat
+                                <br />
+                                Norek Bank Mandiri 103.009.5265.464</p>
                             </li>
                             <li className='pb-2'>
                               <strong>Login ke Akun Bank Anda:</strong>

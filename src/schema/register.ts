@@ -24,7 +24,9 @@ export const registerSchema = z.object({
         value.startsWith('0855') ||
         value.startsWith('0856') ||
         value.startsWith('0857') ||
-        value.startsWith('0858'),
+        value.startsWith('0858') ||
+        value.startsWith('0898') ||
+        value.startsWith('0899'),
       {
         message: 'Nomor telepon harus nomor Indosat',
       },

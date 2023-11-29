@@ -18,7 +18,7 @@ import { XIcon } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import DataLayout from '@/components/zis/DataLayout';
 import { useAuthState } from '@/store/useAuthState';
-import { TYPE_MUZAKI } from '@/utils/constants';
+import { TYPE_MUSTAHIQ, TYPE_MUZAKI } from '@/utils/constants';
 import { formatter } from '@/utils/number';
 
 import useQueryDetailProgram from '../../hooks/useQueryDetailProgram';
@@ -200,6 +200,15 @@ const ProgramDetailPage = () => {
         </Accordion>
       </div>
 
+      {authState?.user?.user_type === TYPE_MUSTAHIQ && (
+        <div className="shadow-t-sm fixed inset-x-0 bottom-0 mx-auto flex w-full max-w-md items-center space-x-4 border-t border-t-slate-100 bg-white p-5">
+          <Link href={`/program/${id}/submit-program`} className="w-full flex-1">
+            <Button className="w-full" size="lg" variant="destructive">
+              Ajukan Proposal
+            </Button>
+          </Link>
+        </div>
+      )}
       {authState?.user?.user_type === TYPE_MUZAKI && (
         <div className="shadow-t-sm fixed inset-x-0 bottom-0 mx-auto flex w-full max-w-md items-center space-x-4 border-t border-t-slate-100 bg-white p-5">
           <Link href={`/program/${id}/recurring-donation`} className="w-full flex-1">

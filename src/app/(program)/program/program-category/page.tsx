@@ -1,6 +1,6 @@
 'use client';
 
-import { ChevronRightIcon, GlobeIcon } from 'lucide-react';
+import { ChevronRightIcon, Stethoscope, AppleIcon, School, GraduationCap } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 
@@ -15,28 +15,32 @@ import { Button } from '@/components/ui/button';
 const category = [
   {
     id: 2,
-    title: 'Bantuan Pendidikan & Guru',
+    title: 'Beasiswa Kuliah',
     description: 'Khusus untuk kebutuhan beasiswa, pembangunan sekolah, dan guru.',
+    Icon:GraduationCap,
   },
   {
     id: 3,
-    title: 'Bantuan Kesehatan & Medis',
+    title: 'Bantuan Kesehatan',
     description: 'Biaya akan diberikan untuk keperluan pengobatan / perawatan penyakit.',
+    Icon: Stethoscope,
   },
   {
     id: 1,
-    title: 'Bantuan Umum',
+    title: 'Beasiswa Guru',
     description: 'Untuk bencana alam, difabel, kegiatan sosial, dan yang lainnya.',
+    Icon:AppleIcon,
   },
   {
     id: 4,
-    title: 'Kategori Lainnya',
+    title: 'Bantuan Sekolah',
     description: 'Buat kebutuhan lainnya dan ajukan untuk tim Zis Indosat',
+    Icon: School,
   },
 ];
-
 const ProgramCategorySelectScreen = () => {
   const [selectedIndex, setSelectedIndex] = React.useState<number | undefined>();
+  const [id,setId] = React.useState<number | undefined>()
   const form = useFormContext<ProgramSchema>();
 
   const watchAmount = form.watch('program_category_id');
@@ -61,12 +65,13 @@ const ProgramCategorySelectScreen = () => {
             onClick={() => {
               form.setValue('program_category_id', item.id);
               setSelectedIndex(index);
+              setId(item.id)
             }}
             key={index}
           >
             <div className="flex items-center space-x-4">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-100">
-                <GlobeIcon className="h-4 w-4 text-red-500" />
+                <item.Icon className="h-4 w-4 text-red-500" />
               </div>
               <div className="flex-1">
                 <p className="font-semibold leading-tight text-slate-500">{item.title}</p>
@@ -79,7 +84,7 @@ const ProgramCategorySelectScreen = () => {
         ))}
       </div>
       <div className="shadow-t-sm fixed inset-x-0 bottom-0 mx-auto w-full max-w-md border-t border-t-slate-100 bg-white p-5">
-        <Link href={Boolean(watchAmount) ? `/program/submit-program` : '#'}>
+        <Link href={Boolean(watchAmount) ? `/program/program-mustahiq?category=${id}` : '#'}>
           <Button
             disabled={!Boolean(watchAmount)}
             type="button"
