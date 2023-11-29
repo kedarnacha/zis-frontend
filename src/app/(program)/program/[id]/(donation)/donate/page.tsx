@@ -65,7 +65,7 @@ const DonatePage = () => {
           <div
             onClick={() => {
               setSelectedIndex(index);
-              form.setValue('amount', (item.price+(cat_id ?? 0)).toString());
+              form.setValue('amount', (item.price + (cat_id ?? 0)).toString());
             }}
             key={index}
             className={cn(
@@ -113,6 +113,22 @@ const DonatePage = () => {
             </FormItem>
           )}
         />
+        <div className='pt-4'>
+          <FormField
+            name="amount"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="mt-4">Donasi yang anda masukkan sebesar</FormLabel>
+                <FormControl>
+                  <Input type="text"
+                  value={field.value ? formatter.format(parseInt(field.value)) : 'Rp 0'} 
+                  readOnly />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </div>
       </div>
 
       <div className="shadow-t-sm fixed inset-x-0 bottom-0 mx-auto w-full max-w-md border-t border-t-slate-100 bg-white p-5">

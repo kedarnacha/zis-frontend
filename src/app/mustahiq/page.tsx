@@ -214,7 +214,7 @@ const MustahiqPage = () => {
               name="province" /*ubah disini*/
               render={({ field }) => (
                 <FormItem className="flex flex-col space-y-2">
-                  <Label>Province</Label>
+                  <Label>Provinsi</Label>
                   <Select onValueChange={(value) => {
                     field.onChange(value);
                     setSelected(value);

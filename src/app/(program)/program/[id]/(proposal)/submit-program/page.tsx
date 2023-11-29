@@ -1358,7 +1358,7 @@ const SubmitProgramPage = () => {
       <CallCenter />
 
       <div className="shadow-t-sm fixed inset-x-0 bottom-0 mx-auto  max-w-md items-center border-t border-t-slate-100 bg-white p-5">
-        {/* <Link href={Boolean(watchAll) ? `/program/${id}/submit-completed` : '#'}> */}\
+        {/* <Link href={Boolean(watchAll) ? `/program/${id}/submit-completed` : '#'}> */}
         <Link href={Boolean(watchAll) ? `/program/${id}/program-lampiran` : '#'}>
           <Button
             disabled={isLoading}

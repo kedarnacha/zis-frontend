@@ -1,7 +1,7 @@
 'use client';
 
 import { useRouter } from 'next/navigation';
-import React from 'react';
+import React, { useState, ChangeEvent } from 'react';
 import { Trash2, Upload } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
 import FileUploadForm from '@/components/FileUploadForm';
@@ -34,6 +34,37 @@ const SubmitProgramPage = () => {
         router.push('/program/program-completed');
     };
 
+    const [files, setFiles] = useState<File[]>([]);
+    const [message, setMessage] = useState<string>('');
+
+    const handleFile = (e: ChangeEvent<HTMLInputElement>) => {
+        setMessage('');
+        const fileList = e.target.files;
+
+        if (!fileList) {
+            return;
+        }
+
+        for (let i = 0; i < fileList.length; i++) {
+            const fileType = fileList[i].type;
+            const validImageTypes = ['image/jpeg',
+            'image/jpg',
+            'image/png',
+            'image/webp',
+            'application/pdf',];
+
+            if (validImageTypes.includes(fileType)) {
+                setFiles((prevFiles) => [...prevFiles, fileList[i]]);
+            } else {
+                setMessage('Format file yang diterima salah');
+            }
+        }
+    };
+
+    const removeImage = (fileName: string) => {
+        setFiles((prevFiles) => prevFiles.filter((file) => file.name !== fileName));
+    };
+
 
     return (
         <div className="pb-24">
@@ -45,7 +76,7 @@ const SubmitProgramPage = () => {
                     Unggah data secara berurutan untuk mengisi data dibawah untuk proses pengajuan bantuan
                 </p>
 
-                <Button
+                {/* <Button
                     onClick={handleClick}
                     className="mt-4 w-full text-slate-50"
                     size="lg"
@@ -53,8 +84,9 @@ const SubmitProgramPage = () => {
                 >
                     <span>Ajukan Lampiran</span>
                     <Upload className="h-4 w-4 ml-2" />
-                </Button>
-                {/* <FileUploadForm /> */}
+                </Button> */}
+                <input onChange={handleFile} className="block w-full text-sm bg-yellow-50 text-yellow-500 border" type="file" name="files[]"></input>
+                <span className="flex text-[12px] mb-1 text-red-500">{message}</span>
             </div>
 
             <Divider />
@@ -65,30 +97,32 @@ const SubmitProgramPage = () => {
                     render={({ field }) => (
                         <FormItem className="flex flex-col space-y-2">
                             <FormLabel>Lampiran file</FormLabel>
-                            <FormControl>
-                                <>
-                                    <input
-                                        type="file"
-                                        // ref={ktpRef}
-                                        className="hidden"
-                                        onChange={(e) => field.onChange(e.target.files?.[0])}
-                                        accept="application/pdf, image/*"
-                                        disabled
-                                    />
-                                    <Button
-                                        variant="outline"
-                                        className="justify-between text-slate-500"
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            e.preventDefault();
-                                            // ktpRef.current?.click();
-                                        }}
-                                    >
-                                        <span>{field.value?.name ?? 'Ceritanya data max 2MB'}</span>{' '}
-                                        <Trash2 className="h-4 w-4 text-orange-400" />
-                                    </Button>
-                                </>
-                            </FormControl>
+                            {files.map((file, key) => {
+                                return (
+                                    <FormControl>
+                                        <>
+                                            <input
+                                                type="file"
+                                                className="hidden"
+                                                accept="application/pdf, image/*"
+                                                disabled
+                                            />
+                                            <Button
+                                                variant="outline"
+                                                className="justify-between text-slate-500"
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    e.preventDefault();
+                                                    removeImage(file.name)
+                                                }}
+                                            >
+                                                <span>{file.name ?? 'Ceritanya data max 2MB'}</span>{' '}
+                                                <Trash2 className="h-4 w-4 text-orange-400" />
+                                            </Button>
+                                        </>
+                                    </FormControl>
+                                )
+                            })}
                             <FormMessage />
                         </FormItem>
                     )}
