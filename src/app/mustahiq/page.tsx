@@ -3,7 +3,7 @@
 import { zodResolver } from '@hookform/resolvers/zod';
 import { HardDriveDownload, Loader2Icon, Upload, HelpCircle } from 'lucide-react';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Button } from '@/components/ui/button';
@@ -42,6 +42,9 @@ import {
 import SelectInstitusiContent from './components/SelectInstitusiContent';
 import InstituteIcon from '@/components/icon/InstituteIcon';
 import PersonalIcon from '@/components/icon/PersonalIcon';
+import useQueryProvince from './hooks/UseQueryProvince';
+import useQueryKota from './hooks/UseQueryKota';
+import useQueryKec from './hooks/UseQueryKec';
 
 type CityList = {
   [key: string]: { kota: string; value: string }[];
@@ -63,47 +66,22 @@ const MustahiqPage = () => {
     },
   });
 
-  const ListOfProvinsi = [
-    { provinsi: 'DKI Jakarta', value: 'dki' },
-  ];
-  const ListOfCity: CityList = {
-    dki: [
-      { kota: 'Kepulauan Seribu', value: 'kepser' },
-      { kota: 'Jakarta Barat', value: 'jakbar' },
-      { kota: 'Jakarta Pusat', value: 'jakpus' },
-      { kota: 'Jakarta Selatan', value: 'jaksel' },
-      { kota: 'Jakarta Timur', value: 'jaktim' },
-      { kota: 'Jakarta Utara', value: 'jakut' },
-    ],
-  }
-  const ListofKec: KecList = {
-    jakpus: [
-      { kec: 'Tanah Abang', value: 'Tanah Abang' },
-      { kec: 'Senen', value: 'Senen' },
-    ],
-    jakut: [
-      { kec: 'Cilincing', value: 'Cilincing' },
-      { kec: 'Koja', value: 'Koja' },
-    ],
-    jaktim: [
-      { kec: 'Cakung', value: 'Cakung' },
-      { kec: 'Ciracas', value: 'Ciracas' },
-    ],
-    jaksel: [
-      { kec: 'Tebet', value: 'Tebet' },
-      { kec: 'Kemang', value: 'Kemang' },
-    ],
-    jakbar: [
-      { kec: 'Kebon Jeruk', value: 'Kebon Jeruk' },
-      { kec: 'Palmerah', value: 'Palmerah' },
-    ],
-    kepser: [
-      { kec: 'Kepulauan Seribu Utara', value: 'Kepulauan Seribu Utara' },
-      { kec: 'Kepulauan Seribu Selatan', value: 'Kepulauan Seribu Selatan' },
-    ],
-  }
-  const [selected, setSelected] = useState('');
-  const [selected2, setSelected2] = useState('');
+  const [selected, setSelected] = useState<number>();
+  const [selected2, setSelected2] = useState<number>();;
+  const { data: provData } = useQueryProvince();
+  console.log(selected)
+  console.log(selected2)
+  const { data: kotaData, refetch: refKota } = useQueryKota(selected!);
+  const { data: kecData, refetch: refKec } = useQueryKec(selected2!);
+  useEffect(() => {
+    if (selected !== undefined) {
+      refKota();
+    }
+    if (selected2 !== undefined) {
+      refKec();
+    }
+  }, [selected, selected2, refKota, refKec]);
+
   const onSubmit = (data: MustahiqSchema) => {
     mutate(data);
   };
@@ -217,26 +195,30 @@ const MustahiqPage = () => {
                   <Label>Provinsi</Label>
                   <Select onValueChange={(value) => {
                     field.onChange(value);
-                    setSelected(value);
+                    setSelected(parseInt(form.watch('province')))
                   }}
                     defaultValue={field.value}>
                     <SelectTrigger className="h-14 w-full">
                       <SelectValue placeholder="Pilih Provinsi" />
                     </SelectTrigger>
-                    <SelectContent>
-                      {ListOfProvinsi.map((option, index) => (
-                        <SelectGroup>
-                          <SelectItem value={option.value}>
-                            {option.provinsi}
-                          </SelectItem>
-                        </SelectGroup>
-                      ))}
+                    <SelectContent className="max-h-60 overflow-y-auto">
+                      {provData?.data ? (
+                        provData.data.map((option: { prov_id: number; prov_name: string }) => (
+                          <SelectGroup key={option.prov_id}>
+                            <SelectItem value={option.prov_id.toString()}>
+                              {option.prov_name}
+                            </SelectItem>
+                          </SelectGroup>
+                        ))
+                      ) : (
+                        <p>Loading provinsi...</p>
+                      )}
                     </SelectContent>
                   </Select>
                 </FormItem>
               )}
             />
-            {selected && (
+            {selected !== undefined && (
               <FormField
                 control={form.control}
                 name="kota" /*ubah disini*/
@@ -245,27 +227,32 @@ const MustahiqPage = () => {
                     <Label>Kota/Kabupaten</Label>
                     <Select onValueChange={(value) => {
                       field.onChange(value);
-                      setSelected2(value);
+                      setSelected2(parseInt(form.watch('kota')))
+                      console.log(selected2)
                     }}
                       defaultValue={field.value}>
                       <SelectTrigger className="h-14 w-full">
-                        <SelectValue placeholder="Pilih Kota/Kabupaten" />
+                        <SelectValue placeholder="Pilih Provinsi" />
                       </SelectTrigger>
-                      <SelectContent>
-                        {ListOfCity[selected]?.map((option) => (
-                          <SelectGroup>
-                            <SelectItem value={option.value}>
-                              {option.kota}
-                            </SelectItem>
-                          </SelectGroup>
-                        ))}
+                      <SelectContent className="max-h-60 overflow-y-auto">
+                        {kotaData?.data ? (
+                          kotaData.data.map((option: { city_id: number; city_name: string }) => (
+                            <SelectGroup key={option.city_id}>
+                              <SelectItem value={option.city_id.toString()}>
+                                {option.city_name}
+                              </SelectItem>
+                            </SelectGroup>
+                          ))
+                        ) : (
+                          <p>Loading provinsi...</p>
+                        )}
                       </SelectContent>
                     </Select>
                   </FormItem>
                 )}
               />
             )}
-            {selected2 && (
+            {selected2 !== undefined && (
               <FormField
                 control={form.control}
                 name="kecamatan" /*ubah disini*/
@@ -279,14 +266,17 @@ const MustahiqPage = () => {
                       <SelectTrigger className="h-14 w-full">
                         <SelectValue placeholder="Pilih Kecamatan" />
                       </SelectTrigger>
-                      <SelectContent>
-                        {ListofKec[selected2]?.map((option) => (
-                          <SelectGroup>
-                            <SelectItem value={option.value}>
-                              {option.kec}
-                            </SelectItem>
-                          </SelectGroup>
-                        ))}
+                      <SelectContent className="max-h-60 overflow-y-auto">
+                        {kecData?.data ?
+                          kecData.data.map((option: { dis_id: number; dis_name : string}) => (
+                        <SelectGroup>
+                          <SelectItem value={option.dis_id.toString()}>
+                            {option.dis_name}
+                          </SelectItem>
+                        </SelectGroup>
+                        )) : (
+                        <p>Loading provinsi...</p>
+                          )}
                       </SelectContent>
                     </Select>
                   </FormItem>

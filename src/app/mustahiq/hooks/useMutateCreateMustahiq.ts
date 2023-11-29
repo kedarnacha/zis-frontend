@@ -46,7 +46,7 @@ const useMutateCreateMustahiq = () => {
         title: 'Berhasil Simpan Data',
       });
       queryClient.invalidateQueries([ACCOUNT_QUERY_KEY]);
-      router.push('/program/program-offering');
+      router.push('/program/program-category');
     },
     onError: (err) => {
       toast({

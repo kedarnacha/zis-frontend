@@ -1,4 +1,7 @@
 export const ALL_PROGRAM_QUERY_KEY = 'ALL_PROGRAM';
+export const PROV_QUERY_KEY = 'PROVINCE';
+export const KOTA_QUERY_KEY = 'KOTA';
+export const KEC_QUERY_KEY = 'KEC';
 export const DETAIL_PROGRAM_QUERY_KEY = 'DETAIL_PROGRAM';
 export const ACCOUNT_QUERY_KEY = 'ACCOUNT';
 

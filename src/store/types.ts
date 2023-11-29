@@ -27,3 +27,24 @@ export type Mustahiq = {
   bank_account_name: string;
   imkas_number: string | null;
 };
+
+export type Provinces = {
+  prov_id: number;
+  prov_name: string;
+  locationid: number;
+  status: number;
+  province_by_dpt: number;
+};
+
+export type Kota = {
+  city_id: number;
+  city_name: string;
+  prov_id: number;
+};
+
+export type Kec = {
+  dis_id: number;
+  dis_name: string;
+  city_id: number;
+  ket:string;
+};

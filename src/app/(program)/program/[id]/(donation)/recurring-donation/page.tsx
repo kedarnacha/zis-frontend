@@ -125,6 +125,22 @@ const DonatePage = () => {
           )}
         />
       </div>
+      <div className='pt-4'>
+        <FormField
+          name="amount"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="mt-4">Donasi yang anda masukkan sebesar</FormLabel>
+              <FormControl>
+                <Input type="text"
+                  value={field.value ? formatter.format(parseInt(field.value)) : 'Rp 0'}
+                  readOnly />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      </div>
 
       <div className="p-5">
         <p className="font-medium">Masukkan Data Diri</p>
