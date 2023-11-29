@@ -18,6 +18,9 @@ import {
 import { Button } from '@/components/ui/button';
 import Divider from '@/components/zis/Divider';
 import Navbar from '@/components/zis/Navbar';
+import { ProgramSchema } from '@/schema/program';
+import { useFormContext } from 'react-hook-form';
+import Link from 'next/link';
 
 const SubmitProgramPage = () => {
     const router = useRouter();
@@ -47,10 +50,10 @@ const SubmitProgramPage = () => {
         for (let i = 0; i < fileList.length; i++) {
             const fileType = fileList[i].type;
             const validImageTypes = ['image/jpeg',
-            'image/jpg',
-            'image/png',
-            'image/webp',
-            'application/pdf',];
+                'image/jpg',
+                'image/png',
+                'image/webp',
+                'application/pdf',];
 
             if (validImageTypes.includes(fileType)) {
                 setFiles((prevFiles) => [...prevFiles, fileList[i]]);
@@ -63,8 +66,8 @@ const SubmitProgramPage = () => {
     const removeImage = (fileName: string) => {
         setFiles((prevFiles) => prevFiles.filter((file) => file.name !== fileName));
     };
-
-
+    const form = useFormContext<ProgramSchema>();
+    const watchAll = form.watch();
     return (
         <div className="pb-24">
             <Navbar title="Lampiran Pendukung Pemohon Bantuan" />
@@ -149,9 +152,11 @@ const SubmitProgramPage = () => {
 
 
             <div className="shadow-t-sm fixed inset-x-0 bottom-0 mx-auto  max-w-md items-center border-t border-t-slate-100 bg-white p-5">
-                <Button onClick={handleClick} className="w-full" size="lg" variant="destructive">
-                    Ajukan Bantuan Sekarang
-                </Button>
+                <Link href={Boolean(watchAll) ? `/program/submit-complete` : '#'}>
+                    <Button onClick={handleClick} className="w-full" size="lg" variant="destructive">
+                        Ajukan Bantuan Sekarang
+                    </Button>
+                </Link>
             </div>
 
 

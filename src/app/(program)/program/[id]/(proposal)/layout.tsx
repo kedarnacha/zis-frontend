@@ -5,8 +5,9 @@ import React, { PropsWithChildren } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { Form } from '@/components/ui/form';
-import { programSchema } from '@/schema/program';
+import { proposalSchema } from '@/schema/proposal';
 import useQueryDetailProgram from '@/app/(program)/hooks/useQueryDetailProgram';
+import { useAuthState } from '@/store/useAuthState';
 
 type Params = {
   params: {
@@ -16,14 +17,17 @@ type Params = {
 
 const ProgramLayout = ({ children, ...props }: PropsWithChildren<Params>) => {
   const programId = props.params?.id ?? '';
+  const authState = useAuthState();
   const { data } = useQueryDetailProgram(programId);
   console.log(data?.data.program_category_id)
+  // const userId = authState?.user?.user_id
+  // console.log(userId)
 
   const form = useForm({
-    resolver: zodResolver(programSchema),
+    resolver: zodResolver(proposalSchema),
     defaultValues: {
-      program_id: programId,
-      program_category_id:data?.data.program_category_id
+      program_id: parseInt(programId),
+      proposal_kategori: data?.data.program_category_id,
     },
     mode: 'onChange',
   });
