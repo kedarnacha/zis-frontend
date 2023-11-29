@@ -4,7 +4,6 @@ import { useRouter } from 'next/navigation';
 import React, { useState, ChangeEvent } from 'react';
 import { Trash2, Upload } from 'lucide-react';
 import { Checkbox } from '@/components/ui/checkbox';
-import FileUploadForm from '@/components/FileUploadForm';
 
 import useQueryAccount from '@/app/account/hooks/useQueryAccount';
 import {
