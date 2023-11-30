@@ -54,10 +54,7 @@ const SubmitProgramPage = () => {
   const id = param?.id as string;
   const { data } = useQueryDetailProgram(id);
 
-  const onSubmit = (data: ProposalSchema) => {
-    console.log("test"+ data)
-    mutate(data);
-  };
+  
 
   return (
     <div className="pb-96">
@@ -73,19 +70,18 @@ const SubmitProgramPage = () => {
       <CallCenter />
 
       <div className="shadow-t-sm fixed inset-x-0 bottom-0 mx-auto  max-w-md items-center border-t border-t-slate-100 bg-white p-5">
-        {/* <Link href={Boolean(watchAll) ? `/program/${id}/program-lampiran` : '#'}> */}
+        <Link href={Boolean(watchAll) ? `/program/${id}/program-lampiran` : '#'}>
         <Button
-          onClick={form.handleSubmit(onSubmit, (errors) => console.log(errors))}
-          disabled={ form.formState.isLoading}
-          type="button"
-          role="button"
-          className="w-full "
-          size="lg"
-          variant="destructive"
-        >
-          Selesai
-        </Button>
-        {/* </Link> */}
+            disabled={!Boolean(watchAll)}
+            type="button"
+            role="button"
+            className="w-full "
+            size="lg"
+            variant="destructive"
+          >
+            Selanjutnya
+          </Button>
+        </Link>
       </div>
     </div>
   );

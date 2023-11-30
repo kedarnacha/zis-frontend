@@ -21,19 +21,23 @@ import Navbar from '@/components/zis/Navbar';
 import { ProgramSchema } from '@/schema/program';
 import { useFormContext } from 'react-hook-form';
 import Link from 'next/link';
+import { ProposalSchema } from '@/schema/proposal';
+import useMutateCreateProposal from '@/app/(program)/hooks/useMutateCreateProposal';
 
 const SubmitProgramPage = () => {
     const router = useRouter();
     const { data } = useQueryAccount();
 
     console.log({ data });
+    const { mutate, isLoading } = useMutateCreateProposal();
 
-    const handleClick = () => {
-        if (!data) {
-            return;
-        }
+    const form = useFormContext<ProposalSchema>();
+    console.log(form.watch())
 
-        router.push('/program/program-completed');
+
+    const onSubmit = (data: ProposalSchema) => {
+        console.log("test" + data)
+        mutate(data);
     };
 
     const [files, setFiles] = useState<File[]>([]);
@@ -66,7 +70,6 @@ const SubmitProgramPage = () => {
     const removeImage = (fileName: string) => {
         setFiles((prevFiles) => prevFiles.filter((file) => file.name !== fileName));
     };
-    const form = useFormContext<ProgramSchema>();
     const watchAll = form.watch();
     return (
         <div className="pb-24">
@@ -78,15 +81,6 @@ const SubmitProgramPage = () => {
                     Unggah data secara berurutan untuk mengisi data dibawah untuk proses pengajuan bantuan
                 </p>
 
-                {/* <Button
-                    onClick={handleClick}
-                    className="mt-4 w-full text-slate-50"
-                    size="lg"
-                    variant="destructive"
-                >
-                    <span>Ajukan Lampiran</span>
-                    <Upload className="h-4 w-4 ml-2" />
-                </Button> */}
                 <input onChange={handleFile} className="block w-full text-sm bg-yellow-50 text-yellow-500 border" type="file" name="files[]"></input>
                 <span className="flex text-[12px] mb-1 text-red-500">{message}</span>
             </div>
@@ -152,11 +146,17 @@ const SubmitProgramPage = () => {
 
 
             <div className="shadow-t-sm fixed inset-x-0 bottom-0 mx-auto  max-w-md items-center border-t border-t-slate-100 bg-white p-5">
-                <Link href={Boolean(watchAll) ? `/program/submit-complete` : '#'}>
-                    <Button onClick={handleClick} className="w-full" size="lg" variant="destructive">
-                        Ajukan Bantuan Sekarang
-                    </Button>
-                </Link>
+                <Button
+                    onClick={form.handleSubmit(onSubmit, (errors) => console.log(errors))}
+                    disabled={form.formState.isLoading}
+                    type="button"
+                    role="button"
+                    className="w-full "
+                    size="lg"
+                    variant="destructive"
+                >
+                    Selesai
+                </Button>
             </div>
 
 
