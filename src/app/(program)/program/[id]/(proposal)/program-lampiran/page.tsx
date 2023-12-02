@@ -125,7 +125,39 @@ const SubmitProgramPage = () => {
                 />
                 {form.watch('proposal_kategori') === 1 ? (
                     <>
-                        <p>Lampiran yang harus diupload : </p>
+                        <p className='text-md text-red-600 font-bold'>Lampiran yang harus diupload :
+                            <br />
+                            <p className='text-sm font-semibold text-black'>
+                                Surat Keterangan dari tempat mengajar, FC Slip Kafalah/ upah, FC KTP, FC Kartu Keluarga
+                            </p>
+                        </p>
+                    </>
+                ) : form.watch('proposal_kategori') === 3 ? (
+                    <>
+                        <p className='text-md text-red-600 font-bold'>Lampiran yang harus diupload :
+                            <br />
+                            <p className='text-sm font-semibold text-black'>
+                                Copy KTP, Copy KK, Surat ket. tidak mampu RT/RW (Asli), -Surat Diagnosa dokter/ RS, copy estimasi biaya RS, Foto Pasien
+                            </p>
+                        </p>
+                    </>
+                ) : form.watch('proposal_kategori') === 2 ? (
+                    <>
+                        <p className='text-md text-red-600 font-bold'>Lampiran yang harus diupload :
+                            <br />
+                            <p className='text-sm font-semibold text-black'>
+                                Surat Ket Kampus, FC Pembayaran SPP semester, FC Transkip Nilai Terakhir, FC Kartu Keluarga, Surat Rekomendasi LDK, Surat Ket.Tidak Mampu RT/RW, Biodata pemohon/ CV
+                            </p>
+                        </p>
+                    </>
+                ) : form.watch('proposal_kategori') === 4 ? (
+                    <>
+                        <p className='text-md text-red-600 font-bold'>Lampiran yang harus diupload :
+                            <br />
+                            <p className='text-sm font-semibold text-black'>
+                                FC Raport Terakhir, FC SPP, FC Kartu Keluarga, Surat Keterangan tdk mampu RT/RW
+                            </p>
+                        </p>
                     </>
                 ) : null}
                 <p className='text-xs text-slate-500'>Ketentuan Bantuan :
@@ -135,7 +167,7 @@ const SubmitProgramPage = () => {
                     2. Pemohon bantuan khusus Putri/Muslimah dianjurkan untuk mengenakan Hijab/Jilbab
                     <br />
                     3. Pemohon wajib menggunakan Nomor Telepon INDOSAT, karena dana bantuan merupakan Zakat Profesi karyawan INDOSAT
-                    </p>
+                </p>
             </div>
             <Divider />
 
