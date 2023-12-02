@@ -39,6 +39,7 @@ export const proposalSchema = z.object({
   bantuan_pihak_lain: z.string().optional(),
   nominal_bantuan: z.string().optional(),
   biaya_hidup_bulanan: z.string().optional(),
+  dana_yang_diajukan: z.string().optional(),
   nama_pemberi_rekomendasi: z.string().min(1).optional(),
   alamat_pemberi_rekomendasi: z.string().min(1).optional(),
   no_telp_pemberi_rekomendasi: z.string().min(1).optional(),

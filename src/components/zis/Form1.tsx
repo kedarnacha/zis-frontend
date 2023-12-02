@@ -93,13 +93,33 @@ class Form1 extends React.Component<Form1Props> {
                       <Calendar
                         mode="single"
                         selected={field.value ? new Date(field.value) : undefined}
-                        onSelect={(date) => field.onChange(date?.toISOString().split('T')[0] || '')}
-                        disabled={(date) => date < new Date()}
+                        onSelect={(date) => {
+                          const adjustedDate = date ? new Date(date.getTime() - date.getTimezoneOffset() * 60000) : undefined;
+                          field.onChange(adjustedDate?.toISOString().split('T')[0] || '');
+                        }}
+                        // disabled={(date) => date < new Date()}
                         initialFocus
                       />
                     </PopoverContent>
                   </Popover>
                   <FormDescription>Pilih Tanggal Lahir</FormDescription>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="dana_yang_diajukan" /*ubah disini*/
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="mt-4">Dana yang diajukan</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Ex : 3000000 (masukkan angka saja)"
+                      {...field}
+                      type="number"
+                    />
+                  </FormControl>
                   <FormMessage />
                 </FormItem>
               )}

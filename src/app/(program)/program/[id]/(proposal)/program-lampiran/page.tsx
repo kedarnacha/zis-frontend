@@ -123,13 +123,19 @@ const SubmitProgramPage = () => {
                         </FormItem>
                     )}
                 />
+                {form.watch('proposal_kategori') === 1 ? (
+                    <>
+                        <p>Lampiran yang harus diupload : </p>
+                    </>
+                ) : null}
                 <p className='text-xs text-slate-500'>Ketentuan Bantuan :
                     <br />
                     1. Pemohon bantuan diharuskan bukan perokok, karena bertentangan dengan tujuan Zakat
                     <br />
                     2. Pemohon bantuan khusus Putri/Muslimah dianjurkan untuk mengenakan Hijab/Jilbab
                     <br />
-                    3. Pemohon wajib menggunakan Nomor Telepon INDOSAT, karena dana bantuan merupakan Zakat Profesi karyawan INDOSAT</p>
+                    3. Pemohon wajib menggunakan Nomor Telepon INDOSAT, karena dana bantuan merupakan Zakat Profesi karyawan INDOSAT
+                    </p>
             </div>
             <Divider />
 
