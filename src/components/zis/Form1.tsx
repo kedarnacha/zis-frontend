@@ -70,40 +70,17 @@ class Form1 extends React.Component<Form1Props> {
               render={({ field }) => (
                 <FormItem className="mt-4 flex flex-col space-y-3">
                   <FormLabel>Tanggal Lahir</FormLabel>
-                  <Popover>
-                    <PopoverTrigger asChild>
-                      <FormControl>
-                        <Button
-                          variant={'outline'}
-                          className={cn(
-                            'w-full pl-3 text-left font-normal',
-                            !field.value && 'text-muted-foreground',
-                          )}
-                        >
-                          {field.value ? (
-                            format(new Date(field.value), 'yyyy-MM-dd')
-                          ) : (
-                            <span>Pick a date</span>
-                          )}
-                          <CalendarIcon className="ml-auto h-4 w-4 opacity-50" />
-                        </Button>
-                      </FormControl>
-                    </PopoverTrigger>
-                    <PopoverContent className="w-auto p-0" align="start">
-                      <Calendar
-                        mode="single"
-                        selected={field.value ? new Date(field.value) : undefined}
-                        onSelect={(date) => {
-                          const adjustedDate = date ? new Date(date.getTime() - date.getTimezoneOffset() * 60000) : undefined;
-                          field.onChange(adjustedDate?.toISOString().split('T')[0] || '');
-                        }}
-                        // disabled={(date) => date < new Date()}
-                        initialFocus
-                      />
-                    </PopoverContent>
-                  </Popover>
-                  <FormDescription>Pilih Tanggal Lahir</FormDescription>
-                  <FormMessage />
+                  <FormControl>
+                    <Input
+                      type="date"
+                      className='w-full font-normal input input-bordered'
+                      value={field.value || ''}
+                      onChange={(e) => {
+                        const adjustedDate = e.target.value ? new Date(e.target.value + 'T00:00:00Z') : undefined;
+                        field.onChange(adjustedDate?.toISOString().split('T')[0] || '');
+                      }}
+                    />
+                  </FormControl>
                 </FormItem>
               )}
             />
