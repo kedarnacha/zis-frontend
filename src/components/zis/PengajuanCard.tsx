@@ -3,38 +3,67 @@ import { id } from 'date-fns/locale';
 import Image from 'next/image';
 import React from 'react';
 
-import { Program } from '@/schema/program';
+import { Proposal } from '@/schema/proposal';
 
-const PengajuanCard = ({ program }: { program: Program }) => {
-    const imageUrl = `${process.env.NEXT_PUBLIC_UNSAFE_URL}/public/${program.program_banner.banners_path}`;
-    const formattedDate = format(new Date(program.program_create), "dd-MMM-yyyy", { locale: id });
-    const statusMappings = [
-        { id: 1, statusClass: 'text-yellow-500', statusText: 'Diproses' },
-        { id: 2, statusClass: 'text-yellow-500', statusText: 'Menunggu Persetujuan 2' },
-        { id: 3, statusClass: 'text-yellow-500', statusText: 'Menunggu Persetujuan 3' },
-        { id: 4, statusClass: 'text-green-500', statusText: 'Disetujui' },
-        { id: 5, statusClass: 'text-red-500', statusText: 'Ditolak' },
-    ];
+const PengajuanCard = ({ proposal }: { proposal: Proposal }) => {
+    // const imageUrl = `${process.env.NEXT_PUBLIC_UNSAFE_URL}/public/${program.program_banner.banners_path}`;
+    const formattedDate = format(new Date(proposal.create_date), "dd-MMM-yyyy", { locale: id });
 
-    const statusMapping = (statusMappings.find(mapping => mapping.id === program.program_status) || {}) as {
-        statusClass?: string;
-        statusText?: string;
-    };
+    const perBayar = proposal.status_bayar
 
-    const { statusClass, statusText } = statusMapping;
+    const statTolak = proposal.proposal_approval.filter(approval => approval.status === 2).length;
+    console.log(statTolak);
+
+    const statAcc = proposal.proposal_approval.filter(approval => approval.status === 1).length;
+    console.log(statAcc);
+
+
+    let statusClass: string = '';
+    let statusText: string = '';
+
+    if (perBayar === 1) {
+        statusClass = 'text-green-500';
+        statusText = 'Pembayaran berhasil';
+    } else if (statTolak >= 1) {
+        const statusMappings = [
+            { id: 1, statusClass: 'text-red-500', statusText: 'Ditolak' },
+            { id: 2, statusClass: 'text-red-500', statusText: 'Ditolak' },
+            { id: 3, statusClass: 'text-red-500', statusText: 'Ditolak' },
+        ];
+        const statusMapping = (statusMappings.find(mapping => mapping.id === statTolak) || {}) as {
+            statusClass?: string;
+            statusText?: string;
+        };
+        statusClass = statusMapping.statusClass || '';
+        statusText = statusMapping.statusText || '';
+    } else if (statAcc <= 3) {
+        const statusMappings = [
+            { id: 0, statusClass: 'text-yellow-600', statusText: 'Dalam proses persetujuan' },
+            { id: 1, statusClass: 'text-yellow-600', statusText: 'Dalam proses persetujuan' },
+            { id: 2, statusClass: 'text-yellow-600', statusText: 'Dalam proses persetujuan' },
+            { id: 3, statusClass: 'text-yellow-600', statusText: 'Sedang menunggu proses pembayaran' },
+        ];
+        const statusMapping = (statusMappings.find(mapping => mapping.id === statAcc) || {}) as {
+            statusClass?: string;
+            statusText?: string;
+        };
+        statusClass = statusMapping.statusClass || '';
+        statusText = statusMapping.statusText || '';
+    }
+
 
     return (
         <>
             <div className="flex border-b border-b-slate-200 py-3">
                 <div className="relative aspect-[1.05] flex-1 overflow-hidden rounded-md">
-                    <Image src={imageUrl} fill alt="Item Image" className="object-cover" />
+                    {/* <Image src={imageUrl} fill alt="Item Image" className="object-cover" /> */}
                 </div>
                 <div className="flex w-full flex-1 flex-col px-3">
                     <h2 className="mt-2 flex-1 text-md font-semibold">
-                        {program.program_title}
+                        {proposal.program_id}
                     </h2>
                     <div className="text-xs font-semibold text-slate-500">
-                        Perubahan terakhir
+                        Tanggal Pengajuan
                         <br />
                         <span className="font-bold">{formattedDate}</span>
                     </div>
@@ -54,15 +83,15 @@ const PengajuanCard = ({ program }: { program: Program }) => {
                 </div>
             </div>
             <div className="self-stretch text-center text-xs mt-2.5">
-                Kategori: {program.program_category.name}
+                Kategori: {proposal.proposal_kategori}
             </div>
             <div className="flex justify-between gap-2 mt-3.5">
                 <a
-                    href={`/program/${program.program_id}`}
+                    href={`/program/${proposal.program_id}`}
                     className="justify-center items-center self-stretch border border-red-500 flex w-[271px] max-w-full flex-col grow shrink-0 basis-auto px-20 py-3 rounded-lg"
                 >
                     <div className="text-sm font-semibold self-center whitespace-nowrap text-red-600">
-                        Lihat Program
+                        Lihat Proposal
                     </div>
                 </a>
                 <div className="justify-center disabled: items-center self-stretch border border-slate-400 flex w-14 max-w-full flex-col px-5 py-3 rounded-lg">

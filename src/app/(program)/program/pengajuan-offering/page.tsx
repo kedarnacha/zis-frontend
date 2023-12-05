@@ -46,7 +46,7 @@ const SubmitProgramPage = () => {
         <div className="rounded-lg bg-white p-4 shadow-lg">
           <Link href='/program/program-category' className="mt-3 flex items-center justify-center rounded-md border-2 border-dashed border-red-400 p-2">
             <button className="text-red-400 text-md flex py-2">
-              Ajukan program bantuan baru <PlusCircle size={24} className="text-red-400 ml-2" />
+              Ajukan proposal bantuan baru <PlusCircle size={24} className="text-red-400 ml-2" />
             </button>
           </Link>
           <Link href="/program/submit-program-intro">
@@ -58,8 +58,8 @@ const SubmitProgramPage = () => {
           </Link>
         </div>
       </div>
-      <Divider />
-      <PengajuanMenu />
+      {/* <Divider />
+      <PengajuanMenu /> */}
       <Divider />
       <PengajuanList />
       <Divider />

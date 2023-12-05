@@ -61,7 +61,7 @@ const ProgramDetailPage = () => {
 
   useEffect(() => {
     setLink(window.location.href);
-  }, []); 
+  }, []);
 
   const copyToClipboard = (e: string) => {
     navigator.clipboard.writeText(e)
@@ -202,11 +202,21 @@ const ProgramDetailPage = () => {
 
       {authState?.user?.user_type === TYPE_MUSTAHIQ && (
         <div className="shadow-t-sm fixed inset-x-0 bottom-0 mx-auto flex w-full max-w-md items-center space-x-4 border-t border-t-slate-100 bg-white p-5">
-          <Link href={`/program/${id}/submit-program`} className="w-full flex-1">
-            <Button className="w-full" size="lg" variant="destructive">
-              Ajukan Proposal
-            </Button>
-          </Link>
+          {authState?.user?.mustahiq_id !== null ? (
+            <Link href={`/program/${id}/submit-program`} className="w-full flex-1">
+              <Button className="w-full" size="lg" variant="destructive">
+                Ajukan Proposal
+              </Button>
+            </Link>
+          ) : (
+            <Link href="/mustahiq">
+              <a className="w-full flex-1">
+                <Button className="w-full" size="lg" variant="destructive">
+                  Lengkapi Data Diri
+                </Button>
+              </a>
+            </Link>
+          )}
         </div>
       )}
       {authState?.user?.user_type === TYPE_MUZAKI && (
@@ -345,7 +355,7 @@ const ProgramDetailPage = () => {
                     d="m12 4.929-.707.707 1.414 1.414.707-.707a3.007 3.007 0 0 1 4.243 0 3.005 3.005 0 0 1 0 4.243l-2.122 2.121c-1.133 1.133-3.109 1.133-4.242 0L10.586 12l-1.414 1.414.707.707c.943.944 2.199 1.465 3.535 1.465s2.592-.521 3.535-1.465L19.071 12a5.008 5.008 0 0 0 0-7.071 5.006 5.006 0 0 0-7.071 0z"
                   ></path>
                 </svg>
-                <input className="w-full outline-none pl-2 bg-transparent" type="text" value={link} disabled/>
+                <input className="w-full outline-none pl-2 bg-transparent" type="text" value={link} disabled />
 
                 <button className={`bg-indigo-500 text-white rounded text-sm py-2 px-5 mr-2 hover:bg-indigo-600 ${copied ? 'bg-green-500 hover:bg-green-600' : ''
                   }`} onClick={() => copyToClipboard(link)}>

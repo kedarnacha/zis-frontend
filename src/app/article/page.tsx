@@ -24,6 +24,7 @@ const ArticlePage = () => {
     sortBy,
     order,
   });
+  console.log(data)
 
   return (
     <div>
@@ -34,7 +35,7 @@ const ArticlePage = () => {
         <div className="my-5 px-4">
           {(data?.data && data.data.length > 0) ? (
             data.data.map((item) => (
-              <ArticleItemCardVertical key={item.program_id} program={item} />
+              <ArticleItemCardVertical key={item.id} article={item} />
             ))
           ) : (
             <div className='flex flex-col items-center'>

@@ -31,13 +31,15 @@ const ProfilePage = () => {
       )}
 
       {authState?.user?.user_type === TYPE_MUSTAHIQ ? (
-        <Link href="/program/submit-program-intro">
-          <div className="flex flex-row items-center space-x-4 p-5 text-slate-700">
-            <div className="flex-1">Submit Proposal</div>
+        // <Link href="/program/pengajuan-offering">
+        //   <div className="flex flex-row items-center space-x-4 p-5 text-slate-700">
+        //     <div className="flex-1">Lihat pengajuan Proposal</div>
 
-            <ChevronRight className="h-5 w-5" />
-          </div>
-        </Link>
+        //     <ChevronRight className="h-5 w-5" />
+        //   </div>
+        // </Link>
+        <>
+        </>
       ) : (
         <Link href="/program">
           <div className="flex flex-row items-center space-x-4 p-5 text-slate-700">

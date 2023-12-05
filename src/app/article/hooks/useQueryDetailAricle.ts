@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import axios from '@/lib/axios';
-import { Program } from '@/schema/program';
+import { Article } from '@/schema/article';
 import { DETAIL_PROGRAM_QUERY_KEY } from '@/utils/constants';
 
 type Params = {
@@ -10,13 +10,13 @@ type Params = {
 
 type Response = {
   message: string;
-  data: Program;
+  data: Article;
 };
 
 const request = async (id: string) => {
   const { data } = await axios.request<Response>({
     method: 'GET',
-    url: `/home/program/${id}`,
+    url: `/ref/article/${id}`,
   });
 
   return data;

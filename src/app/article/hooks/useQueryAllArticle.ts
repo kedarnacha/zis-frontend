@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 
 import axios from '@/lib/axios';
-import { Program } from '@/schema/program';
-import { ALL_PROGRAM_QUERY_KEY } from '@/utils/constants';
+import { Article } from '@/schema/article';
+import { ALL_ARTICLE_QUERY_KEY } from '@/utils/constants';
 
 type Params = {
   page?: number;
@@ -15,7 +15,7 @@ type Params = {
 type Response = {
   success: boolean;
   message: string;
-  data?: Program[];
+  data?: Article[];
   total?: number;
   pagination?: {
     current: number;
@@ -32,7 +32,7 @@ const request = async (params?: Params) => {
   const { page = 1, category = '', keyword = '', order = '', sortBy = '' } = params || {};
   const { data } = await axios.request<Response>({
     method: 'GET',
-    url: '/home/program',
+    url: '/ref/article',
     params: {
       page,
       category,
@@ -47,7 +47,7 @@ const request = async (params?: Params) => {
 
 const useQueryGetAllArticle= (params?: Params) => {
   return useQuery({
-    queryKey: [ALL_PROGRAM_QUERY_KEY, params],
+    queryKey: [ALL_ARTICLE_QUERY_KEY, params],
     queryFn: () => request(params),
   });
 };

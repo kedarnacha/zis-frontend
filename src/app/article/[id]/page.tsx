@@ -26,18 +26,7 @@ const ArticlePage = () => {
 
     const { data, isError, isLoading } = useQueryDetailArticle(id);
 
-    const imageUrl = `${process.env.NEXT_PUBLIC_UNSAFE_URL}/public/${data?.data.program_banner.banners_path}`;
-
-    const percentage =
-        ((data?.data?.total_donation ?? 0) / (data?.data?.program_target_amount ?? 0)) * 100;
-
-    const distance = formatDistance(
-        new Date(data?.data?.program_end_date ?? Date.now()),
-        new Date(),
-        {
-            locale: indo,
-        },
-    );
+    const imageUrl = `${process.env.NEXT_PUBLIC_UNSAFE_URL}/public/${data?.data.banner}`;
 
     const [isSharedVisible, setIsSharedVisible] = useState(false);
 
@@ -85,12 +74,12 @@ const ArticlePage = () => {
                 </div>
 
                 <div className="p-5">
-                    <h1 className="font-bold">{data?.data.program_title}</h1>
-                    <p className="text-sm font-light">{data?.data.program_short_desc ?? ''}</p>
+                    <h1 className="font-bold">{data?.data.title}</h1>
+                    <p className="text-sm font-light">Penulis : {data?.data.user.user_nama ?? ''}</p>
                 </div>
                 <div className="h-3 bg-slate-100" />
                 <div className="prose prose-fuchsia p-5 leading-normal">
-                    {(data?.data.program_description ?? '').split('\n').map((text, index) => (
+                    {(data?.data.content ?? '').split('\n').map((text, index) => (
                         <p key={index} className="font-light">
                             {text}
                         </p>

@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import axios from '@/lib/axios';
-import { Program } from '@/schema/program';
+import { Proposal } from '@/schema/proposal';
 import { ALL_PROGRAM_QUERY_KEY } from '@/utils/constants';
 
 type Params = {
@@ -10,23 +10,23 @@ type Params = {
 
 type Response = {
   message: string;
-  data?: Program[];
+  data?: Proposal[];
 };
 
 const request = async (id_user: number) => {
   const { data } = await axios.request<Response>({
     method: 'GET',
-    url: `/mustahiq/program/${id_user}`,
+    url: `/mustahiq/proposal/${id_user}`,
   });
 
   return data; 
 };
 
-const useQueryUserProgram = (id_user: number) => {
+const useQueryProposalProgram = (id_user: number) => {
   return useQuery({
     queryKey: [ALL_PROGRAM_QUERY_KEY, id_user],
     queryFn: () => request(id_user),
   });
 };
 
-export default useQueryUserProgram;
+export default useQueryProposalProgram;
