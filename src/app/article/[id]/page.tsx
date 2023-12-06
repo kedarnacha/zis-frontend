@@ -26,7 +26,7 @@ const ArticlePage = () => {
 
     const { data, isError, isLoading } = useQueryDetailArticle(id);
 
-    const imageUrl = `${process.env.NEXT_PUBLIC_UNSAFE_URL}/public/${data?.data.banner}`;
+    const imageUrl = `${process.env.NEXT_PUBLIC_UNSAFE_URL}/public/uploads/${data?.data.banner}`;
 
     const [isSharedVisible, setIsSharedVisible] = useState(false);
 
