@@ -9,7 +9,8 @@ const PengajuanCard = ({ proposal }: { proposal: Proposal }) => {
     // const imageUrl = `${process.env.NEXT_PUBLIC_UNSAFE_URL}/public/${program.program_banner.banners_path}`;
     const formattedDate = format(new Date(proposal.create_date), "dd-MMM-yyyy", { locale: id });
 
-    const perBayar = proposal.status_bayar
+    const tlhBayar = proposal.status_bayar
+    const perBayar = proposal.approved
 
     const statTolak = proposal.proposal_approval.filter(approval => approval.status === 2).length;
     console.log(statTolak);
@@ -17,13 +18,24 @@ const PengajuanCard = ({ proposal }: { proposal: Proposal }) => {
     const statAcc = proposal.proposal_approval.filter(approval => approval.status === 1).length;
     console.log(statAcc);
 
+    const kategori = [
+        {id: 1, namaCat: 'Bea Guru'},
+        {id: 2, namaCat: 'Bea Kuliah'},
+        {id: 3, namaCat: 'Kesehatan'},
+        {id: 4, namaCat: 'Bea Sekolah'},
+    ]
+    const category = kategori.find(cat => cat.id === proposal.proposal_kategori);
+    const namaCat = category?.namaCat || ''
 
     let statusClass: string = '';
     let statusText: string = '';
 
-    if (perBayar === 1) {
+    if (tlhBayar === 1) {
+        statusClass = 'text-green-700';
+        statusText = 'Dana telah dikirimkan';
+    }else if (perBayar === 1) {
         statusClass = 'text-green-500';
-        statusText = 'Pembayaran berhasil';
+        statusText = 'Proposal disetujui dan dalam proses pengiriman dana';
     } else if (statTolak >= 1) {
         const statusMappings = [
             { id: 1, statusClass: 'text-red-500', statusText: 'Ditolak' },
@@ -55,12 +67,12 @@ const PengajuanCard = ({ proposal }: { proposal: Proposal }) => {
     return (
         <>
             <div className="flex border-b border-b-slate-200 py-3">
-                <div className="relative aspect-[1.05] flex-1 overflow-hidden rounded-md">
+                {/* <div className="relative aspect-[1.05] flex-1 overflow-hidden rounded-md"> */}
                     {/* <Image src={imageUrl} fill alt="Item Image" className="object-cover" /> */}
-                </div>
+                {/* </div> */}
                 <div className="flex w-full flex-1 flex-col px-3">
                     <h2 className="mt-2 flex-1 text-md font-semibold">
-                        {proposal.program_id}
+                        Nama penerima bantuan : {proposal.nama}
                     </h2>
                     <div className="text-xs font-semibold text-slate-500">
                         Tanggal Pengajuan
@@ -83,11 +95,11 @@ const PengajuanCard = ({ proposal }: { proposal: Proposal }) => {
                 </div>
             </div>
             <div className="self-stretch text-center text-xs mt-2.5">
-                Kategori: {proposal.proposal_kategori}
+                Kategori: {namaCat}
             </div>
             <div className="flex justify-between gap-2 mt-3.5">
                 <a
-                    href={`/program/${proposal.program_id}`}
+                    href={`/proposal/${proposal.id}`}
                     className="justify-center items-center self-stretch border border-red-500 flex w-[271px] max-w-full flex-col grow shrink-0 basis-auto px-20 py-3 rounded-lg"
                 >
                     <div className="text-sm font-semibold self-center whitespace-nowrap text-red-600">

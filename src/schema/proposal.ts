@@ -3,6 +3,12 @@ export type Proposal = {
   program_id: number;
   proposal_kategori: number;
   nama: string;
+  tempat_lahir:string;
+  approved:number;
+  tgl_lahir:string;
+  alamat_rumah:string;
+  nama_pemberi_rekomendasi:string;
+  no_telp_pemberi_rekomendasi:string;
   status_bayar:number;
   proposal_approval:{
     id: number;
