@@ -77,7 +77,7 @@ const ArticleCarousel = () => {
                   <div className="ml-5 h-72 w-60 overflow-hidden rounded-md border shadow-md transition duration-300 hover:shadow-none">
                     <div className="relative aspect-video">
                       <Image
-                        src={`${process.env.NEXT_PUBLIC_UNSAFE_URL}/public/${slide.banner}`}
+                        src={`${process.env.NEXT_PUBLIC_UNSAFE_URL}/public/uploads/${slide.banner}`}
                         fill
                         className='object-cover'
                         alt="Item Image"
