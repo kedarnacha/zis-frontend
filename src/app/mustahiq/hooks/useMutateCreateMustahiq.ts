@@ -43,10 +43,10 @@ const useMutateCreateMustahiq = () => {
     mutationFn: (data: MustahiqSchema) => mutationFn(data),
     onSuccess: () => {
       toast({
-        title: 'Berhasil Simpan Data',
+        title: 'Berhasil Simpan Data, Silakan login ulang',
       });
       queryClient.invalidateQueries([ACCOUNT_QUERY_KEY]);
-      router.push('/program/program-category');
+      router.push('/login');
     },
     onError: (err) => {
       toast({

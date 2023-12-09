@@ -142,7 +142,7 @@ const ProgramDetailPage = () => {
               </div>
             </div>
             <div className="flex-1">
-              <p className="ml-2 mt-2">Rp 1.123.123</p>
+              <p className="ml-2 mt-2 text-right font-semibold">Rp 1.123.123</p>
             </div>
           </div>
           <p className="mt-5 font-light">
@@ -209,12 +209,10 @@ const ProgramDetailPage = () => {
               </Button>
             </Link>
           ) : (
-            <Link href="/mustahiq">
-              <a className="w-full flex-1">
+            <Link href="/mustahiq" className="w-full flex-1">
                 <Button className="w-full" size="lg" variant="destructive">
                   Lengkapi Data Diri
                 </Button>
-              </a>
             </Link>
           )}
         </div>
