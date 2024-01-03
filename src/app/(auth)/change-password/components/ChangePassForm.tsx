@@ -31,14 +31,24 @@ const schema = z
       .string({
         invalid_type_error: 'Password Baru tidak valid',
         required_error: 'Password Baru harus diisi',
+      }).min(8, 'Minimal 8 karakter')
+      .refine(value => /[A-Z]/.test(value), {
+        message: 'Password Baru harus mengandung setidaknya satu huruf kapital',
       })
-      .min(1, 'Password Baru harus diisi'),
+      .refine(value => /[!@#$%^&*()_+,\-.;{}[\]:;<=>?@^_`~\\|]/.test(value), {
+        message: 'Password Baru harus mengandung setidaknya satu tanda baca',
+      }),
     confirm: z
       .string({
         invalid_type_error: 'Konfirmasi Password Baru tidak valid',
         required_error: 'Konfirmasi Password Baru harus diisi',
       })
-      .min(1, 'Konfirmasi Password Baru harus diisi'),
+      .min(8, 'Konfirmasi Password Baru harus diisi').refine(value => /[A-Z]/.test(value), {
+        message: 'Password Baru harus mengandung setidaknya satu huruf kapital',
+      })
+      .refine(value => /[!@#$%^&*()_+,\-.;{}[\]:;<=>?@^_`~\\|]/.test(value), {
+        message: 'Password Baru harus mengandung setidaknya satu tanda baca',
+      }),
   })
   .refine((data) => data.newPassword === data.confirm, {
     message: 'Password Baru dan Konfirmasi Password Baru harus sama',

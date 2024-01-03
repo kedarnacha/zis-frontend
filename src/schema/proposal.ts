@@ -1,23 +1,25 @@
+import { ACCEPTED_IMAGE_TYPES, ACCEPTED_SIZE } from '@/utils/constants';
+
 export type Proposal = {
-  id:number,
+  id: number;
   program_id: number;
   proposal_kategori: number;
   nama: string;
-  tempat_lahir:string;
-  approved:number;
-  tgl_lahir:string;
-  alamat_rumah:string;
-  nama_pemberi_rekomendasi:string;
-  no_telp_pemberi_rekomendasi:string;
-  status_bayar:number;
-  proposal_approval:{
+  tempat_lahir: string;
+  approved: number;
+  tgl_lahir: string;
+  alamat_rumah: string;
+  nama_pemberi_rekomendasi: string;
+  no_telp_pemberi_rekomendasi: string;
+  status_bayar: number;
+  proposal_approval: {
     id: number;
     status: number;
     user: {
       user_nama: string;
     };
   }[];
-  create_date:string;
+  create_date: string;
 };
 
 import { z } from 'zod';
@@ -65,6 +67,41 @@ export const proposalSchema = z.object({
   nama_pemberi_rekomendasi: z.string().min(1).optional(),
   alamat_pemberi_rekomendasi: z.string().min(1).optional(),
   no_telp_pemberi_rekomendasi: z.string().min(1).optional(),
+  lampiran1: z
+    .any()
+    .optional()
+    .refine((file) => file?.size <= ACCEPTED_SIZE, 'Ukuran file maksimal 2MB')
+    .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), 'Format file tidak didukung'),
+  lampiran2: z
+    .any()
+    .optional()
+    .refine((file) => file?.size <= ACCEPTED_SIZE, 'Ukuran file maksimal 2MB')
+    .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), 'Format file tidak didukung'),
+  lampiran3: z
+    .any()
+    .optional()
+    .refine((file) => file?.size <= ACCEPTED_SIZE, 'Ukuran file maksimal 2MB')
+    .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), 'Format file tidak didukung'),
+  lampiran4: z
+    .any()
+    .optional()
+    .refine((file) => file?.size <= ACCEPTED_SIZE, 'Ukuran file maksimal 2MB')
+    .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), 'Format file tidak didukung'),
+  lampiran5: z
+    .any()
+    .optional()
+    .refine((file) => file?.size <= ACCEPTED_SIZE, 'Ukuran file maksimal 2MB')
+    .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), 'Format file tidak didukung'),
+  lampiran6: z
+    .any()
+    .optional()
+    .refine((file) => file?.size <= ACCEPTED_SIZE, 'Ukuran file maksimal 2MB')
+    .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), 'Format file tidak didukung'),
+  lampiran7: z
+    .any()
+    .optional()
+    .refine((file) => file?.size <= ACCEPTED_SIZE, 'Ukuran file maksimal 2MB')
+    .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), 'Format file tidak didukung'),
 });
 
 export type ProposalSchema = z.infer<typeof proposalSchema>;

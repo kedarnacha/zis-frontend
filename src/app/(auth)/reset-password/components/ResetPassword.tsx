@@ -24,7 +24,13 @@ import useMutateResetPassword from '../hooks/useMutateResetPassword';
 
 const schema = z
   .object({
-    password: z.string().min(8, 'Minimal 8 karakter').max(50, 'Maksimal 50 karakter'),
+    password: z.string().min(8, 'Minimal 8 karakter').max(50, 'Maksimal 50 karakter')
+      .refine(value => /[A-Z]/.test(value), {
+        message: 'Password Baru harus mengandung setidaknya satu huruf kapital',
+      })
+      .refine(value => /[!@#$%^&*()_+,\-.;{}[\]:;<=>?@^_`~\\|]/.test(value), {
+        message: 'Password Baru harus mengandung setidaknya satu tanda baca',
+      }),
     confirmPassword: z.string().min(8, 'Minimal 8 karakter').max(50, 'Maksimal 50 karakter'),
   })
   .refine((data) => data.password === data.confirmPassword, {

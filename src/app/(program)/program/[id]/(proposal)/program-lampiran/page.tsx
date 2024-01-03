@@ -40,8 +40,9 @@ const SubmitProgramPage = () => {
         mutate(data);
     };
 
-    const [files, setFiles] = useState<File[]>([]);
+    const [files, setFiles] = useState<(File | null)[]>(Array.from({ length: 7 }, () => null));
     const [message, setMessage] = useState<string>('');
+
 
     const handleFile = (e: ChangeEvent<HTMLInputElement>) => {
         setMessage('');
@@ -51,26 +52,46 @@ const SubmitProgramPage = () => {
             return;
         }
 
+        const validImageTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'application/pdf'];
+
+        const newFiles = [...files];
+
         for (let i = 0; i < fileList.length; i++) {
             const fileType = fileList[i].type;
-            const validImageTypes = ['image/jpeg',
-                'image/jpg',
-                'image/png',
-                'image/webp',
-                'application/pdf',];
 
             if (validImageTypes.includes(fileType)) {
-                setFiles((prevFiles) => [...prevFiles, fileList[i]]);
+                const emptyIndex = newFiles.findIndex((file) => file === null);
+
+                if (emptyIndex !== -1) {
+                    newFiles[emptyIndex] = fileList[i];
+                    const fieldName = `lampiran${emptyIndex + 1}` as keyof ProposalSchema;
+                    form.setValue(fieldName, fileList[i]);
+                } else {
+                    setMessage('Maksimal 7 lampiran');
+                    break;
+                }
             } else {
                 setMessage('Format file yang diterima salah');
             }
         }
+
+        setFiles(newFiles);
     };
 
-    const removeImage = (fileName: string) => {
-        setFiles((prevFiles) => prevFiles.filter((file) => file.name !== fileName));
+    const removeImage = (index: number) => {
+        setFiles((prevFiles) => {
+            const newFiles = [...prevFiles];
+            newFiles[index] = null;
+
+            const fieldName = `lampiran${index + 1}` as keyof ProposalSchema;
+            form.setValue(fieldName, null);
+
+            return newFiles;
+        });
     };
+
     const watchAll = form.watch();
+    console.log(watchAll)
     return (
         <div className="pb-24">
             <Navbar title="Lampiran Pendukung Pemohon Bantuan" />
@@ -81,44 +102,45 @@ const SubmitProgramPage = () => {
                     Unggah data secara berurutan untuk mengisi data dibawah untuk proses pengajuan bantuan
                 </p>
 
-                <input onChange={handleFile} className="block w-full text-sm bg-yellow-50 text-yellow-500 border" type="file" name="files[]"></input>
+                <input
+                    onChange={handleFile}
+                    className="block w-full text-sm bg-yellow-50 text-yellow-500 border"
+                    type="file"
+                    name="files[]"
+                    accept="application/pdf, image/*"
+                    multiple
+                />
                 <span className="flex text-[12px] mb-1 text-red-500">{message}</span>
             </div>
 
             <Divider />
             <div className="space-y-4 p-5">
                 <FormField
-                    // control={form.control}
                     name="inicontoh"
                     render={({ field }) => (
                         <FormItem className="flex flex-col space-y-2">
                             <FormLabel>Lampiran file</FormLabel>
-                            {files.map((file, key) => {
-                                return (
-                                    <FormControl>
-                                        <>
-                                            <input
-                                                type="file"
-                                                className="hidden"
-                                                accept="application/pdf, image/*"
-                                                disabled
-                                            />
+                            {files.map((file, index) => (
+                                <FormControl key={index}>
+                                    <>
+                                        <input type="file" className="hidden" accept="application/pdf, image/*" disabled />
+                                        {file && (
                                             <Button
                                                 variant="outline"
                                                 className="justify-between text-slate-500"
                                                 onClick={(e) => {
                                                     e.stopPropagation();
                                                     e.preventDefault();
-                                                    removeImage(file.name)
+                                                    removeImage(index);
                                                 }}
                                             >
-                                                <span>{file.name ?? 'Ceritanya data max 2MB'}</span>{' '}
+                                                <span>{file?.name ?? 'Ceritanya data max 2MB'}</span>{' '}
                                                 <Trash2 className="h-4 w-4 text-orange-400" />
                                             </Button>
-                                        </>
-                                    </FormControl>
-                                )
-                            })}
+                                        )}
+                                    </>
+                                </FormControl>
+                            ))}
                             <FormMessage />
                         </FormItem>
                     )}

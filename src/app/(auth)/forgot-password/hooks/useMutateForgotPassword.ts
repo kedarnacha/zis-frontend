@@ -38,7 +38,7 @@ const useMutateForgotPassword = () => {
     onError: (err) => {
       toast({
         title: 'Gagal Request Reset Password',
-        description: (err as any)?.response?.data?.message ?? 'Terjadi kesalahan',
+        description: 'Terjadi kesalahan',
         variant: 'destructive',
       });
     },
