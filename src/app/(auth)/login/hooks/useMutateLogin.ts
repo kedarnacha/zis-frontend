@@ -50,9 +50,14 @@ const useMutateLogin = () => {
     },
     onError: (error) => {
       const err = error as any;
+      const errorMessage =
+        err?.response?.status === 429
+          ? 'Terlalu banyak kesalahan. Silakan ulangi dalam 10 menit.'
+          : err?.response?.data?.message ?? err?.response?.data ?? 'Terjadi kesalahan';
+    
       toast({
         title: 'Gagal Login',
-        description: err?.response?.data?.message ?? 'Terjadi kesalahan',
+        description: errorMessage,
         variant: 'destructive',
       });
     },
