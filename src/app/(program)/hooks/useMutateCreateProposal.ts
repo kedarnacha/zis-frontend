@@ -20,27 +20,24 @@ const useMutateCreateProposal = () => {
 
   const mutationFn = async (data: ProposalSchema) => {
     const formData = new FormData();
-    console.log("ini data" + formData)
 
     for (const key in data) {
       const _key = key as keyof typeof data;
-      const value = data[_key];
-      console.log(value)
-      if (value !== null && value !== undefined) {
-        formData.append(key, value.toString());
+
+      if (Boolean(data[_key])) {
+        formData.append(key, data[_key]);
       }
     }
-    
 
     const response = await axios.request<Response>({
       method: 'POST',
       url: '/proposal/create',
       data: formData,
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'multipart/form-data',
       },
     });
-    console.log("tessss"+data);
+    console.log('tessss' + data);
     return response.data;
   };
 

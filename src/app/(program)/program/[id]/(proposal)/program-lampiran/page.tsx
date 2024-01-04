@@ -46,7 +46,8 @@ const SubmitProgramPage = () => {
 
     const handleFile = (e: ChangeEvent<HTMLInputElement>) => {
         setMessage('');
-        const fileList = e.target.files;
+        const fileList2 = e.target.files?.[0];
+        const fileList = e.target.files
 
         if (!fileList) {
             return;
@@ -58,6 +59,7 @@ const SubmitProgramPage = () => {
 
         for (let i = 0; i < fileList.length; i++) {
             const fileType = fileList[i].type;
+            console.log(fileList[1])
 
             if (validImageTypes.includes(fileType)) {
                 const emptyIndex = newFiles.findIndex((file) => file === null);

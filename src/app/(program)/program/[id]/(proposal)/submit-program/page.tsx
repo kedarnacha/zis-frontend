@@ -54,8 +54,6 @@ const SubmitProgramPage = () => {
   const id = param?.id as string;
   const { data } = useQueryDetailProgram(id);
 
-  
-
   return (
     <div className="pb-96">
       <Navbar title="Proses Proposal Program Bantuan" />

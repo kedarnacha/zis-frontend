@@ -69,39 +69,39 @@ export const proposalSchema = z.object({
   no_telp_pemberi_rekomendasi: z.string().min(1).optional(),
   lampiran1: z
     .any()
-    .optional()
-    .refine((file) => file?.size <= ACCEPTED_SIZE, 'Ukuran file maksimal 2MB')
-    .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), 'Format file tidak didukung'),
+    .optional(),
+    // .refine((file) => file?.size <= ACCEPTED_SIZE, 'Ukuran file maksimal 2MB'),
+    // .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), 'Format file tidak didukung'),
   lampiran2: z
     .any()
-    .optional()
-    .refine((file) => file?.size <= ACCEPTED_SIZE, 'Ukuran file maksimal 2MB')
-    .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), 'Format file tidak didukung'),
+    .optional(),
+    // .refine((file) => file?.size <= ACCEPTED_SIZE, 'Ukuran file maksimal 2MB'),
+    // .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), 'Format file tidak didukung'),
   lampiran3: z
     .any()
-    .optional()
-    .refine((file) => file?.size <= ACCEPTED_SIZE, 'Ukuran file maksimal 2MB')
-    .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), 'Format file tidak didukung'),
+    .optional(),
+    // .refine((file) => file?.size <= ACCEPTED_SIZE, 'Ukuran file maksimal 2MB'),
+    // .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), 'Format file tidak didukung'),
   lampiran4: z
     .any()
-    .optional()
-    .refine((file) => file?.size <= ACCEPTED_SIZE, 'Ukuran file maksimal 2MB')
-    .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), 'Format file tidak didukung'),
+    .optional(),
+    // .refine((file) => file?.size <= ACCEPTED_SIZE, 'Ukuran file maksimal 2MB'),
+    // .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), 'Format file tidak didukung'),
   lampiran5: z
     .any()
-    .optional()
-    .refine((file) => file?.size <= ACCEPTED_SIZE, 'Ukuran file maksimal 2MB')
-    .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), 'Format file tidak didukung'),
+    .optional(),
+    // .refine((file) => file?.size <= ACCEPTED_SIZE, 'Ukuran file maksimal 2MB'),
+    // .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), 'Format file tidak didukung'),
   lampiran6: z
     .any()
-    .optional()
-    .refine((file) => file?.size <= ACCEPTED_SIZE, 'Ukuran file maksimal 2MB')
-    .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), 'Format file tidak didukung'),
+    .optional(),
+    // .refine((file) => file?.size <= ACCEPTED_SIZE, 'Ukuran file maksimal 2MB'),
+    // .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), 'Format file tidak didukung'),
   lampiran7: z
     .any()
-    .optional()
-    .refine((file) => file?.size <= ACCEPTED_SIZE, 'Ukuran file maksimal 2MB')
-    .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), 'Format file tidak didukung'),
+    .optional(),
+    // .refine((file) => file?.size <= ACCEPTED_SIZE, 'Ukuran file maksimal 2MB'),
+    // .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), 'Format file tidak didukung'),
 });
 
 export type ProposalSchema = z.infer<typeof proposalSchema>;
