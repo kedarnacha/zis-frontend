@@ -121,7 +121,7 @@ const SubmitProgramPage = () => {
                     name="inicontoh"
                     render={({ field }) => (
                         <FormItem className="flex flex-col space-y-2">
-                            <FormLabel>Lampiran file</FormLabel>
+                            <FormLabel>Lampirkan file</FormLabel>
                             {files.map((file, index) => (
                                 <FormControl key={index}>
                                     <>
@@ -183,7 +183,16 @@ const SubmitProgramPage = () => {
                             </p>
                         </p>
                     </>
-                ) : null}
+                ) : (form.watch('proposal_kategori') === 5 || form.watch('proposal_kategori') === 6 || form.watch('proposal_kategori') === 7) ? (
+                    <>
+                        <p className='text-md text-red-600 font-bold'>Lampiran yang harus diupload :
+                            <br />
+                            <p className='text-sm font-semibold text-black'>
+                                FC KTP, FC Kartu Keluarga, Surat Keterangan tdk mampu RT/RW, Kwitansi Rincian Pengguaan Dana, FC Ijazah
+                            </p>
+                        </p>
+                    </>
+                ): null}
                 <p className='text-xs text-slate-500'>Ketentuan Bantuan :
                     <br />
                     1. Pemohon bantuan diharuskan bukan perokok, karena bertentangan dengan tujuan Zakat

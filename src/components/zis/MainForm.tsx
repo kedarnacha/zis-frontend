@@ -2,6 +2,7 @@ import React from 'react';
 import Form1 from './Form1';
 import Form2 from './Form2';
 import Form3 from './Form3';
+import Form4 from './Form4';
 
 interface MainFormProps {
     data: any; // Adjust the type according to your data structure
@@ -18,7 +19,9 @@ class MainForm extends React.Component<MainFormProps> {
             return <Form3 form={form} />;
         } else if (data?.data.program_category_id === 2 || data?.data.program_category_id === 4) {
             return <Form2 form={form} />;
-        } else {
+        } else if (data?.data.program_category_id === 5 || data?.data.program_category_id === 6 || data?.data.program_category_id === 7) {
+            return <Form4 form={form} />;
+        }else {
             return <p>Unsupported program category</p>;
         }
     }

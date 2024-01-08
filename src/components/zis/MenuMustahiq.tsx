@@ -1,6 +1,6 @@
 'use client';
 
-import { Stethoscope, AppleIcon, School, GraduationCap } from 'lucide-react';
+import { Stethoscope, AppleIcon, School, GraduationCap, Theater, CircleDollarSign, MessagesSquare } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { parseAsInteger, useQueryState } from 'next-usequerystate';
 import React from 'react';
@@ -36,6 +36,21 @@ const menu = [
     name: 'Bantuan Sekolah',
     value: 4,
     Icon: School,
+  },
+  {
+    name: 'Sarpras Dakwah',
+    value: 5,
+    Icon: Theater,
+  },
+  {
+    name: 'Bantuan Ekonomi',
+    value: 6,
+    Icon: CircleDollarSign,
+  },
+  {
+    name: 'Bantuan Sosial',
+    value: 7,
+    Icon: MessagesSquare,
   },
 ];
 

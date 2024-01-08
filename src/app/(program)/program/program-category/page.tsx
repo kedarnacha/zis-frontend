@@ -1,6 +1,6 @@
 'use client';
 
-import { ChevronRightIcon, Stethoscope, AppleIcon, School, GraduationCap } from 'lucide-react';
+import { ChevronRightIcon, Stethoscope, AppleIcon, School, GraduationCap, Theater, CircleDollarSign, MessagesSquare } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
 
@@ -16,7 +16,7 @@ const category = [
   {
     id: 2,
     title: 'Beasiswa Kuliah',
-    description: 'Khusus untuk kebutuhan beasiswa, pembangunan sekolah, dan guru.',
+    description: 'Khusus untuk kebutuhan beasiswa kuliah.',
     Icon:GraduationCap,
   },
   {
@@ -28,14 +28,32 @@ const category = [
   {
     id: 1,
     title: 'Beasiswa Guru',
-    description: 'Untuk bencana alam, difabel, kegiatan sosial, dan yang lainnya.',
+    description: 'Khusus untuk kebutuhan beasiswa guru.',
     Icon:AppleIcon,
   },
   {
     id: 4,
     title: 'Bantuan Sekolah',
-    description: 'Buat kebutuhan lainnya dan ajukan untuk tim Zis Indosat',
+    description: 'Khusus untuk kebutuhan beasiswa sekolah.',
     Icon: School,
+  },
+  {
+    id: 5,
+    title: 'Sarpras Dakwah',
+    description: 'Buat kebutuhan sarana prasarana untuk bantuan dakwah yang akan ajukan kepada tim Zis Indosat',
+    Icon: Theater,
+  },
+  {
+    id: 6,
+    title: 'Bantuan Ekonomi',
+    description: 'Buat kebutuhan bantuan ekonomi kepada yang membutuhkan dan diajukan kepada tim Zis Indosat',
+    Icon: CircleDollarSign,
+  },
+  {
+    id: 7,
+    title: 'Bantuan Sosial',
+    description: 'Untuk bencana alam, difabel, kegiatan sosial, dan yang lainnya.',
+    Icon: MessagesSquare,
   },
 ];
 const ProgramCategorySelectScreen = () => {

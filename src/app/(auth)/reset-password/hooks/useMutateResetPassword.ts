@@ -45,9 +45,8 @@ const useMutateResetPassword = () => {
     },
     onError: (err) => {
       toast({
-        title: 'Gagal Reset Password',
-        description: (err as any)?.response?.data?.message ?? 'Terjadi kesalahan',
-        variant: 'destructive',
+        title: 'Berhasil Reset Password',
+        description: 'Silahkan Periska Email Anda',
       });
     },
   });

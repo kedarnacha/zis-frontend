@@ -23,6 +23,9 @@ const PengajuanCard = ({ proposal }: { proposal: Proposal }) => {
         {id: 2, namaCat: 'Bea Kuliah'},
         {id: 3, namaCat: 'Kesehatan'},
         {id: 4, namaCat: 'Bea Sekolah'},
+        {id: 5, namaCat: 'Sarpras Dakwah'},
+        {id: 6, namaCat: 'Ekonomi'},
+        {id: 7, namaCat: 'Sosial'},
     ]
     const category = kategori.find(cat => cat.id === proposal.proposal_kategori);
     const namaCat = category?.namaCat || ''

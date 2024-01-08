@@ -166,7 +166,7 @@ const RegisterForm = () => {
               </DialogTrigger>
               <DialogContent className="max-h-screen overflow-y-scroll sm:max-w-[425px]">
                 <DialogHeader>
-                  <DialogTitle>Syarat Dan Ketentuan</DialogTitle>
+                  <DialogTitle className='pt-3'>Syarat Dan Ketentuan</DialogTitle>
                 </DialogHeader>
                 <TOCContent />
               </DialogContent>

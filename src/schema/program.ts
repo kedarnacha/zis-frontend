@@ -24,6 +24,7 @@ export type Program = {
     banners_path: string;
   };
   total_donation: number;
+  transactions: any;
 };
 
 const acceptedSize = 1 * 1024 * 1024;
