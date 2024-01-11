@@ -14,7 +14,7 @@ const LogoutSection = () => {
   const handleLogout = () => {
     authState?.logOut();
     toast({
-      description: 'Anda telah keluar dari ZIS Indosat',
+      description: 'Anda telah keluar dari Portal ZIS Indosat',
     });
     router.push('/');
   };
@@ -25,7 +25,7 @@ const LogoutSection = () => {
       className="flex cursor-pointer items-center space-x-4 border-b border-b-slate-200 px-10 py-2 transition-colors duration-150 hover:bg-slate-100"
     >
       <LogOut className="h-5 w-5 text-orange-500" />
-      <div className="flex-1">Keluar dari ZIS Indosat</div>
+      <div className="flex-1">Logout</div>
     </div>
   );
 };
