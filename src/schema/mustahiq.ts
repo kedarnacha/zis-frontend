@@ -52,23 +52,26 @@ export const mustahiqSchema = z
           value.startsWith('0856') ||
           value.startsWith('0857') ||
           value.startsWith('0858') ||
+          value.startsWith('0895') ||
+          value.startsWith('0896') ||
+          value.startsWith('0897') ||
           value.startsWith('0898') ||
           value.startsWith('0899'),
         {
           message: 'Nomor telepon harus nomor Indosat',
         },
       ),
-      province:z
+    province: z
       .string({
         required_error: 'Provinsi harus diisi',
       })
       .min(1, 'Provinsi harus diisi'),
-      kota: z
+    kota: z
       .string({
         required_error: 'Kota harus diisi',
       })
       .min(1, 'Kota harus diisi'),
-      kecamatan: z
+    kecamatan: z
       .string({
         required_error: 'Kecamatan harus diisi',
       })

@@ -52,11 +52,14 @@ const ProgramDetailPage = () => {
     { id: 2, namaCat: 'Bea Kuliah' },
     { id: 3, namaCat: 'Kesehatan' },
     { id: 4, namaCat: 'Bea Sekolah' },
+    { id: 5, namaCat: 'Sarpras Dakwah' },
+    { id: 6, namaCat: 'Ekonomi' },
+    { id: 7, namaCat: 'Sosial' },
   ];
 
   const { data, isError, isLoading, } = useQueryProposalProgram(ids);
   const { data: Jurnals } = useQueryJurnal();
-  
+
   let biaya = 0;
   let tgl = '-';
   let formattedDate = '-';

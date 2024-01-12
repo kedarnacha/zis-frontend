@@ -121,7 +121,7 @@ const SubmitProgramPage = () => {
                     name="inicontoh"
                     render={({ field }) => (
                         <FormItem className="flex flex-col space-y-2">
-                            <FormLabel>Lampirkan file</FormLabel>
+                            <FormLabel>Lampirkan file (Maksimal 7 File dengan maksimal ukuran tiap file 2Mb)</FormLabel>
                             {files.map((file, index) => (
                                 <FormControl key={index}>
                                     <>

@@ -49,7 +49,7 @@ export const proposalSchema = z.object({
   jurusan: z.string().optional(),
   kelas_semester_saat_ini: z.string().optional(),
   alamat_sekolah_kampus: z.string().optional(),
-  nomor_telp_sekolah_kampus: z.string().optional(),
+  nomor_telp_sekolah_kampus: z.string().max(15).optional(),
   tempat_mengajar: z.string().optional(),
   alamat_mengajar: z.string().optional(),
   sebagai_guru: z.string().optional(),
@@ -87,7 +87,7 @@ export const proposalSchema = z.object({
   }).optional(),
   nama_pemberi_rekomendasi: z.string().min(1).optional(),
   alamat_pemberi_rekomendasi: z.string().min(1).optional(),
-  no_telp_pemberi_rekomendasi: z.string().min(1).optional(),
+  no_telp_pemberi_rekomendasi: z.string().min(1).max(15).optional(),
   lampiran1: z
     .any()
     .optional(),

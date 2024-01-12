@@ -25,6 +25,9 @@ export const registerSchema = z.object({
         value.startsWith('0856') ||
         value.startsWith('0857') ||
         value.startsWith('0858') ||
+        value.startsWith('0895') ||
+        value.startsWith('0896') ||
+        value.startsWith('0897') ||
         value.startsWith('0898') ||
         value.startsWith('0899'),
       {

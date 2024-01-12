@@ -56,7 +56,8 @@ const PengajuanCard = ({ proposal }: { proposal: Proposal }) => {
             { id: 0, statusClass: 'text-yellow-600', statusText: 'Dalam proses persetujuan' },
             { id: 1, statusClass: 'text-yellow-600', statusText: 'Dalam proses persetujuan' },
             { id: 2, statusClass: 'text-yellow-600', statusText: 'Dalam proses persetujuan' },
-            { id: 3, statusClass: 'text-yellow-600', statusText: 'Sedang menunggu proses pembayaran' },
+            { id: 3, statusClass: 'text-yellow-600', statusText: 'Dalam proses persetujuan' },
+            { id: 4, statusClass: 'text-yellow-600', statusText: 'Sedang menunggu proses pembayaran' },
         ];
         const statusMapping = (statusMappings.find(mapping => mapping.id === statAcc) || {}) as {
             statusClass?: string;
