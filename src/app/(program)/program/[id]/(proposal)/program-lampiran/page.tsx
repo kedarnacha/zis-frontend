@@ -26,6 +26,7 @@ import useMutateCreateProposal from '@/app/(program)/hooks/useMutateCreatePropos
 
 const SubmitProgramPage = () => {
     const router = useRouter();
+    const [isTermsAgreed, setIsTermsAgreed] = React.useState(false);
     const { data } = useQueryAccount();
 
     console.log({ data });
@@ -192,7 +193,7 @@ const SubmitProgramPage = () => {
                             </p>
                         </p>
                     </>
-                ): null}
+                ) : null}
                 <p className='text-xs text-slate-500'>Ketentuan Bantuan :
                     <br />
                     1. Pemohon bantuan diharuskan bukan perokok, karena bertentangan dengan tujuan Zakat
@@ -205,7 +206,10 @@ const SubmitProgramPage = () => {
             <Divider />
 
             <div className="my-3 flex items-center space-x-2 p-5">
-                <Checkbox id="terms" />
+                <Checkbox id="terms" 
+                    checked={isTermsAgreed}
+                    onCheckedChange={(e) => setIsTermsAgreed(Boolean(e))}
+                />
                 <label
                     htmlFor="terms"
                     className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
@@ -219,7 +223,7 @@ const SubmitProgramPage = () => {
             <div className="shadow-t-sm fixed inset-x-0 bottom-0 mx-auto  max-w-md items-center border-t border-t-slate-100 bg-white p-5">
                 <Button
                     onClick={form.handleSubmit(onSubmit, (errors) => console.log(errors))}
-                    disabled={form.formState.isLoading}
+                    disabled={isLoading || !isTermsAgreed}
                     type="button"
                     role="button"
                     className="w-full "
