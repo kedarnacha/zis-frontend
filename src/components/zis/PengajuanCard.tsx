@@ -39,19 +39,10 @@ const PengajuanCard = ({ proposal }: { proposal: Proposal }) => {
     }else if (perBayar === 1) {
         statusClass = 'text-green-500';
         statusText = 'Proposal disetujui dan dalam proses pengiriman dana';
-    } else if (statTolak >= 1) {
-        const statusMappings = [
-            { id: 1, statusClass: 'text-red-500', statusText: 'Ditolak' },
-            { id: 2, statusClass: 'text-red-500', statusText: 'Ditolak' },
-            { id: 3, statusClass: 'text-red-500', statusText: 'Ditolak' },
-        ];
-        const statusMapping = (statusMappings.find(mapping => mapping.id === statTolak) || {}) as {
-            statusClass?: string;
-            statusText?: string;
-        };
-        statusClass = statusMapping.statusClass || '';
-        statusText = statusMapping.statusText || '';
-    } else if (statAcc <= 3) {
+    } else if (perBayar === 2) {
+        statusClass = 'text-red-500';
+        statusText = 'Ditolak';
+    } else if (statAcc <= 4) {
         const statusMappings = [
             { id: 0, statusClass: 'text-yellow-600', statusText: 'Dalam proses persetujuan' },
             { id: 1, statusClass: 'text-yellow-600', statusText: 'Dalam proses persetujuan' },
