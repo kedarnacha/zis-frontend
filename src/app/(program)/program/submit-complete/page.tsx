@@ -20,7 +20,7 @@ const VerifikasiPage = () => {
       <div className="border-b-8 border-b-slate-100 p-5">
         <h2 className="font-semibold text-slate-500">Permohonan bantuan telah diproses,</h2>
         <p className="mt-5 text-slate-500">
-          Tunggu selama maksimal 2x24 dihari kerja untuk proses persetujuan dari Tim kami
+          Tunggu selama kurang lebih 7x24 dihari kerja untuk proses persetujuan dari Tim kami
         </p>
       </div>
 
