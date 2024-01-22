@@ -40,6 +40,11 @@ export const mustahiqSchema = z
         required_error: 'Nomor Rekening harus diisi',
       })
       .min(1, 'Nomor Rekening harus diisi'),
+    nama_imkas: z
+      .string({
+        required_error: 'Nama Akun Imkas harus diisi',
+      })
+      .min(1, 'Nama Akun Imkas harus diisi'),
     imkas_number: z
       .string()
       // .optional()

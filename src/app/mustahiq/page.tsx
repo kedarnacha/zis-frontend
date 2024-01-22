@@ -171,78 +171,45 @@ const MustahiqPage = () => {
         </div>
         <Divider />
         {authState?.user?.mustahiq_id === null && (
-        <>
-          <div className="p-5">
-            <p className="font-medium">Identitas Penerima Bantuan</p>
+          <>
+            <div className="p-5">
+              <p className="font-medium">Identitas Penerima Bantuan</p>
 
-            <div className="mt-4 space-y-5">
-              <FormField
-                control={form.control}
-                name="address"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="mt-4">Alamat Lengkap</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Masukkan Alamat Lengkap" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="province" /*ubah disini*/
-                render={({ field }) => (
-                  <FormItem className="flex flex-col space-y-2">
-                    <Label>Provinsi</Label>
-                    <Select onValueChange={(value) => {
-                      field.onChange(value);
-                      setSelected(parseInt(form.watch('province')))
-                    }}
-                      defaultValue={field.value}>
-                      <SelectTrigger className="h-14 w-full">
-                        <SelectValue placeholder="Pilih Provinsi" />
-                      </SelectTrigger>
-                      <SelectContent className="max-h-60 overflow-y-auto">
-                        {provData?.data ? (
-                          provData.data.map((option: { prov_id: number; prov_name: string }) => (
-                            <SelectGroup key={option.prov_id}>
-                              <SelectItem value={option.prov_id.toString()}>
-                                {option.prov_name}
-                              </SelectItem>
-                            </SelectGroup>
-                          ))
-                        ) : (
-                          <p>Loading provinsi...</p>
-                        )}
-                      </SelectContent>
-                    </Select>
-                  </FormItem>
-                )}
-              />
-              {selected !== undefined && (
+              <div className="mt-4 space-y-5">
                 <FormField
                   control={form.control}
-                  name="kota" /*ubah disini*/
+                  name="address"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="mt-4">Alamat Lengkap</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Masukkan Alamat Lengkap" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="province" /*ubah disini*/
                   render={({ field }) => (
                     <FormItem className="flex flex-col space-y-2">
-                      <Label>Kota/Kabupaten</Label>
+                      <Label>Provinsi</Label>
                       <Select onValueChange={(value) => {
                         field.onChange(value);
-                        setSelected2(parseInt(form.watch('kota')))
-                        console.log(selected2)
+                        setSelected(parseInt(form.watch('province')))
                       }}
                         defaultValue={field.value}>
                         <SelectTrigger className="h-14 w-full">
                           <SelectValue placeholder="Pilih Provinsi" />
                         </SelectTrigger>
                         <SelectContent className="max-h-60 overflow-y-auto">
-                          {kotaData?.data ? (
-                            kotaData.data.map((option: { city_id: number; city_name: string }) => (
-                              <SelectGroup key={option.city_id}>
-                                <SelectItem value={option.city_id.toString()}>
-                                  {option.city_name}
+                          {provData?.data ? (
+                            provData.data.map((option: { prov_id: number; prov_name: string }) => (
+                              <SelectGroup key={option.prov_id}>
+                                <SelectItem value={option.prov_id.toString()}>
+                                  {option.prov_name}
                                 </SelectItem>
                               </SelectGroup>
                             ))
@@ -254,275 +221,321 @@ const MustahiqPage = () => {
                     </FormItem>
                   )}
                 />
-              )}
-              {selected2 !== undefined && (
-                <FormField
-                  control={form.control}
-                  name="kecamatan" /*ubah disini*/
-                  render={({ field }) => (
-                    <FormItem className="flex flex-col space-y-2">
-                      <Label>Kecamatan</Label>
-                      <Select onValueChange={(value) => {
-                        field.onChange(value);
-                      }}
-                        defaultValue={field.value}>
-                        <SelectTrigger className="h-14 w-full">
-                          <SelectValue placeholder="Pilih Kecamatan" />
-                        </SelectTrigger>
-                        <SelectContent className="max-h-60 overflow-y-auto">
-                          {kecData?.data ?
-                            kecData.data.map((option: { dis_id: number; dis_name: string }) => (
-                              <SelectGroup>
-                                <SelectItem value={option.dis_id.toString()}>
-                                  {option.dis_name}
-                                </SelectItem>
-                              </SelectGroup>
-                            )) : (
+                {selected !== undefined && (
+                  <FormField
+                    control={form.control}
+                    name="kota" /*ubah disini*/
+                    render={({ field }) => (
+                      <FormItem className="flex flex-col space-y-2">
+                        <Label>Kota/Kabupaten</Label>
+                        <Select onValueChange={(value) => {
+                          field.onChange(value);
+                          setSelected2(parseInt(form.watch('kota')))
+                          console.log(selected2)
+                        }}
+                          defaultValue={field.value}>
+                          <SelectTrigger className="h-14 w-full">
+                            <SelectValue placeholder="Pilih Provinsi" />
+                          </SelectTrigger>
+                          <SelectContent className="max-h-60 overflow-y-auto">
+                            {kotaData?.data ? (
+                              kotaData.data.map((option: { city_id: number; city_name: string }) => (
+                                <SelectGroup key={option.city_id}>
+                                  <SelectItem value={option.city_id.toString()}>
+                                    {option.city_name}
+                                  </SelectItem>
+                                </SelectGroup>
+                              ))
+                            ) : (
                               <p>Loading provinsi...</p>
                             )}
-                        </SelectContent>
-                      </Select>
+                          </SelectContent>
+                        </Select>
+                      </FormItem>
+                    )}
+                  />
+                )}
+                {selected2 !== undefined && (
+                  <FormField
+                    control={form.control}
+                    name="kecamatan" /*ubah disini*/
+                    render={({ field }) => (
+                      <FormItem className="flex flex-col space-y-2">
+                        <Label>Kecamatan</Label>
+                        <Select onValueChange={(value) => {
+                          field.onChange(value);
+                        }}
+                          defaultValue={field.value}>
+                          <SelectTrigger className="h-14 w-full">
+                            <SelectValue placeholder="Pilih Kecamatan" />
+                          </SelectTrigger>
+                          <SelectContent className="max-h-60 overflow-y-auto">
+                            {kecData?.data ?
+                              kecData.data.map((option: { dis_id: number; dis_name: string }) => (
+                                <SelectGroup>
+                                  <SelectItem value={option.dis_id.toString()}>
+                                    {option.dis_name}
+                                  </SelectItem>
+                                </SelectGroup>
+                              )) : (
+                                <p>Loading provinsi...</p>
+                              )}
+                          </SelectContent>
+                        </Select>
+                      </FormItem>
+                    )}
+                  />)}
+
+                <FormField
+                  control={form.control}
+                  name="ktp_file"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col space-y-2">
+                      <FormLabel>Data Foto KTP</FormLabel>
+                      <FormControl>
+                        <>
+                          <input
+                            type="file"
+                            ref={ktpRef}
+                            className="hidden"
+                            onChange={(e) => field.onChange(e.target.files?.[0])}
+                            accept="application/pdf, image/*"
+                          />
+                          <Button
+                            variant="outline"
+                            className="justify-between text-slate-500"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              e.preventDefault();
+                              ktpRef.current?.click();
+                            }}
+                          >
+                            <span>{field.value?.name ?? 'Unggah Data (PDF/JPG) max 2MB'}</span>{' '}
+                            <Upload className="h-4 w-4 text-orange-400" />
+                          </Button>
+                        </>
+                      </FormControl>
+                      <FormMessage />
                     </FormItem>
                   )}
-                />)}
+                />
 
-              <FormField
-                control={form.control}
-                name="ktp_file"
-                render={({ field }) => (
-                  <FormItem className="flex flex-col space-y-2">
-                    <FormLabel>Data Foto KTP</FormLabel>
-                    <FormControl>
-                      <>
-                        <input
-                          type="file"
-                          ref={ktpRef}
-                          className="hidden"
-                          onChange={(e) => field.onChange(e.target.files?.[0])}
-                          accept="application/pdf, image/*"
-                        />
-                        <Button
-                          variant="outline"
-                          className="justify-between text-slate-500"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            e.preventDefault();
-                            ktpRef.current?.click();
-                          }}
-                        >
-                          <span>{field.value?.name ?? 'Unggah Data (PDF/JPG) max 2MB'}</span>{' '}
-                          <Upload className="h-4 w-4 text-orange-400" />
-                        </Button>
-                      </>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                <FormField
+                  control={form.control}
+                  name="kk_file"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col space-y-2">
+                      <FormLabel>Data Foto Kartu Keluarga</FormLabel>
+                      <FormControl>
+                        <>
+                          <input
+                            type="file"
+                            ref={kkRef}
+                            className="hidden"
+                            onChange={(e) => field.onChange(e.target.files?.[0])}
+                            accept="application/pdf, image/*"
+                          />
+                          <Button
+                            variant="outline"
+                            className="justify-between text-slate-500"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              e.preventDefault();
+                              kkRef.current?.click();
+                            }}
+                          >
+                            <span>{field.value?.name ?? 'Unggah Data (PDF/JPG) max 2MB'}</span>{' '}
+                            <Upload className="h-4 w-4 text-orange-400" />
+                          </Button>
+                        </>
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-              <FormField
-                control={form.control}
-                name="kk_file"
-                render={({ field }) => (
-                  <FormItem className="flex flex-col space-y-2">
-                    <FormLabel>Data Foto Kartu Keluarga</FormLabel>
-                    <FormControl>
-                      <>
-                        <input
-                          type="file"
-                          ref={kkRef}
-                          className="hidden"
-                          onChange={(e) => field.onChange(e.target.files?.[0])}
-                          accept="application/pdf, image/*"
-                        />
-                        <Button
-                          variant="outline"
-                          className="justify-between text-slate-500"
-                          onClick={(e) => {
-                            e.stopPropagation();
-                            e.preventDefault();
-                            kkRef.current?.click();
-                          }}
-                        >
-                          <span>{field.value?.name ?? 'Unggah Data (PDF/JPG) max 2MB'}</span>{' '}
-                          <Upload className="h-4 w-4 text-orange-400" />
-                        </Button>
-                      </>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+                <FormField
+                  control={form.control}
+                  name="emergency_contact_name"
+                  render={({ field }) => (
+                    <FormItem className="flex flex-col space-y-2">
+                      <Label>Kontak Darurat</Label>
+                      <Select onValueChange={field.onChange} value={field.value}>
+                        <SelectTrigger className="h-14 w-full">
+                          <SelectValue placeholder="Pilih Status Keluarga" />
+                        </SelectTrigger>
+                        <SelectContent>
+                          <SelectGroup>
+                            <SelectItem value="Orang Tua">Orang Tua</SelectItem>
+                            <SelectItem value="Saudara">Saudara</SelectItem>
+                            <SelectItem value="Lainnya">Lainnya</SelectItem>
+                          </SelectGroup>
+                        </SelectContent>
+                      </Select>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
 
-              <FormField
-                control={form.control}
-                name="emergency_contact_name"
-                render={({ field }) => (
-                  <FormItem className="flex flex-col space-y-2">
-                    <Label>Kontak Darurat</Label>
-                    <Select onValueChange={field.onChange} value={field.value}>
-                      <SelectTrigger className="h-14 w-full">
-                        <SelectValue placeholder="Pilih Status Keluarga" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        <SelectGroup>
-                          <SelectItem value="Orang Tua">Orang Tua</SelectItem>
-                          <SelectItem value="Saudara">Saudara</SelectItem>
-                          <SelectItem value="Lainnya">Lainnya</SelectItem>
-                        </SelectGroup>
-                      </SelectContent>
-                    </Select>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="emergency_contact_number"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormControl>
-                      <Input placeholder="Masukkan Nomor Telepon" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-          </div>
-
-          <Divider />
-
-          {isInstitusi ?
-            <>
-              <div className="p-5">
-                <p className="font-medium">Data Lembaga</p>
-
-                <div className="mt-4 space-y-5">
-                  <FormField
-                    control={form.control}
-                    name="institusi_nama"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="mt-4">Nama Institusi</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Masukkan Nama Institusi" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-                  <FormField
-                    control={form.control}
-                    name="institusi_no_hp"
-                    render={({ field }) => (
-                      <FormItem>
-                        <FormLabel className="mt-4">Nomor Telepon Institusi</FormLabel>
-                        <FormControl>
-                          <Input placeholder="Masukkan Nomor Telepon" {...field} />
-                        </FormControl>
-                        <FormMessage />
-                      </FormItem>
-                    )}
-                  />
-
-                </div>
-              </div>
-              <Divider />
-            </>
-            : null}
-
-          <div className="p-5">
-            <p className="font-medium">Nomor Rekening Penerima Bantuan</p>
-
-            <div className="mt-4 space-y-5">
-              <FormField
-                control={form.control}
-                name="bank_name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="mt-4">Masukkan Nama Bank</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Masukkan Nama Bank" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="bank_number"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="mt-4">Nomor Rekening</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Masukkan Nomor Rekening" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="bank_account_name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="mt-4">Pemilik Rekening</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Masukkan Pemilik Rekening" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-          </div>
-
-          <Divider />
-
-          <div className="p-5">
-            <div className='flex'>
-              <p className="font-medium flex">Nomor IMkas</p>
-              <button data-popover-target="popover-default" className=" rounded-full bg-white p-0" onClick={() => setPop(!pop)} >
-                <HelpCircle className='ml-1' />
-              </button>
-              <div data-popover id="popover-default" role="tooltip" className={`absolute z-10 left-1/3 block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm ${pop ? 'visible opacity-100' : 'invisible opacity-0'}`}>
-                <div className="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg dark:border-gray-600 dark:bg-gray-700">
-                  <h3 className="font-semibold text-gray-900 dark:text-white">IMKas Procedure</h3>
-                </div>
-                <div className="px-3 py-2 text-black" >
-                  <img src='/IMKAS.png' />
-                </div>
-                <div data-popper-arrow></div>
+                <FormField
+                  control={form.control}
+                  name="emergency_contact_number"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormControl>
+                        <Input placeholder="Masukkan Nomor Telepon" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
               </div>
             </div>
 
-            <div className="mt-4 space-y-5">
-              <FormField
-                control={form.control}
-                name="imkas_number"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="mt-4">Masukkan Nomor IMkas</FormLabel>
-                    <FormControl>
-                      <Input placeholder="Masukkan Nomor IMkas" {...field} />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-            </div>
-          </div>
+            <Divider />
 
-        </>
+            {isInstitusi ?
+              <>
+                <div className="p-5">
+                  <p className="font-medium">Data Lembaga</p>
+
+                  <div className="mt-4 space-y-5">
+                    <FormField
+                      control={form.control}
+                      name="institusi_nama"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="mt-4">Nama Institusi</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Masukkan Nama Institusi" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                    <FormField
+                      control={form.control}
+                      name="institusi_no_hp"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel className="mt-4">Nomor Telepon Institusi</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Masukkan Nomor Telepon" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+
+                  </div>
+                </div>
+                <Divider />
+              </>
+              : null}
+
+            <div className="p-5">
+              <p className="font-medium">Nomor Rekening Penerima Bantuan</p>
+
+              <div className="mt-4 space-y-5">
+                <FormField
+                  control={form.control}
+                  name="bank_name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="mt-4">Masukkan Nama Bank</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Masukkan Nama Bank (Contoh : BCA)" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="bank_number"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="mt-4">Nomor Rekening</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Masukkan Nomor Rekening" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+
+                <FormField
+                  control={form.control}
+                  name="bank_account_name"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="mt-4">Nama Pemilik Rekening</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Masukkan Pemilik Rekening" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
+
+            <Divider />
+
+            <div className="p-5">
+              <div className='flex'>
+                <p className="font-medium flex">Nomor IMkas</p>
+                <button data-popover-target="popover-default" className=" rounded-full bg-white p-0" onClick={() => setPop(!pop)} >
+                  <HelpCircle className='ml-1' />
+                </button>
+                <div data-popover id="popover-default" role="tooltip" className={`absolute z-10 left-1/3 block w-64 text-sm text-gray-500 transition-opacity duration-300 bg-white border border-gray-200 rounded-lg shadow-sm ${pop ? 'visible opacity-100' : 'invisible opacity-0'}`}>
+                  <div className="px-3 py-2 bg-gray-100 border-b border-gray-200 rounded-t-lg dark:border-gray-600 dark:bg-gray-700">
+                    <h3 className="font-semibold text-gray-900 dark:text-white">IMKas Procedure</h3>
+                  </div>
+                  <div className="px-3 py-2 text-black" >
+                    <img src='/IMKAS.png' />
+                  </div>
+                  <div data-popper-arrow></div>
+                </div>
+              </div>
+
+              <div className="mt-4 space-y-5">
+                <FormField
+                  control={form.control}
+                  name="nama_imkas"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="mt-4">Masukkan Nama Akun IMkas</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Masukkan Nama Akun IMkas" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="imkas_number"
+                  render={({ field }) => (
+                    <FormItem>
+                      <FormLabel className="mt-4">Masukkan Nomor IMkas</FormLabel>
+                      <FormControl>
+                        <Input placeholder="Masukkan Nomor IMkas" {...field} />
+                      </FormControl>
+                      <FormMessage />
+                    </FormItem>
+                  )}
+                />
+              </div>
+            </div>
+
+          </>
         )}
       </Form>
 
       {/* <Divider /> */}
-{/* 
+      {/* 
       <div className="p-5">
         <Button variant="outline" size="lg" className="w-full justify-between px-4 text-slate-500">
           <span>Unduh data Mustahiq</span> <HardDriveDownload className="h-4 w-4 text-orange-400" />

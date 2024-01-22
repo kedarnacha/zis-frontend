@@ -214,7 +214,7 @@ const ProgramDetailPage = () => {
         </div>
       </Form>
       <Divider />
-      <h2 className="font-semibold pl-5 pt-5">Nominal dana yang dikirimkan ZIS</h2>
+      <h2 className="font-semibold pl-5 pt-5">Nominal dana yang akan dikirimkan oleh Tim ZIS</h2>
       <div className="mt-5 mx-5 flex items-center justify-between space-x-3 rounded-md border border-slate-300 p-2">
         <Wallet />
         <div className="flex-1 flex items-center">
@@ -228,7 +228,7 @@ const ProgramDetailPage = () => {
       </div>
       <div className="mt-4 pl-5">
         <p className='text-sm text-gray-500'>
-          Bantuan telah dikirimkan pada:
+          Bantuan telah diproses pada:
         </p>
         <Input value={formattedDate} readOnly />
       </div>

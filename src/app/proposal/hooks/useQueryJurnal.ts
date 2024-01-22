@@ -16,7 +16,7 @@ type Response = {
 const request = async () => {
   const { data } = await axios.request<Response>({
     method: 'GET',
-    url: `/jurnal/perintahbayar`,
+    url: `/jurnal/jurnalall`,
   });
 
   return data; 
