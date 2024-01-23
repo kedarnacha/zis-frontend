@@ -159,7 +159,7 @@ const MustahiqPage = () => {
             </div>
 
             <div>
-              <Label>Nomor telepon / whatsapp</Label>
+              <Label>Nomor telepon yang tersambung whatsapp</Label>
               <Input
                 disabled
                 type="text"

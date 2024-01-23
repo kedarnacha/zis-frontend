@@ -463,7 +463,7 @@ class Form1 extends React.Component<Form1Props> {
               name="no_telp_pemberi_rekomendasi" /*ubah disini*/
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="mt-4">No Telepon</FormLabel>
+                  <FormLabel className="mt-4">No Telepon yang tersambung Whatsapp</FormLabel>
                   <FormControl>
                     <Input placeholder="Ex: 081919282719" {...field} />
                   </FormControl>
