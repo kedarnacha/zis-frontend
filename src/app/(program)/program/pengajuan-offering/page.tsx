@@ -35,7 +35,7 @@ const SubmitProgramPage = () => {
         </div>
       </nav>
       <div className="relative aspect-[7/2] object-cover bg-amber-300">
-        <div className="absolute left-5 top-1 z-10 pr-32 text-xl font-semibold">
+        <div className="absolute left-5 top-1 z-10 pr-32 text-md font-semibold xl:text-xl">
           Buat permohonan pengajuan bantuan sekarang
         </div>
       </div>
