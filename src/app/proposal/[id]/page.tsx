@@ -226,12 +226,6 @@ const ProgramDetailPage = () => {
           </p>
         </div>
       </div>
-      <div className="mt-4 pl-5">
-        <p className='text-sm text-gray-500'>
-          Bantuan telah diproses pada:
-        </p>
-        <Input value={formattedDate} readOnly />
-      </div>
 
       <div className="h-96" />
     </>

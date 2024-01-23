@@ -42,6 +42,23 @@ class Form3 extends React.Component<Form3Props> {
           <div className="space-y-4 p-5">
             <FormField
               control={form.control}
+              name="nik_mustahiq" /*ubah disini*/
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="mt-4">Nomor Induk Kependudukan</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Ex : 3201192817651 (masukkan angka saja)"
+                      {...field}
+                      type="number"
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
               name="nama" /*ubah disini*/
               render={({ field }) => (
                 <FormItem>

@@ -11,6 +11,8 @@ const PengajuanCard = ({ proposal }: { proposal: Proposal }) => {
 
     const tlhBayar = proposal.status_bayar
     const perBayar = proposal.approved
+    console.log(proposal.ispaid)
+    const done = proposal.ispaid
 
     const statTolak = proposal.proposal_approval.filter(approval => approval.status === 2).length;
     console.log(statTolak);
@@ -33,12 +35,12 @@ const PengajuanCard = ({ proposal }: { proposal: Proposal }) => {
     let statusClass: string = '';
     let statusText: string = '';
 
-    if (tlhBayar === 1) {
+    if (done === 1) {
         statusClass = 'text-green-700';
-        statusText = 'Dana dalam proses untuk dikirimkan';
-    }else if (perBayar === 1) {
+        statusText = 'Dana Telah Dikirimkan';
+    }else if (tlhBayar === 1 || perBayar === 1) {
         statusClass = 'text-green-500';
-        statusText = 'Sedang menunggu proses pengiriman dana';
+        statusText = 'Proposal Telah Disetujui';
     } else if (perBayar === 2) {
         statusClass = 'text-red-500';
         statusText = 'Ditolak';

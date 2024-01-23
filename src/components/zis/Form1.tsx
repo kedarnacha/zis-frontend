@@ -40,6 +40,24 @@ class Form1 extends React.Component<Form1Props> {
           <div className="space-y-4 p-5">
             <FormField
               control={form.control}
+              name="nik_mustahiq" /*ubah disini*/
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel className="mt-4">Nomor Induk Kependudukan</FormLabel>
+                  <FormControl>
+                    <Input
+                      placeholder="Ex : 3201192817651 (masukkan angka saja)"
+                      {...field}
+                      type="number"
+                      required
+                    />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
               name="nama" /*ubah disini*/
               render={({ field }) => (
                 <FormItem>
