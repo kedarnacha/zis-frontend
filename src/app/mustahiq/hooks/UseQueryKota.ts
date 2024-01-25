@@ -12,7 +12,7 @@ const useQueryKota = (id: number) => {
   const request = async () => {
     const { data } = await axios.request<Response>({
       method: 'GET',
-      url: `ref/cities/${id}`,
+      url: `/ref/cities/${id}`,
     });
     console.log(data.data);
     return data;

@@ -5,6 +5,7 @@ export const KOTA_QUERY_KEY = 'KOTA';
 export const KEC_QUERY_KEY = 'KEC';
 export const DETAIL_PROGRAM_QUERY_KEY = 'DETAIL_PROGRAM';
 export const ACCOUNT_QUERY_KEY = 'ACCOUNT';
+export const INSTITUSI_QUERY_KEY = 'INSTITUSI';
 
 export const TYPE_MUSTAHIQ = 10;
 export const TYPE_MUZAKI = 11;

@@ -22,7 +22,9 @@ import { ProgramSchema } from '@/schema/program';
 import { useFormContext } from 'react-hook-form';
 import Link from 'next/link';
 import { ProposalSchema } from '@/schema/proposal';
+import { useAuthState } from '@/store/useAuthState';
 import useMutateCreateProposal from '@/app/(program)/hooks/useMutateCreateProposal';
+import useQueryInstitusi from '@/app/(program)/hooks/userQueryInstitusi';
 
 const SubmitProgramPage = () => {
     const router = useRouter();
@@ -93,6 +95,11 @@ const SubmitProgramPage = () => {
         });
     };
 
+    const authState = useAuthState();
+    const aidi = authState?.user?.user_id as number
+    const { data: Institusidata } = useQueryInstitusi(aidi);
+    console.log(Institusidata)
+
     const watchAll = form.watch();
     console.log(watchAll)
     return (
@@ -148,52 +155,63 @@ const SubmitProgramPage = () => {
                         </FormItem>
                     )}
                 />
-                {form.watch('proposal_kategori') === 1 ? (
-                    <>
-                        <p className='text-md text-red-600 font-bold'>Lampiran yang harus diupload :
-                            <br />
-                            <p className='text-sm font-semibold text-black'>
-                                Surat Keterangan dari tempat mengajar, FC Slip Kafalah/ upah, FC KTP, FC Kartu Keluarga
-                            </p>
+                {Institusidata?.data && Institusidata.data.length > 0 ? (
+                    <p className='text-md text-red-600 font-bold'>Lampiran yang harus diupload :
+                        <br />
+                        <p className='text-sm font-semibold text-black'>
+                            Lampirkan seluruh persyaratan dengan maksimal ukuran file adalah 2 Mb dan maksimal berjumlah 7 file
                         </p>
-                    </>
-                ) : form.watch('proposal_kategori') === 3 ? (
+                    </p>
+                ) : (
                     <>
-                        <p className='text-md text-red-600 font-bold'>Lampiran yang harus diupload :
-                            <br />
-                            <p className='text-sm font-semibold text-black'>
-                                Copy KTP, Copy KK, Surat ket. tidak mampu RT/RW (Asli), -Surat Diagnosa dokter/ RS, copy estimasi biaya RS, Foto Pasien
-                            </p>
-                        </p>
+                        {form.watch('proposal_kategori') === 1 ? (
+                            <>
+                                <p className='text-md text-red-600 font-bold'>Lampiran yang harus diupload :
+                                    <br />
+                                    <p className='text-sm font-semibold text-black'>
+                                        Surat Keterangan dari tempat mengajar, FC Slip Kafalah/ upah, FC KTP, FC Kartu Keluarga
+                                    </p>
+                                </p>
+                            </>
+                        ) : form.watch('proposal_kategori') === 3 ? (
+                            <>
+                                <p className='text-md text-red-600 font-bold'>Lampiran yang harus diupload :
+                                    <br />
+                                    <p className='text-sm font-semibold text-black'>
+                                        Copy KTP, Copy KK, Surat ket. tidak mampu RT/RW (Asli), -Surat Diagnosa dokter/ RS, copy estimasi biaya RS, Foto Pasien
+                                    </p>
+                                </p>
+                            </>
+                        ) : form.watch('proposal_kategori') === 2 ? (
+                            <>
+                                <p className='text-md text-red-600 font-bold'>Lampiran yang harus diupload :
+                                    <br />
+                                    <p className='text-sm font-semibold text-black'>
+                                        Surat Ket Kampus, FC Pembayaran SPP semester, FC Transkip Nilai Terakhir, FC Kartu Keluarga, Surat Rekomendasi LDK, Surat Ket.Tidak Mampu RT/RW, Biodata pemohon/ CV
+                                    </p>
+                                </p>
+                            </>
+                        ) : form.watch('proposal_kategori') === 4 ? (
+                            <>
+                                <p className='text-md text-red-600 font-bold'>Lampiran yang harus diupload :
+                                    <br />
+                                    <p className='text-sm font-semibold text-black'>
+                                        FC Raport Terakhir, FC SPP, FC Kartu Keluarga, Surat Keterangan tdk mampu RT/RW
+                                    </p>
+                                </p>
+                            </>
+                        ) : (form.watch('proposal_kategori') === 5 || form.watch('proposal_kategori') === 6 || form.watch('proposal_kategori') === 7) ? (
+                            <>
+                                <p className='text-md text-red-600 font-bold'>Lampiran yang harus diupload :
+                                    <br />
+                                    <p className='text-sm font-semibold text-black'>
+                                        FC KTP, FC Kartu Keluarga, Surat Keterangan tdk mampu RT/RW, Kwitansi Rincian Pengguaan Dana, FC Ijazah
+                                    </p>
+                                </p>
+                            </>
+                        ) : null}
                     </>
-                ) : form.watch('proposal_kategori') === 2 ? (
-                    <>
-                        <p className='text-md text-red-600 font-bold'>Lampiran yang harus diupload :
-                            <br />
-                            <p className='text-sm font-semibold text-black'>
-                                Surat Ket Kampus, FC Pembayaran SPP semester, FC Transkip Nilai Terakhir, FC Kartu Keluarga, Surat Rekomendasi LDK, Surat Ket.Tidak Mampu RT/RW, Biodata pemohon/ CV
-                            </p>
-                        </p>
-                    </>
-                ) : form.watch('proposal_kategori') === 4 ? (
-                    <>
-                        <p className='text-md text-red-600 font-bold'>Lampiran yang harus diupload :
-                            <br />
-                            <p className='text-sm font-semibold text-black'>
-                                FC Raport Terakhir, FC SPP, FC Kartu Keluarga, Surat Keterangan tdk mampu RT/RW
-                            </p>
-                        </p>
-                    </>
-                ) : (form.watch('proposal_kategori') === 5 || form.watch('proposal_kategori') === 6 || form.watch('proposal_kategori') === 7) ? (
-                    <>
-                        <p className='text-md text-red-600 font-bold'>Lampiran yang harus diupload :
-                            <br />
-                            <p className='text-sm font-semibold text-black'>
-                                FC KTP, FC Kartu Keluarga, Surat Keterangan tdk mampu RT/RW, Kwitansi Rincian Pengguaan Dana, FC Ijazah
-                            </p>
-                        </p>
-                    </>
-                ) : null}
+                )}
                 <p className='text-xs text-slate-500'>Ketentuan Bantuan :
                     <br />
                     1. Pemohon bantuan diharuskan bukan perokok, karena bertentangan dengan tujuan Zakat
@@ -206,7 +224,7 @@ const SubmitProgramPage = () => {
             <Divider />
 
             <div className="my-3 flex items-center space-x-2 p-5">
-                <Checkbox id="terms" 
+                <Checkbox id="terms"
                     checked={isTermsAgreed}
                     onCheckedChange={(e) => setIsTermsAgreed(Boolean(e))}
                 />

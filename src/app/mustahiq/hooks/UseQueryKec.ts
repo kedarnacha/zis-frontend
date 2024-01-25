@@ -12,7 +12,7 @@ const useQueryKec = (id: number) => {
   const request = async () => {
     const { data } = await axios.request<Response>({
       method: 'GET',
-      url: `ref/districts/${id}`,
+      url: `/ref/districts/${id}`,
     });
     console.log(data.data);
     return data;

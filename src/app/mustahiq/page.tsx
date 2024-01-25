@@ -319,40 +319,76 @@ const MustahiqPage = () => {
                     </FormItem>
                   )}
                 />
-
-                <FormField
-                  control={form.control}
-                  name="kk_file"
-                  render={({ field }) => (
-                    <FormItem className="flex flex-col space-y-2">
-                      <FormLabel>Data Foto Kartu Keluarga</FormLabel>
-                      <FormControl>
-                        <>
-                          <input
-                            type="file"
-                            ref={kkRef}
-                            className="hidden"
-                            onChange={(e) => field.onChange(e.target.files?.[0])}
-                            accept="application/pdf, image/*"
-                          />
-                          <Button
-                            variant="outline"
-                            className="justify-between text-slate-500"
-                            onClick={(e) => {
-                              e.stopPropagation();
-                              e.preventDefault();
-                              kkRef.current?.click();
-                            }}
-                          >
-                            <span>{field.value?.name ?? 'Unggah Data (PDF/JPG) max 2MB'}</span>{' '}
-                            <Upload className="h-4 w-4 text-orange-400" />
-                          </Button>
-                        </>
-                      </FormControl>
-                      <FormMessage />
-                    </FormItem>
+                {isInstitusi ?
+                  (
+                    <FormField
+                      control={form.control}
+                      name="kk_file"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-col space-y-2">
+                          <FormLabel>Data Foto Legalitas Institusi</FormLabel>
+                          <FormControl>
+                            <>
+                              <input
+                                type="file"
+                                ref={kkRef}
+                                className="hidden"
+                                onChange={(e) => field.onChange(e.target.files?.[0])}
+                                accept="application/pdf, image/*"
+                              />
+                              <Button
+                                variant="outline"
+                                className="justify-between text-slate-500"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  e.preventDefault();
+                                  kkRef.current?.click();
+                                }}
+                              >
+                                <span>{field.value?.name ?? 'Unggah Data (PDF/JPG) max 2MB'}</span>{' '}
+                                <Upload className="h-4 w-4 text-orange-400" />
+                              </Button>
+                            </>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
+                  ): (
+                    <FormField
+                      control={form.control}
+                      name="kk_file"
+                      render={({ field }) => (
+                        <FormItem className="flex flex-col space-y-2">
+                          <FormLabel>Data Foto Kartu Keluarga</FormLabel>
+                          <FormControl>
+                            <>
+                              <input
+                                type="file"
+                                ref={kkRef}
+                                className="hidden"
+                                onChange={(e) => field.onChange(e.target.files?.[0])}
+                                accept="application/pdf, image/*"
+                              />
+                              <Button
+                                variant="outline"
+                                className="justify-between text-slate-500"
+                                onClick={(e) => {
+                                  e.stopPropagation();
+                                  e.preventDefault();
+                                  kkRef.current?.click();
+                                }}
+                              >
+                                <span>{field.value?.name ?? 'Unggah Data (PDF/JPG) max 2MB'}</span>{' '}
+                                <Upload className="h-4 w-4 text-orange-400" />
+                              </Button>
+                            </>
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
+                    />
                   )}
-                />
 
                 <FormField
                   control={form.control}
