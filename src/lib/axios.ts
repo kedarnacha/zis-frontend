@@ -27,4 +27,17 @@ axios.interceptors.request.use(
   (error) => Promise.reject(error),
 );
 
+axios.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  (error) => {
+    if (error.response.status === 401) {
+      alert('Sesi anda telah habis: Silakan Login Kembali');
+      return (window.location.href = '/login');
+    }
+    return Promise.reject(error);
+  },
+);
+
 export default axios;
