@@ -153,20 +153,24 @@ const SubmitProgramPage = () => {
             <AccordionTrigger className="flex-1 text-left font-normal">
               Apakah Zis Indosat memberikan bantuan langsung?
             </AccordionTrigger>
-            <AccordionContent>Lorem ipsum dolor sit amet.</AccordionContent>
+            <AccordionContent>
+              Seluruh bantuan yang diajukan atau diberikan melalui pengajuan terlebih dahulu melalui portal.zisindosat.id dengan menggunakan user sebagai mustahik
+            </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-2">
             <AccordionTrigger className="flex-1 text-left font-normal">
               Bagaimana jika donasi yang diberikan tidak sesuai target?
             </AccordionTrigger>
-            <AccordionContent>Lorem ipsum dolor sit amet consectetur.</AccordionContent>
+            <AccordionContent>
+              Jika donasi yang terkumpul belum memenuhi target, maka periode program akan diperbanjang
+            </AccordionContent>
           </AccordionItem>
           <AccordionItem value="item-3">
             <AccordionTrigger className="flex-1 text-left font-normal">
               Apakah Zis Indosat tidak memungut biaya potongan?
             </AccordionTrigger>
             <AccordionContent>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Donasi yang terkumpul dari portal.zisindosat.id akan dipotong 5% sebagai Dana Pengembangan Dakwah (DPD).
             </AccordionContent>
           </AccordionItem>
         </Accordion>

@@ -24,6 +24,7 @@ export const mustahiqSchema = z
         required_error: 'Nomor Kontak Darurat harus diisi',
       })
       .min(1, 'Nomor Kontak Darurat harus diisi')
+      .max(15, 'Panjang karakter maksimal 15 huruf')
       .regex(phoneRegex, 'Nomor telepon / WA tidak valid'),
     bank_name: z
       .string({
@@ -47,6 +48,7 @@ export const mustahiqSchema = z
       .min(1, 'Nama Akun Imkas harus diisi'),
     imkas_number: z
       .string()
+      .max(15, 'Panjang karakter maksimal 15 huruf')
       // .optional()
       .refine(
         (value) =>

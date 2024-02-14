@@ -13,19 +13,19 @@ type Response = {
   data?: Jurnal[];
 };
 
-const request = async () => {
+const request = async (id: number) => {
   const { data } = await axios.request<Response>({
     method: 'GET',
-    url: `/jurnal/jurnalall`,
+    url: `/jurnal/jurnalall/${id}`,
   });
 
   return data; 
 };
 
-const useQueryJurnal = () => {
+const useQueryJurnal = (id: number) => {
   return useQuery({
-    queryKey: [ALL_PROGRAM_QUERY_KEY],
-    queryFn: () => request(),
+    queryKey: [ALL_PROGRAM_QUERY_KEY,id],
+    queryFn: () => request(id),
   });
 };
 

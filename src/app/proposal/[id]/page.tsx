@@ -38,6 +38,7 @@ import useQueryJurnal from '../hooks/useQueryJurnal';
 const ProgramDetailPage = () => {
   const router = useRouter();
   const authState = useAuthState();
+  const id_mustahiq = authState?.user?.mustahiq_id as number;
 
   const handleBack = () => {
     router.back();
@@ -58,7 +59,7 @@ const ProgramDetailPage = () => {
   ];
 
   const { data, isError, isLoading, } = useQueryProposalProgram(ids);
-  const { data: Jurnals } = useQueryJurnal();
+  const { data: Jurnals } = useQueryJurnal(id_mustahiq);
 
   let biaya = 0;
   let tgl = '-';

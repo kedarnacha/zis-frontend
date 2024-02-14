@@ -12,7 +12,15 @@ const FAQQ = () => {
       <div className="border-b-8 border-b-slate-100 px-5 pt-3" />
       <div className="prose px-5 font-light text-xs leading-tight">
         <Accordion type="single" collapsible className="w-full">
-          <AccordionItem value="item-1">
+          {/* <AccordionItem value="item-1">
+            <AccordionTrigger className="flex-1 text-left font-normal">
+              Apakah terdapat video tutorial pengajuannya?
+            </AccordionTrigger>
+            <AccordionContent>
+              <video controls src="http://api.zisindosat.id/public/uploads/video_zis_Portal_Muzaki_Mustahiq_Landscape.mp4"></video>
+            </AccordionContent>
+          </AccordionItem> */}
+          <AccordionItem value="item-2">
             <AccordionTrigger className="flex-1 text-left font-normal">
               Bagaimana Cara Registrasi & Login di portal.zisindosat.id ?
             </AccordionTrigger>
@@ -32,7 +40,7 @@ const FAQQ = () => {
               </ol>
             </AccordionContent>
           </AccordionItem>
-          <AccordionItem value="item-2">
+          <AccordionItem value="item-3">
             <AccordionTrigger className="flex-1 text-left font-normal">
               Bagaimana cara berdonasi di portal.zisindosat.id?
             </AccordionTrigger>
@@ -51,7 +59,7 @@ const FAQQ = () => {
               </ol>
             </AccordionContent>
           </AccordionItem>
-          <AccordionItem value="item-3">
+          <AccordionItem value="item-4">
             <AccordionTrigger className="flex-1 text-left font-normal">
               Bagaimana cara berdonasi menggunakan Transfer Bank?
             </AccordionTrigger>
@@ -60,7 +68,7 @@ const FAQQ = () => {
               sediakan yaitu: Transfer Bank BCA, Mandiri, BRI, dll
             </AccordionContent>
           </AccordionItem>
-          <AccordionItem value="item-4">
+          <AccordionItem value="item-5">
             <AccordionTrigger className="flex-1 text-left font-normal">
               Bagaimana jika sudah transfer tapi ada notifikasi donasi dibatalkan?
             </AccordionTrigger>
@@ -80,7 +88,7 @@ const FAQQ = () => {
               <a href="https://api.whatsapp.com/send?phone=6285693318006">085693318006</a>
             </AccordionContent>
           </AccordionItem>
-          <AccordionItem value="item-5">
+          <AccordionItem value="item-6">
             <AccordionTrigger className="flex-1 text-left font-normal">
               Bagaimana jika saya lupa memasukan kode unik pada nominal transfer?
             </AccordionTrigger>
@@ -90,7 +98,7 @@ const FAQQ = () => {
               <a href="https://api.whatsapp.com/send?phone=6285693318006">085693318006</a>
             </AccordionContent>
           </AccordionItem>
-          <AccordionItem value="item-6">
+          <AccordionItem value="item-7">
             <AccordionTrigger className="flex-1 text-left font-normal">
               Bagaimana jika rekening bank saya tidak terdaftar?
             </AccordionTrigger>
@@ -103,7 +111,7 @@ const FAQQ = () => {
               </p>
             </AccordionContent>
           </AccordionItem>
-          <AccordionItem value="item-7">
+          <AccordionItem value="item-8">
             <AccordionTrigger className="flex-1 text-left font-normal">
               Bagaimana jika saya belum transfer hingga melewati batas waktu?
             </AccordionTrigger>
