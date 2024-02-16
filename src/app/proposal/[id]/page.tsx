@@ -65,7 +65,7 @@ const ProgramDetailPage = () => {
   let tgl = '-';
   let formattedDate = '-';
 
-  const filteredJurnals = Jurnals?.data?.filter((entry) => entry.proposal.id == ids && entry.amount_credit > 0);
+  const filteredJurnals = Jurnals?.data?.filter((entry) => entry.proposal?.id == ids && entry.amount_credit > 0);
   if (filteredJurnals && filteredJurnals.length > 0) {
     biaya = filteredJurnals?.[0].amount_credit;
     tgl = filteredJurnals?.[0].datetime;
