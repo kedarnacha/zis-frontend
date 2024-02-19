@@ -31,7 +31,9 @@ const HomePage = () => {
   return (
     <div className="relative">
       <nav className="flex w-full items-center justify-center space-x-3 bg-amber-300 p-4 py-7">
-        <Image src="/zis.png" alt="Logo" width={32} height={32} />
+        <Image src="/zis.png" alt="Logo" width={32} height={32} 
+          onClick={() => {router.push('/');}} 
+        />
         <div className="flex-1">
           <div className="flex w-full items-center overflow-hidden rounded-md border border-red-500 bg-slate-50 pl-4 text-left text-slate-400">
             <SearchIcon width={16} height={16} className="text-red-600 " />
