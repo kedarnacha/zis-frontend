@@ -4,10 +4,12 @@
 /node_modules
 /.pnp
 .pnp.js
-yarn.lock
 
 # testing
 /coverage
+wakaf
+.gitignorewakaf
+font
 
 # next.js
 /.next/

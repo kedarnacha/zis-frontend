@@ -12,14 +12,14 @@ const FAQQ = () => {
       <div className="border-b-8 border-b-slate-100 px-5 pt-3" />
       <div className="prose px-5 font-light text-xs leading-tight">
         <Accordion type="single" collapsible className="w-full">
-          {/* <AccordionItem value="item-1">
+          <AccordionItem value="item-1">
             <AccordionTrigger className="flex-1 text-left font-normal">
               Apakah terdapat video tutorial pengajuannya?
             </AccordionTrigger>
             <AccordionContent>
               <video controls src="http://api.zisindosat.id/public/uploads/video_zis_Portal_Muzaki_Mustahiq_Landscape.mp4"></video>
             </AccordionContent>
-          </AccordionItem> */}
+          </AccordionItem>
           <AccordionItem value="item-2">
             <AccordionTrigger className="flex-1 text-left font-normal">
               Bagaimana Cara Registrasi & Login di portal.zisindosat.id ?

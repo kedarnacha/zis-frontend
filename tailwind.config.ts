@@ -9,6 +9,9 @@ const config: Config = {
     './src/**/*.{ts,tsx}',
   ],
   theme: {
+    // fontFamily: {
+    //   ooredoo: ["Ooredoo", "Ooredoo"],
+    // },
     container: {
       center: true,
       padding: '2rem',

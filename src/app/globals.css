@@ -78,3 +78,25 @@
 .custom-splide .splide__pagination__page.is-active {
   background-color: red; 
 }
+
+/* .wakaf-splide .splide__pagination__page {
+  opacity: 100;
+  background-color: white;
+  margin-bottom: 25px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+.wakaf-splide .splide__pagination__page.is-active {
+  border-radius: 8px;
+  height: 7px;
+  background-color: white;
+  width: 20px;
+  margin-bottom: 27px;
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+@font-face {
+  font-family: "Ooredoo";
+  src: url("../font/Ooredoo-Heavy.ttf");
+} */
