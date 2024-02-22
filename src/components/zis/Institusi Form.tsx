@@ -86,6 +86,21 @@ class InstitusiForm extends React.Component<MainFormProps> {
                             </FormItem>
                         )}
                     />
+                    <FormField
+                        control={form.control}
+                        name="jenis_bantuan_kesehatan" /*ubah disini*/
+                        render={({ field }) => (
+                            <FormItem>
+                                <FormLabel className="mt-4">Jenis Permohonan Bantuan</FormLabel>
+                                <FormControl>
+                                    <Input placeholder="Ex: Pengajuan Bantuan Kesehatan Anak"
+                                        {...field}
+                                    />
+                                </FormControl>
+                                <FormMessage />
+                            </FormItem>
+                        )}
+                    />
                 </div>
                 <Divider />
                 <p className="p-5 font-medium">Pemberi Rekomendasi</p>
