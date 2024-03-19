@@ -33,12 +33,12 @@ const menu = [
     Icon: AppleIcon,
   },
   {
-    name: 'Bantuan Sekolah',
+    name: 'Beasiswa (SD/SMP/SMA)',
     value: 4,
     Icon: School,
   },
   {
-    name: 'Sarpras Dakwah',
+    name: 'Bantuan Umum',
     value: 5,
     Icon: Theater,
   },
@@ -74,7 +74,7 @@ const MenuMustahiq = ({ fromHome = false }: { fromHome?: boolean }) => {
 
   return (
     <div className="mt-5 px-4">
-      <h3 className="font-semibold text-lg">Pilih Program Serupa dengan Pengajuan Proposal Bantuan</h3>
+      <h3 className="font-semibold text-lg">Pilih program yang serupa dengan pengajuan proposal Anda</h3>
 
       <div className="flex space-x-4 overflow-auto scroll-smooth p-4">
         {menu.map((item) => (

@@ -3,7 +3,7 @@ import React from 'react';
 import FooterEmail from '@/components/zis/FooterEmail';
 import MenuMustahiq from '@/components/zis/MenuMustahiq';
 
-import ProgramList from '../../components/ProgramList';
+import MustahiqProgramList from '../../components/MustahiqProgramList';
 import ProgramSearchBar from '../components/ProgramSearchBar';
 import ProgramSort from '../components/ProgramSort';
 
@@ -13,9 +13,7 @@ const page = () => {
       <ProgramSearchBar />
 
       <MenuMustahiq />
-      <ProgramSort />
-      <div className="h-3 bg-slate-100" />
-      <ProgramList />
+      <MustahiqProgramList />
       <div className="h-3 bg-slate-100" />
       <FooterEmail />
     </div>

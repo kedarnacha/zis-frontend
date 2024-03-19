@@ -17,9 +17,11 @@ import { useAuthState } from '@/store/useAuthState';
 import { TYPE_MUSTAHIQ } from '@/utils/constants';
 
 import { Button } from '../ui/button';
+import useQueryAccount from '@/app/account/hooks/useQueryAccount';
 
 const BottomNavigation = () => {
   const auth = useAuthState();
+  const { data } = useQueryAccount();
 
   const isLoggedIn = auth?.isAuthenticated && auth?.hasHydrated;
 
@@ -32,7 +34,7 @@ const BottomNavigation = () => {
     {
       icon: HeartHandshakeIcon,
       label: 'Bantuan',
-      href: '/program/submit-program-intro',
+      href: data?.mustahiq === null ? '/mustahiq' : '/program/program-mustahiq',
     },
   ];
 
@@ -71,7 +73,7 @@ const BottomNavigation = () => {
   ];
 
   const routes = Array.from(new Set([...menu.map((item) => item.href), '/program'])).filter(
-    (item) => item !== '/login' && item !== '/program/submit-program-intro',
+    (item) => item !== '/login' && item !== '/mustahiq',
   );
 
   const pathName = usePathname();

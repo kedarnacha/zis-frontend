@@ -19,7 +19,7 @@ const ProgramLayout = ({ children, ...props }: PropsWithChildren<Params>) => {
   const programId = props.params?.id ?? '';
   const authState = useAuthState();
   const { data } = useQueryDetailProgram(programId);
-  console.log(data?.data.program_category_id)
+  console.log(data?.data?.program_category_id)
   // const userId = authState?.user?.user_id
   // console.log(userId)
 
@@ -27,7 +27,7 @@ const ProgramLayout = ({ children, ...props }: PropsWithChildren<Params>) => {
     resolver: zodResolver(proposalSchema),
     defaultValues: {
       program_id: parseInt(programId),
-      proposal_kategori: data?.data.program_category_id,
+      proposal_kategori: data?.data?.program_category_id,
     },
     mode: 'onChange',
   });

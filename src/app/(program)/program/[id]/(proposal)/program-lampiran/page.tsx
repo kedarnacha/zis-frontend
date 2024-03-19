@@ -196,7 +196,7 @@ const SubmitProgramPage = () => {
                                 <p className='text-md text-red-600 font-bold'>Lampiran yang harus diupload :
                                     <br />
                                     <p className='text-sm font-semibold text-black'>
-                                        FC Raport Terakhir, FC SPP, FC Kartu Keluarga, Surat Keterangan tdk mampu RT/RW
+                                        FC Raport Terakhir, FC SPP, FC Kartu Keluarga, Surat keterangan tidak mampu RT/RW
                                     </p>
                                 </p>
                             </>

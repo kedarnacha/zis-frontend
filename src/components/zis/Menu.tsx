@@ -33,12 +33,12 @@ const menu = [
     Icon: AppleIcon,
   },
   {
-    name: 'Bantuan Sekolah',
+    name: 'Beasiswa (SD/SMP/SMA)',
     value: 4,
     Icon: School,
   },
   {
-    name: 'Sarpras Dakwah',
+    name: 'Bantuan Umum',
     value: 5,
     Icon: Theater,
   },

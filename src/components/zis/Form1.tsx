@@ -20,6 +20,7 @@ import {
 import { Input } from '@/components/ui/input';
 import Divider from '@/components/zis/Divider';
 import { Label } from '@/components/ui/label';
+import { NumericFormat } from 'react-number-format';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { CalendarIcon } from 'lucide-react';
@@ -63,7 +64,7 @@ class Form1 extends React.Component<Form1Props> {
                 <FormItem>
                   <FormLabel className="mt-4">Nama</FormLabel>
                   <FormControl>
-                    <Input placeholder="Ex: Ini Nama" {...field} />
+                    <Input placeholder="Ex: Budhi" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -109,10 +110,17 @@ class Form1 extends React.Component<Form1Props> {
                 <FormItem>
                   <FormLabel className="mt-4">Dana yang diajukan</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="Ex : 3000000 (masukkan angka saja)"
-                      {...field}
-                      type="number"
+                    <NumericFormat
+                      placeholder="Ex: 4000000"
+                      className="input flex h-10 w-full rounded-none border-x-0 border-b border-t-0 border-b-slate-200 bg-transparent px-3 py-2 text-sm"
+                      type="text"
+                      value={field.value}
+                      onValueChange={(value) => {
+                        field.onChange(value.value);
+                      }}
+                      decimalSeparator=","
+                      thousandSeparator="."
+                      prefix="Rp "
                     />
                   </FormControl>
                   <FormMessage />
@@ -246,10 +254,17 @@ class Form1 extends React.Component<Form1Props> {
                 <FormItem>
                   <FormLabel className="mt-4">Penghasilan Bulanan</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="Ex : 3000000/bulan (masukkan angka saja)"
-                      {...field}
-                      type="number"
+                    <NumericFormat
+                      placeholder="Ex: 4000000"
+                      className="input flex h-10 w-full rounded-none border-x-0 border-b border-t-0 border-b-slate-200 bg-transparent px-3 py-2 text-sm"
+                      type="text"
+                      value={field.value}
+                      onValueChange={(value) => {
+                        field.onChange(value.value);
+                      }}
+                      decimalSeparator=","
+                      thousandSeparator="."
+                      prefix="Rp "
                     />
                   </FormControl>
                   <FormMessage />
@@ -263,7 +278,7 @@ class Form1 extends React.Component<Form1Props> {
                 <FormItem>
                   <FormLabel className="mt-4">Nama Suami/Istri</FormLabel>
                   <FormControl>
-                    <Input placeholder="Ex: Istri saya" {...field} />
+                    <Input placeholder="Ex: Sulastri" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -276,7 +291,7 @@ class Form1 extends React.Component<Form1Props> {
                 <FormItem>
                   <FormLabel className="mt-4">Pekerjaan</FormLabel>
                   <FormControl>
-                    <Input placeholder="Ex: Project Manager" {...field} />
+                    <Input placeholder="Ex: Guru Matematika" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -327,7 +342,7 @@ class Form1 extends React.Component<Form1Props> {
                 <FormItem>
                   <FormLabel className="mt-4">Universitas</FormLabel>
                   <FormControl>
-                    <Input placeholder="Ex: Cambridge" {...field} />
+                    <Input placeholder="Ex: Universitas Indonesia" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -353,7 +368,7 @@ class Form1 extends React.Component<Form1Props> {
                 <FormItem>
                   <FormLabel className="mt-4">Tempat Mengajar</FormLabel>
                   <FormControl>
-                    <Input placeholder="Ex: Harvard" {...field} />
+                    <Input placeholder="Ex: SMA 3 Jakarta" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -366,7 +381,7 @@ class Form1 extends React.Component<Form1Props> {
                 <FormItem>
                   <FormLabel className="mt-4">Alamat</FormLabel>
                   <FormControl>
-                    <Input placeholder="Ex: United State" {...field} />
+                    <Input placeholder="Ex: JL. Sawah Besar" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -379,7 +394,7 @@ class Form1 extends React.Component<Form1Props> {
                 <FormItem>
                   <FormLabel className="mt-4">Nomor Telepon Sekolah</FormLabel>
                   <FormControl>
-                    <Input placeholder="Ex: 081929278729726" {...field} />
+                    <Input placeholder="Ex: 0856292787297" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -390,7 +405,7 @@ class Form1 extends React.Component<Form1Props> {
               name="sebagai_guru" /*ubah disini*/
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="mt-4">Sebagai Guru</FormLabel>
+                  <FormLabel className="mt-4">Guru Bidang Studi</FormLabel>
                   <FormControl>
                     <Input placeholder="Ex: Guru IPA" {...field} />
                   </FormControl>
@@ -418,10 +433,17 @@ class Form1 extends React.Component<Form1Props> {
                 <FormItem>
                   <FormLabel className="mt-4">Nominal</FormLabel>
                   <FormControl>
-                    <Input
-                      placeholder="Ex : 3000000 (masukkan angka saja)"
-                      {...field}
-                      type="number"
+                    <NumericFormat
+                      placeholder="Ex: 4000000"
+                      className="input flex h-10 w-full rounded-none border-x-0 border-b border-t-0 border-b-slate-200 bg-transparent px-3 py-2 text-sm"
+                      type="text"
+                      value={field.value}
+                      onValueChange={(value) => {
+                        field.onChange(value.value);
+                      }}
+                      decimalSeparator=","
+                      thousandSeparator="."
+                      prefix="Rp "
                     />
                   </FormControl>
                   <FormMessage />
@@ -463,9 +485,9 @@ class Form1 extends React.Component<Form1Props> {
               name="no_telp_pemberi_rekomendasi" /*ubah disini*/
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel className="mt-4">No Telepon yang tersambung Whatsapp</FormLabel>
+                  <FormLabel className="mt-4">No Handphone yang terhubung Whatsapp</FormLabel>
                   <FormControl>
-                    <Input placeholder="Ex: 081919282719" {...field} />
+                    <Input placeholder="Ex: 085619282719" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
