@@ -4,7 +4,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { format } from 'date-fns';
 import { CalendarIcon, GlobeIcon, Loader2Icon, Upload } from 'lucide-react';
 import Image from 'next/image';
-import React from 'react';
+import React, {useEffect} from 'react';
 import { useForm, useFormContext } from 'react-hook-form';
 import { useParams } from 'next/navigation';
 
@@ -38,7 +38,13 @@ const SubmitProgramPage = () => {
   const id = param?.id as string;
   const { data } = useQueryDetailProgram(id);
   const { data: Institusidata } = useQueryInstitusi(aidi);
-  console.log(Institusidata)
+  // console.log(data?.data.program_category_id)
+  // console.log(Institusidata)
+  useEffect(() => {
+    if (data?.data?.program_category_id) {
+      form.setValue('proposal_kategori', data.data.program_category_id);
+    }
+  }, [data]);
 
   return (
     <div className="pb-96">
@@ -48,7 +54,7 @@ const SubmitProgramPage = () => {
       </div>
 
       {Institusidata?.data && Institusidata.data.length > 0 ? (
-        <InstitusiForm data={data} form={form}/>
+        <InstitusiForm data={data} form={form} />
       ) : (
         <MainForm data={data} form={form} />
       )}
