@@ -10,7 +10,7 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { cn } from '@/lib/utils';
 import { useAuthState } from '@/store/useAuthState';
@@ -21,9 +21,22 @@ import useQueryAccount from '@/app/account/hooks/useQueryAccount';
 
 const BottomNavigation = () => {
   const auth = useAuthState();
-  const { data } = useQueryAccount();
+  const [datas, setDatas] = useState<any>(null);
 
   const isLoggedIn = auth?.isAuthenticated && auth?.hasHydrated;
+  useEffect(() => {
+    if (isLoggedIn) {
+      const fetchData = async () => {
+        try {
+          const { data } = await useQueryAccount();
+          setDatas(data);
+        } catch (error) {
+          // Handle error if needed
+        }
+      };
+      fetchData();
+    }
+  }, [isLoggedIn]);
 
   const mustahiqMenu = [
     {
@@ -34,7 +47,7 @@ const BottomNavigation = () => {
     {
       icon: HeartHandshakeIcon,
       label: 'Bantuan',
-      href: data?.mustahiq === null ? '/mustahiq' : '/program/program-mustahiq',
+      href: datas?.mustahiq === null ? '/mustahiq' : '/program/program-mustahiq',
     },
   ];
 
