@@ -17,7 +17,6 @@ import { useAuthState } from '@/store/useAuthState';
 import { TYPE_MUSTAHIQ } from '@/utils/constants';
 
 import { Button } from '../ui/button';
-import useQueryAccount from '@/app/account/hooks/useQueryAccount';
 
 const BottomNavigation = () => {
   const auth = useAuthState();
@@ -25,18 +24,19 @@ const BottomNavigation = () => {
 
   const isLoggedIn = auth?.isAuthenticated && auth?.hasHydrated;
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setDatas(auth?.user?.mustahiq_id);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+  
     if (isLoggedIn) {
-      const fetchData = async () => {
-        try {
-          const { data } = await useQueryAccount();
-          setDatas(data);
-        } catch (error) {
-          // Handle error if needed
-        }
-      };
       fetchData();
     }
   }, [isLoggedIn]);
+  console.log(datas)
 
   const mustahiqMenu = [
     {
@@ -47,7 +47,7 @@ const BottomNavigation = () => {
     {
       icon: HeartHandshakeIcon,
       label: 'Bantuan',
-      href: datas?.mustahiq === null ? '/mustahiq' : '/program/program-mustahiq',
+      href: datas == null ? '/mustahiq' : '/program/program-mustahiq',
     },
   ];
 
