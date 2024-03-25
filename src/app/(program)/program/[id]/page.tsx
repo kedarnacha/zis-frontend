@@ -232,7 +232,7 @@ const ProgramDetailPage = () => {
           {authState?.user?.mustahiq_id !== null &&
           data?.data?.program_category_id !== undefined &&
           data.data.program_category_id <= 7 ? (
-            <Link href={`/program/${id}/submit-program`} className="w-full flex-1">
+            <Link href={`/program/${id}/submit-proposal`} className="w-full flex-1">
               <Button className="w-full" size="lg" variant="destructive">
                 Ajukan Proposal
               </Button>
