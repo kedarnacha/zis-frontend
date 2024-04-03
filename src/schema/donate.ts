@@ -13,8 +13,13 @@ export const donateSchema = z.object({
     .any()
     .refine((file) => file?.size <= ACCEPTED_SIZE, 'Ukuran file maksimal 2MB')
     .refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), 'Format file tidak didukung'),
-  reminder_type: z.string().optional(),
-  recurring_type: z.string().optional(),
+  isrecurring: z.number().optional(),
+  recurring_satuan: z.number().optional(),
+  nama_muzaki: z.string().min(1),
+  email_muzaki: z.string().min(1).email({
+    message: 'Email tidak valid',
+  }),
+  phone_muzaki: z.string().min(1),
 });
 
 export type DonateSchema = z.infer<typeof donateSchema>;

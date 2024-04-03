@@ -17,6 +17,7 @@ export type Proposal = {
   proposal_approval: {
     id: number;
     status: number;
+    date: string;
     user: {
       user_nama: string;
     };

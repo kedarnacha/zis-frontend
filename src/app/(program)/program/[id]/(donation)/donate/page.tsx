@@ -3,7 +3,7 @@
 import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import { Button } from '@/components/ui/button';
@@ -21,6 +21,7 @@ import Navbar from '@/components/zis/Navbar';
 import { cn } from '@/lib/utils';
 import { DonateSchema } from '@/schema/donate';
 import { formatter } from '@/utils/number';
+import { useAuthState } from '@/store/useAuthState';
 import useQueryDetailProgram from '@/app/(program)/hooks/useQueryDetailProgram';
 
 const amount = [
@@ -45,12 +46,25 @@ const amount = [
 const DonatePage = () => {
   const [selectedIndex, setSelectedIndex] = React.useState<number | undefined>();
   const param = useParams();
+  const authState = useAuthState();
+  console.log(authState?.user)
   const id = param?.id as string;
   const form = useFormContext<DonateSchema>();
   const { data } = useQueryDetailProgram(id);
   const cat_id = data?.data.program_category_id;
 
+  useEffect(() => {
+    if (authState?.user) {
+      form.setValue('nama_muzaki', authState.user.user_nama);
+      form.setValue('email_muzaki', authState.user.username);
+      form.setValue('phone_muzaki', authState.user.user_phone);
+    }
+  }, [authState?.user]);
+
   const watchAmount = form.watch('amount');
+  const watchName = form.watch('nama_muzaki');
+  const watchEmail = form.watch('email_muzaki');
+  const watchPhone = form.watch('phone_muzaki');
   console.log(cat_id)
 
   return (
@@ -65,7 +79,7 @@ const DonatePage = () => {
           <div
             onClick={() => {
               setSelectedIndex(index);
-              form.setValue('amount', (item.price + (cat_id ?? 0)).toString());
+              form.setValue('amount', (item.price.toString()));
             }}
             key={index}
             className={cn(
@@ -104,7 +118,7 @@ const DonatePage = () => {
                     field.onChange(e);
                   }}
                   onBlur={(e) => {
-                    form.setValue('amount', (parseInt(e.target.value) + (cat_id ?? 0)).toString());
+                    form.setValue('amount', (e.target.value.toString()));
                   }}
                 />
               </FormControl>
@@ -114,27 +128,56 @@ const DonatePage = () => {
           )}
         />
         <div className='pt-4'>
-          <FormField
-            name="amount"
-            render={({ field }) => (
-              <FormItem>
-                <FormLabel className="mt-4">Donasi yang anda masukkan sebesar</FormLabel>
-                <FormControl>
-                  <Input type="text"
-                  value={field.value ? formatter.format(parseInt(field.value)) : 'Rp 0'} 
-                  readOnly />
-                </FormControl>
-                <FormMessage />
-              </FormItem>
-            )}
-          />
+          {(authState?.user == undefined || null) ? (
+            <>
+              <FormField
+                control={form.control}
+                name="nama_muzaki"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="mt-4">Masukkan Nama Anda</FormLabel>
+                    <FormControl>
+                      <Input type="text" placeholder="Budi" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="email_muzaki"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="mt-4">Masukkan Email Anda</FormLabel>
+                    <FormControl>
+                      <Input type="text" placeholder="budi@gmail.com" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="phone_muzaki"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel className="mt-4">Masukkan Nomor Handphone Anda</FormLabel>
+                    <FormControl>
+                      <Input type="text" placeholder="08989101082716" {...field} />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+            </>
+          ) : null}
         </div>
       </div>
 
       <div className="shadow-t-sm fixed inset-x-0 bottom-0 mx-auto w-full max-w-md border-t border-t-slate-100 bg-white p-5">
         <Link href={Boolean(watchAmount) ? `/program/${id}/confirm-donation` : '#'}>
           <Button
-            disabled={!Boolean(watchAmount)}
+            disabled={!(Boolean(watchAmount) && Boolean(watchName) && Boolean(watchEmail) && Boolean(watchPhone)) }
             type="button"
             role="button"
             className="w-full "

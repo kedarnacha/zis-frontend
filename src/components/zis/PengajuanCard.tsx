@@ -14,20 +14,24 @@ const PengajuanCard = ({ proposal }: { proposal: Proposal }) => {
     console.log(proposal.ispaid)
     const done = proposal.ispaid
 
-    const statTolak = proposal.proposal_approval.filter(approval => approval.status === 2).length;
-    console.log(statTolak);
+    const statTolak = proposal.proposal_approval.filter(approval => approval.status === 2);
+    console.log(statTolak[0]?.date);
+    const dateToCheck = new Date(statTolak[0]?.date);
+    console.log(dateToCheck)
+    const startDate = new Date('2024-04-02');
+    const endDate = new Date('2024-04-15');
 
     const statAcc = proposal.proposal_approval.filter(approval => approval.status === 1).length;
     console.log(statAcc);
 
     const kategori = [
-        {id: 1, namaCat: 'Bea Guru'},
-        {id: 2, namaCat: 'Bea Kuliah'},
-        {id: 3, namaCat: 'Kesehatan'},
-        {id: 4, namaCat: 'Bea Sekolah'},
-        {id: 5, namaCat: 'Sarpras Dakwah'},
-        {id: 6, namaCat: 'Ekonomi'},
-        {id: 7, namaCat: 'Sosial'},
+        { id: 1, namaCat: 'Bea Guru' },
+        { id: 2, namaCat: 'Bea Kuliah' },
+        { id: 3, namaCat: 'Kesehatan' },
+        { id: 4, namaCat: 'Bea Sekolah' },
+        { id: 5, namaCat: 'Sarpras Dakwah' },
+        { id: 6, namaCat: 'Ekonomi' },
+        { id: 7, namaCat: 'Sosial' },
     ]
     const category = kategori.find(cat => cat.id === proposal.proposal_kategori);
     const namaCat = category?.namaCat || ''
@@ -38,12 +42,16 @@ const PengajuanCard = ({ proposal }: { proposal: Proposal }) => {
     if (done === 1) {
         statusClass = 'text-green-700';
         statusText = 'Dana Telah Dikirimkan';
-    }else if (tlhBayar === 1 || perBayar === 1) {
+    } else if (tlhBayar === 1 || perBayar === 1) {
         statusClass = 'text-green-500';
         statusText = 'Proposal Telah Disetujui';
     } else if (perBayar === 2) {
         statusClass = 'text-red-500';
-        statusText = 'Ditolak';
+        if (dateToCheck >= startDate && dateToCheck <= endDate) {
+            statusText = 'Untuk proposal kegiatan Ramadhan 1445 H sudah kami tutup tanggal 02 April 2024 dan untuk proposal diluar kegiatan Ramadhan 1445 H harap diinput kembali mulai tanggal 16 April 2024'
+        } else {
+            statusText = 'Ditolak';
+        }
     } else if (statAcc <= 4) {
         statusClass = 'text-yellow-600';
         statusText = 'Dalam proses persetujuan';
@@ -53,7 +61,7 @@ const PengajuanCard = ({ proposal }: { proposal: Proposal }) => {
         <>
             <div className="flex border-b border-b-slate-200 py-3">
                 {/* <div className="relative aspect-[1.05] flex-1 overflow-hidden rounded-md"> */}
-                    {/* <Image src={imageUrl} fill alt="Item Image" className="object-cover" /> */}
+                {/* <Image src={imageUrl} fill alt="Item Image" className="object-cover" /> */}
                 {/* </div> */}
                 <div className="flex w-full flex-1 flex-col px-3">
                     <h2 className="mt-2 flex-1 text-md font-semibold">

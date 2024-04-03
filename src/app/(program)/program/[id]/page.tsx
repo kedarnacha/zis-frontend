@@ -260,6 +260,15 @@ const ProgramDetailPage = () => {
           </Link>
         </div>
       )}
+      {(authState?.user == undefined || null) && (
+        <div className="shadow-t-sm fixed inset-x-0 bottom-0 mx-auto flex w-full max-w-md items-center space-x-4 border-t border-t-slate-100 bg-white p-5">
+          <Link href={`/program/${id}/donate`} className="w-full flex-1">
+            <Button className="w-full" size="lg" variant="destructive">
+              Bantu Sekarang
+            </Button>
+          </Link>
+        </div>
+      )}
       {isSharedVisible && (
         <div className="justify-center items-end flex fixed inset-0 backdrop-blur-sm z-50 outline-none focus:outline-none">
           <div className="bg-gray-100 w-[450px] p-4 rounded-xl">

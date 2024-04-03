@@ -20,7 +20,9 @@ import {
 import Divider from '@/components/zis/Divider';
 import Navbar from '@/components/zis/Navbar';
 import { DonateSchema } from '@/schema/donate';
-import { RecurringSchema } from '@/schema/recurring';
+import { useAuthState } from '@/store/useAuthState';
+import { TYPE_MUZAKI } from '@/utils/constants';
+import useMutateNoLoginDonate from '@/app/(program)/hooks/useMutateNoLoginDonate';
 
 const bank = [
   {
@@ -55,13 +57,17 @@ const bank = [
 const ConfirmDonationPage = () => {
   const form = useFormContext<DonateSchema>();
   const evidenceRef = React.useRef<HTMLInputElement>(null);
+  const authState = useAuthState();
 
   const { mutate: donateMutate, isLoading: donateLoading } = useMutateDonate();
-  const { mutate: recurringMutate, isLoading: recurringLoading } = useMutateRecurring();
+  const { mutate: donateNoLoginMutate, isLoading: donatenoLoginLoading } = useMutateNoLoginDonate();
 
   const onSubmit = (data: DonateSchema) => {
-    donateMutate(data);
-    recurringMutate(data);
+    if (authState?.user?.user_type === TYPE_MUZAKI) {
+      donateMutate(data);
+    } else{
+    donateNoLoginMutate(data)
+    }
   };
 
   return (

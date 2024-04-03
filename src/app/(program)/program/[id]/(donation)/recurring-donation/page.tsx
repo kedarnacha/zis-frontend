@@ -3,7 +3,7 @@
 import { ChevronRight } from 'lucide-react';
 import Link from 'next/link';
 import { useParams } from 'next/navigation';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 
 import { Button } from '@/components/ui/button';
@@ -59,11 +59,20 @@ const DonatePage = () => {
   const authState = useAuthState();
   const id = param?.id as string;
   const form = useFormContext<DonateSchema>();
-  const [checked, setChecked] = React.useState(false);
   const { data } = useQueryDetailProgram(id);
   const cat_id = data?.data.program_category_id;
 
   const watchAmount = form.watch('amount');
+  useEffect(() => {
+    if (authState?.user) {
+      form.setValue('nama_muzaki', authState.user.user_nama);
+      form.setValue('email_muzaki', authState.user.username);
+      form.setValue('phone_muzaki', authState.user.user_phone);
+    }
+  }, [authState?.user]);
+  useEffect(() => {
+      form.setValue('isrecurring', 1);
+  }, []);
 
   return (
     <div>
@@ -77,7 +86,7 @@ const DonatePage = () => {
           <div
             onClick={() => {
               setSelectedIndex(index);
-              form.setValue('amount', (item.price + (cat_id ?? 0)).toString());
+              form.setValue('amount', (item.price.toString()));
             }}
             key={index}
             className={cn(
@@ -115,7 +124,7 @@ const DonatePage = () => {
                     field.onChange(e);
                   }}
                   onBlur={(e) => {
-                    form.setValue('amount', (parseInt(e.target.value) + (cat_id ?? 0)).toString());
+                    form.setValue('amount', (e.target.value.toString()));
                   }}
                 />
               </FormControl>
@@ -125,133 +134,50 @@ const DonatePage = () => {
           )}
         />
       </div>
-      <div className='pt-4'>
-        <FormField
-          name="amount"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="mt-4">Donasi yang anda masukkan sebesar</FormLabel>
-              <FormControl>
-                <Input type="text"
-                  value={field.value ? formatter.format(parseInt(field.value)) : 'Rp 0'}
-                  readOnly />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </div>
 
-      <div className="p-5">
-        <p className="font-medium">Masukkan Data Diri</p>
-
-        <div className="my-4">
-          <Label>Email</Label>
-          <Input type="email" placeholder="Email" value={authState?.user?.username} />
-        </div>
-
-        <div className="my-4">
-          <Label>Nama</Label>
-          <Input type="text" placeholder="Nama" value={authState?.user?.user_nama} />
-        </div>
-
-        <div className="my-4">
-          <Label>Nomor telepon / whatsapp</Label>
-          <Input type="text" placeholder="Nomor telepon / whatsapp" value={authState?.user?.user_phone} />
-        </div>
-
-        <div className="flex flex-row items-center my-4 text-slate-700">
+      <div className="px-5">
+        <div className="flex flex-row items-center mb-4 text-slate-700">
           <div className="flex-1">Aktifkan Fitur Pengingat</div>
-
-          <Switch
-            className="data-[state=checked]:bg-red-500"
-            checked={checked}
-            onCheckedChange={(c) => setChecked(c)}
-          />
         </div>
-        {checked ? (
-          <>
-            <FormField
-              control={form.control}
-              name="reminder_type"
-              render={({ field }) => (
-                <FormItem className="flex flex-col space-y-2">
-                  <Label>Durasi Sedekah</Label>
-                  <div className="flex items-center justify-start space-x-3">
-                    <div className="flex-1">
-                      <Select onValueChange={(value) => {
-                        field.onChange(value);
-                      }}>
-                        <SelectTrigger className="w-full">
-                          <SelectValue placeholder="0" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectGroup>
-                            <SelectItem value="0" >
-                              1
-                            </SelectItem>
-                            <SelectItem value="1" >
-                              2
-                            </SelectItem>
-                            <SelectItem value="2" >
-                              3
-                            </SelectItem>
-                            <SelectItem value="3" >
-                              4
-                            </SelectItem>
-                          </SelectGroup>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div className="flex-[3]">
-                      <Input type="text" disabled placeholder="Minggu" />
-                    </div>
+          <FormField
+            control={form.control}
+            name="recurring_satuan"
+            render={({ field }) => (
+              <FormItem className="flex flex-col space-y-2">
+                <Label>Durasi Sedekah</Label>
+                <div className="flex items-center justify-start space-x-3">
+                  <div className="flex-1">
+                    <Select onValueChange={(value) => {
+                      field.onChange(parseInt(value));
+                    }}>
+                      <SelectTrigger className="w-full">
+                        <SelectValue placeholder="0" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectGroup>
+                          <SelectItem value="12" >
+                            12
+                          </SelectItem>
+                          <SelectItem value="24" >
+                            24
+                          </SelectItem>
+                          <SelectItem value="36" >
+                            36
+                          </SelectItem>
+                          <SelectItem value="48" >
+                            48
+                          </SelectItem>
+                        </SelectGroup>
+                      </SelectContent>
+                    </Select>
                   </div>
-                </FormItem>
-              )}
-            />
-
-            <FormField
-              control={form.control}
-              name="recurring_type"
-              render={({ field }) => (
-                <FormItem className="flex flex-col space-y-2">
-                  <Label>Pengingat Setiap</Label>
-                  <div className="flex items-center justify-start space-x-3">
-                    <div className="flex-1">
-                      <Select onValueChange={(value) => {
-                        field.onChange(value);
-                      }}>
-                        <SelectTrigger className="w-full">
-                          <SelectValue placeholder="0" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectGroup>
-                            <SelectItem value="0" >
-                              1
-                            </SelectItem>
-                            <SelectItem value="1" >
-                              2
-                            </SelectItem>
-                            <SelectItem value="2" >
-                              3
-                            </SelectItem>
-                            <SelectItem value="3" >
-                              4
-                            </SelectItem>
-                          </SelectGroup>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div className="flex-[3]">
-                      <Input type="text" disabled placeholder="Minggu" />
-                    </div>
+                  <div>
+                    <Input type="text" disabled placeholder="Minggu" />
                   </div>
-                </FormItem>
-              )}
-            />
-          </>
-        ) : null}
+                </div>
+              </FormItem>
+            )}
+          />
       </div>
 
       <div className="h-96" />
